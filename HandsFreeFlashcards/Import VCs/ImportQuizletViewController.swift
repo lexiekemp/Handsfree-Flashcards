@@ -13,41 +13,65 @@ class ImportQuizletViewController: RootViewController, UITextViewDelegate, UITab
 
     var set:Set?
     var managedObjectContext:NSManagedObjectContext?
-    var separatorOptions = [",",";","|","/"]
-    var wordDefChoice = "," {
+    let separatorOptions = [",",";","|","/"]
+    var sideSepChoice = "," {
         didSet {
-            wordDefButton.setTitle(wordDefChoice, for: .normal)
-            wordDefButton.setTitle(wordDefChoice, for: .selected)
+            sidesButton.setTitle(sideSepChoice, for: .normal)
+            sidesButton.setTitle(sideSepChoice, for: .selected)
         }
     }
-    var termsChoice = ";" {
+    var cardsSepChoice = ";" {
         didSet {
-            termsButton.setTitle(termsChoice, for: .normal)
-            termsButton.setTitle(termsChoice, for: .selected)
+            termsButton.setTitle(cardsSepChoice, for: .normal)
+            termsButton.setTitle(cardsSepChoice, for: .selected)
         }
     }
-    
+    var sideOptions = ["Two", "Three", "Two and Three"]
+    var sideChoice = 0 {
+        didSet {
+            sideChoiceButton.setTitle(sideOptions[sideChoice], for: .normal)
+            sideChoiceButton.setTitle(sideOptions[sideChoice], for: .selected)
+        }
+    }
+
     @IBOutlet weak var setTextView: UITextView!
     
     @IBOutlet weak var termsButton: UIButton!
-    @IBOutlet weak var wordDefButton: UIButton!
-    @IBOutlet weak var wordDefTableView: UITableView!
+    @IBOutlet weak var sidesButton: UIButton!
+    @IBOutlet weak var sidesTableView: UITableView!
     @IBOutlet weak var termsTableView: UITableView!
+    @IBOutlet weak var numSidesSegControl: UISegmentedControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard(_:)))
         self.view.addGestureRecognizer(tap)
         setTextView.delegate = self
-        wordDefTableView.delegate = self
+        sidesTableView.delegate = self
         termsTableView.delegate = self
-        wordDefTableView.dataSource = self
+        sideChoiceTableView.delegate = self
+        sidesTableView.dataSource = self
         termsTableView.dataSource = self
-        wordDefTableView.tag = 0
+        sideChoiceTableView.dataSource = self
+        sidesTableView.tag = 0
         termsTableView.tag = 1
-        wordDefChoice = separatorOptions[0]
-        termsChoice = separatorOptions[1]
-        wordDefTableView.isHidden = true
+        sideChoiceTableView.tag = 2
+        sideSepChoice = separatorOptions[0]
+        cardsSepChoice = separatorOptions[1]
+        sidesTableView.isHidden = true
         termsTableView.isHidden = true
+        if set?.sideThreeName != nil && set?.sideThreeLangID != nil {
+            sideOptions = [set!.sideTwoName!, set!.sideThreeName!, set!.sideTwoName! + "and" + set!.sideThreeName!]
+            sideChoice = 0
+            sideChoiceLabel.text = "Import" + set!.sideOneName! + "and"
+        }
+        else {
+            sideChoiceLabel.isHidden = true
+            sideChoiceButton.isHidden = true
+            sideChoiceDownButton.isHidden = true
+            sideChoice = 0
+        }
+        sideChoiceTableView.isHidden = true
         (UIApplication.shared.delegate as? AppDelegate)?.getManagedObjectContext(completionHandler: { (context:NSManagedObjectContext) in
             DispatchQueue.main.async {
                 self.managedObjectContext = context
@@ -57,20 +81,20 @@ class ImportQuizletViewController: RootViewController, UITextViewDelegate, UITab
     private func checkSyntax(_ setToParse: String) -> Bool {
         var needChar = true
         var readingWord = true
-        var needWordDefSep = false
+        var needsidesSep = false
         var termsSepOK = false
         for c in setToParse {
-            if c == wordDefChoice[wordDefChoice.startIndex] {
-                if (!needWordDefSep) {
+            if c == sideSepChoice[sideSepChoice.startIndex] {
+                if (!needsidesSep) {
                     return false
                 }
                 else {
                     readingWord = false
-                    needWordDefSep = false
+                    needsidesSep = false
                     needChar = true
                 }
             }
-            else if c == termsChoice[termsChoice.startIndex] {
+            else if c == cardsSepChoice[cardsSepChoice.startIndex] {
                 if (!termsSepOK) {
                     return false
                 }
@@ -81,7 +105,7 @@ class ImportQuizletViewController: RootViewController, UITextViewDelegate, UITab
             }
             else { //part of word or def
                 if (readingWord) {
-                    needWordDefSep = true
+                    needsidesSep = true
                     needChar = false
                 }
                 else {
@@ -90,7 +114,7 @@ class ImportQuizletViewController: RootViewController, UITextViewDelegate, UITab
                 }
             }
         }
-        if (needWordDefSep || needChar) {
+        if (needsidesSep || needChar) {
             return false
         }
         return true
@@ -100,18 +124,24 @@ class ImportQuizletViewController: RootViewController, UITextViewDelegate, UITab
             return false
         }
         if let setToParse = setTextView.text {
-            if !checkSyntax(setToParse) {
-                errorAlert(message: "Please enter correct syntax for set")
-                return true
+//            if !checkSyntax(setToParse) {
+//                errorAlert(message: "Please enter correct syntax for set")
+//                return true
+//            }
+            
+            var cards = setToParse.components(separatedBy: cardsSepChoice)
+            for card in cards {
+                var sides = card.components(separatedBy: sideSepChoice)
+                
             }
             var currWord = ""
             var currDef = ""
             var readingWord = true
             for c in setToParse {
-                if (c == wordDefChoice[wordDefChoice.startIndex]) {
+                if (c == sideSepChoice[sideSepChoice.startIndex]) {
                     readingWord = false
                 }
-                else if (c == termsChoice[termsChoice.startIndex]) {
+                else if (c == cardsSepChoice[cardsSepChoice.startIndex]) {
                     readingWord = true
                     _ = Card.addCard(word: currWord, definition: currDef, set: set!, inManagedObjectContext: managedObjectContext!)
                     currWord = ""
@@ -157,13 +187,16 @@ class ImportQuizletViewController: RootViewController, UITextViewDelegate, UITab
     @IBAction func cancel(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
-    @IBAction func selectWordDef(_ sender: UIButton) {
-        wordDefTableView.isHidden = !wordDefTableView.isHidden
+    @IBAction func selectSideSep(_ sender: UIButton) {
+        sidesTableView.isHidden = !sidesTableView.isHidden
     }
-    @IBAction func selectTerms(_ sender: UIButton) {
+    @IBAction func selectTermSep(_ sender: UIButton) {
         termsTableView.isHidden = !termsTableView.isHidden
     }
-  
+    @IBAction func selectSideChoice(_ sender: UIButton) {
+        sideChoiceTableView.isHidden = !sideChoiceTableView.isHidden
+    }
+    
     @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
         self.setTextView.resignFirstResponder()
     }
@@ -177,12 +210,20 @@ class ImportQuizletViewController: RootViewController, UITextViewDelegate, UITab
     // MARK: - UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView.tag == 2 {
+            return sideOptions.count
+        }
         return separatorOptions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "sepOptCell", for: indexPath)
-        cell.textLabel?.text = separatorOptions[indexPath.row]
+        if tableView.tag == 2 {
+            cell.textLabel?.text = sideOptions[indexPath.row]
+        }
+        else {
+            cell.textLabel?.text = separatorOptions[indexPath.row]
+        }
         if cell.responds(to: #selector(setter: UITableViewCell.separatorInset)){
             cell.separatorInset = UIEdgeInsets.zero
         }
@@ -198,11 +239,11 @@ class ImportQuizletViewController: RootViewController, UITextViewDelegate, UITab
     // MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView.tag == 0 { //wordDefTableView
-            wordDefChoice = separatorOptions[indexPath.row]
+        if tableView.tag == 0 { //sidesTableView
+            sideSepChoice = separatorOptions[indexPath.row]
         }
         else if tableView.tag == 1 { //termsTableView
-            termsChoice = separatorOptions[indexPath.row]
+            cardsSepChoice = separatorOptions[indexPath.row]
         }
         tableView.isHidden = true
     }
