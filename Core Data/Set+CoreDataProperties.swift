@@ -2,7 +2,7 @@
 //  Set+CoreDataProperties.swift
 //  HandsFreeFlashcards
 //
-//  Created by Lexie Kemp on 1/10/18.
+//  Created by Lexie Kemp on 7/23/18.
 //  Copyright © 2018 Lexie Kemp. All rights reserved.
 //
 //
@@ -17,9 +17,13 @@ extension Set {
         return NSFetchRequest<Set>(entityName: "Set")
     }
 
-    @NSManaged public var name: String?
-    @NSManaged public var wordLangID: String?
-    @NSManaged public var defLangID: String?
+    @NSManaged public var sideOneLangID: String?
+    @NSManaged public var sideTwoLangID: String?
+    @NSManaged public var sideThreeLangID: String?
+    @NSManaged public var setName: String?
+    @NSManaged public var sideOneName: String?
+    @NSManaged public var sideTwoName: String?
+    @NSManaged public var sideThreeName: String?
     @NSManaged public var childCards: NSSet?
 
 }

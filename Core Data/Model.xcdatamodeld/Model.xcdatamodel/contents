@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="16G1114" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Card" representedClassName="Card" syncable="YES">
-        <attribute name="definition" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="word" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sideOne" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sideThree" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sideTwo" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="parentSet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Set" inverseName="childCards" inverseEntity="Set" syncable="YES"/>
     </entity>
     <entity name="Set" representedClassName="Set" syncable="YES">
-        <attribute name="defLangID" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="wordLangID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="setName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sideOneLangID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sideOneName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sideThreeLangID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sideThreeName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sideTwoLangID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sideTwoName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="childCards" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Card" inverseName="parentSet" inverseEntity="Card" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Card" positionX="-63" positionY="-18" width="128" height="90"/>
-        <element name="Set" positionX="189" positionY="18" width="128" height="105"/>
+        <element name="Card" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="Set" positionX="189" positionY="18" width="128" height="165"/>
     </elements>
 </model>

@@ -2,7 +2,7 @@
 //  Card+CoreDataProperties.swift
 //  HandsFreeFlashcards
 //
-//  Created by Lexie Kemp on 1/10/18.
+//  Created by Lexie Kemp on 7/23/18.
 //  Copyright © 2018 Lexie Kemp. All rights reserved.
 //
 //
@@ -17,8 +17,9 @@ extension Card {
         return NSFetchRequest<Card>(entityName: "Card")
     }
 
-    @NSManaged public var definition: String?
-    @NSManaged public var word: String?
+    @NSManaged public var sideOne: String?
+    @NSManaged public var sideTwo: String?
+    @NSManaged public var sideThree: String?
     @NSManaged public var parentSet: Set?
 
 }

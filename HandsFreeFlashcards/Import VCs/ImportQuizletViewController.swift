@@ -26,13 +26,6 @@ class ImportQuizletViewController: RootViewController, UITextViewDelegate, UITab
             termsButton.setTitle(cardsSepChoice, for: .selected)
         }
     }
-    var sideOptions = ["Two", "Three", "Two and Three"]
-    var sideChoice = 0 {
-        didSet {
-            sideChoiceButton.setTitle(sideOptions[sideChoice], for: .normal)
-            sideChoiceButton.setTitle(sideOptions[sideChoice], for: .selected)
-        }
-    }
 
     @IBOutlet weak var setTextView: UITextView!
     
@@ -49,76 +42,25 @@ class ImportQuizletViewController: RootViewController, UITextViewDelegate, UITab
         setTextView.delegate = self
         sidesTableView.delegate = self
         termsTableView.delegate = self
-        sideChoiceTableView.delegate = self
         sidesTableView.dataSource = self
         termsTableView.dataSource = self
-        sideChoiceTableView.dataSource = self
         sidesTableView.tag = 0
         termsTableView.tag = 1
-        sideChoiceTableView.tag = 2
         sideSepChoice = separatorOptions[0]
         cardsSepChoice = separatorOptions[1]
         sidesTableView.isHidden = true
         termsTableView.isHidden = true
-        if set?.sideThreeName != nil && set?.sideThreeLangID != nil {
-            sideOptions = [set!.sideTwoName!, set!.sideThreeName!, set!.sideTwoName! + "and" + set!.sideThreeName!]
-            sideChoice = 0
-            sideChoiceLabel.text = "Import" + set!.sideOneName! + "and"
+        if set?.sideThreeName == nil || set?.sideThreeLangID == nil {
+            numSidesSegControl.setEnabled(false, forSegmentAt: 1)
         }
-        else {
-            sideChoiceLabel.isHidden = true
-            sideChoiceButton.isHidden = true
-            sideChoiceDownButton.isHidden = true
-            sideChoice = 0
-        }
-        sideChoiceTableView.isHidden = true
+
         (UIApplication.shared.delegate as? AppDelegate)?.getManagedObjectContext(completionHandler: { (context:NSManagedObjectContext) in
             DispatchQueue.main.async {
                 self.managedObjectContext = context
             }
         })
     }
-    private func checkSyntax(_ setToParse: String) -> Bool {
-        var needChar = true
-        var readingWord = true
-        var needsidesSep = false
-        var termsSepOK = false
-        for c in setToParse {
-            if c == sideSepChoice[sideSepChoice.startIndex] {
-                if (!needsidesSep) {
-                    return false
-                }
-                else {
-                    readingWord = false
-                    needsidesSep = false
-                    needChar = true
-                }
-            }
-            else if c == cardsSepChoice[cardsSepChoice.startIndex] {
-                if (!termsSepOK) {
-                    return false
-                }
-                else {
-                    readingWord = true
-                    termsSepOK = false
-                }
-            }
-            else { //part of word or def
-                if (readingWord) {
-                    needsidesSep = true
-                    needChar = false
-                }
-                else {
-                    termsSepOK = true
-                    needChar = false
-                }
-            }
-        }
-        if (needsidesSep || needChar) {
-            return false
-        }
-        return true
-    }
+    
     private func parseText() -> Bool { //use text.components() instead to parse string into an array
         if managedObjectContext == nil {
             return false
@@ -132,32 +74,20 @@ class ImportQuizletViewController: RootViewController, UITextViewDelegate, UITab
             var cards = setToParse.components(separatedBy: cardsSepChoice)
             for card in cards {
                 var sides = card.components(separatedBy: sideSepChoice)
-                
-            }
-            var currWord = ""
-            var currDef = ""
-            var readingWord = true
-            for c in setToParse {
-                if (c == sideSepChoice[sideSepChoice.startIndex]) {
-                    readingWord = false
-                }
-                else if (c == cardsSepChoice[cardsSepChoice.startIndex]) {
-                    readingWord = true
-                    _ = Card.addCard(word: currWord, definition: currDef, set: set!, inManagedObjectContext: managedObjectContext!)
-                    currWord = ""
-                    currDef = ""
+                if set?.sideThreeName != nil && set?.sideThreeLangID != nil && numSidesSegControl.selectedSegmentIndex == 1 {
+                    if sides.count != 3 {
+                        errorAlert(message: "Please enter correct syntax for importing 3 sides")
+                        return true
+                    }
+                    _ = Card.addCard(sideOne: sides[0], sideTwo: sides[1], sideThree: sides[2], set: set!, inManagedObjectContext: managedObjectContext!)
                 }
                 else {
-                    if (readingWord) {
-                        currWord+=String(c)
+                    if sides.count != 2 {
+                        errorAlert(message: "Please enter correct syntax for importing 2 sides")
+                        return true
                     }
-                    else {
-                        currDef+=String(c)
-                    }
+                    _ = Card.addCard(sideOne: sides[0], sideTwo: sides[1], sideThree: nil, set: set!, inManagedObjectContext: managedObjectContext!)
                 }
-            }
-            if !currWord.isEmpty && !currDef.isEmpty {
-                _ = Card.addCard(word: currWord, definition: currDef, set: set!, inManagedObjectContext: managedObjectContext!)
             }
         }
         return true
@@ -193,9 +123,6 @@ class ImportQuizletViewController: RootViewController, UITextViewDelegate, UITab
     @IBAction func selectTermSep(_ sender: UIButton) {
         termsTableView.isHidden = !termsTableView.isHidden
     }
-    @IBAction func selectSideChoice(_ sender: UIButton) {
-        sideChoiceTableView.isHidden = !sideChoiceTableView.isHidden
-    }
     
     @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
         self.setTextView.resignFirstResponder()
@@ -210,20 +137,12 @@ class ImportQuizletViewController: RootViewController, UITextViewDelegate, UITab
     // MARK: - UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView.tag == 2 {
-            return sideOptions.count
-        }
         return separatorOptions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "sepOptCell", for: indexPath)
-        if tableView.tag == 2 {
-            cell.textLabel?.text = sideOptions[indexPath.row]
-        }
-        else {
-            cell.textLabel?.text = separatorOptions[indexPath.row]
-        }
+        cell.textLabel?.text = separatorOptions[indexPath.row]
         if cell.responds(to: #selector(setter: UITableViewCell.separatorInset)){
             cell.separatorInset = UIEdgeInsets.zero
         }
