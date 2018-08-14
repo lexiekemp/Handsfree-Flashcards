@@ -23,12 +23,40 @@ class SideThreeViewController: RootViewController, UITextFieldDelegate, UIPicker
         sideThreeLangPicker.delegate = self
         sideThreeLangPicker.dataSource = self
         sideThreeNameField.delegate = self
-        sideThreeNameField.becomeFirstResponder()
         sideThreeLangPicker.showsSelectionIndicator = true
         sideThreeLangPicker.selectRow(0, inComponent: 0, animated: true)
         sideThreeLangID = parentVC?.getLangID(languageOptions[0])
+        if parentVC?.sideThreeName != nil && parentVC?.sideThreeLangID != nil {
+            sideThreeName = parentVC?.sideThreeName
+            sideThreeLangID = parentVC?.sideThreeLangID
+            sideThreeNameField.text = sideThreeName
+            if sideThreeLangID != nil {
+                if let langIDIndex = languageOptions.index(of: getLangName(sideThreeLangID!)){
+                sideThreeLangPicker.selectRow(langIDIndex, inComponent: 0, animated: true)
+                }
+            }
+        }
     }
 
+    internal func getLangName(_ lang:String) -> String {
+        if lang == "zh-Hans" {
+            return "中文"
+        }
+        if lang == "es" {
+            return "Español"
+        }
+        if lang == "fr" {
+            return "Français"
+        }
+        if lang == "de" {
+            return "Deutsch"
+        }
+        if lang == "ar-Arabic" {
+            return "العربية"
+        }
+        return "English"
+    }
+    
     @IBAction func cancel(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -48,6 +76,11 @@ class SideThreeViewController: RootViewController, UITextFieldDelegate, UIPicker
         
     }
     
+    @IBAction func removeSide(_ sender: UIButton) {
+        parentVC?.sideThreeName = nil
+        parentVC?.sideThreeLangID = nil
+        self.dismiss(animated: true, completion: nil)
+    }
     //MARK: UIPickerViewDataSource
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1

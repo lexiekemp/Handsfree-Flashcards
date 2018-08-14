@@ -54,7 +54,7 @@ class SetsTableViewController: CoreDataTableViewController, UITextFieldDelegate 
     private func updateUI() {
         if let context = managedObjectContext {
             let request = NSFetchRequest<NSFetchRequestResult>(entityName:"Set")
-            request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true, selector: #selector(NSString.localizedStandardCompare(_:)))]
+            request.sortDescriptors = [NSSortDescriptor(key: "setName", ascending: true, selector: #selector(NSString.localizedStandardCompare(_:)))]
             fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
             if let newCount = fetchedResultsController?.fetchedObjects?.count {
                 setCount = newCount
@@ -85,7 +85,7 @@ class SetsTableViewController: CoreDataTableViewController, UITextFieldDelegate 
         if let set = fetchedResultsController?.object(at: indexPath) as? Set {
             var name: String?
             set.managedObjectContext?.performAndWait {
-                name = set.name
+                name = set.setName
             }
             if name != nil {
                 cell.setTitleTextField.text = name!
@@ -151,7 +151,7 @@ class SetsTableViewController: CoreDataTableViewController, UITextFieldDelegate 
             let cell = tableView.cellForRow(at: indexPath) as! SetTableViewCell
             if let setTitle = cell.setTitleTextField.text, managedObjectContext != nil {
                 setCount = setCount - 1
-                Set.removeSet(name: setTitle, inManagedObjectContext: managedObjectContext!)
+                Set.removeSet(setName: setTitle, inManagedObjectContext: managedObjectContext!)
                 tableView.reloadData()
             }
             else {
@@ -177,7 +177,7 @@ class SetsTableViewController: CoreDataTableViewController, UITextFieldDelegate 
                 return true
             }
             if let set = fetchedResultsController?.object(at: IndexPath(row:textField.tag, section:0)) as? Set {
-                set.name = newTitle
+                set.setName = newTitle
                 do {
                     try managedObjectContext?.save()
                 } catch {

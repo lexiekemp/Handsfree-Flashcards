@@ -11,20 +11,26 @@ import CoreData
 
 class SideChoiceViewController: RootViewController, UITableViewDelegate, UITableViewDataSource {
 
-    var set:Set?
-    var sideChoices: [String]?
-    
-    var firstChoiceIndex:Int?
-    var secondChoiceIndex:Int?
+    var studySets:[Set]?
+    var sideChoices = [String]()
+    var studyMode:Mode = .answer
+    var firstChoiceIndex = 1
+    var secondChoiceIndex = 2
     var thirdChoiceIndex:Int?
+    var repeatIncorrect = false
     
+    @IBOutlet weak var chooseLabel: UILabel!
     @IBOutlet weak var firstButton: UIButton!
     @IBOutlet weak var secondButton: UIButton!
     @IBOutlet weak var thirdButton: UIButton!
     @IBOutlet weak var firstTableView: UITableView!
     @IBOutlet weak var secondTableView: UITableView!
     @IBOutlet weak var thirdTableView: UITableView!
+    @IBOutlet weak var firstLabel: UILabel!
+    @IBOutlet weak var secondLabel: UILabel!
     @IBOutlet weak var thirdLabel: UILabel!
+    @IBOutlet weak var firstArrowButton: UIButton!
+    @IBOutlet weak var secondArrowButton: UIButton!
     @IBOutlet weak var thirdArrowButton: UIButton!
     @IBOutlet weak var repeatIncorrectSwitch: UISwitch!
     @IBOutlet weak var repeatIncorrectLabel: UILabel!
@@ -44,37 +50,43 @@ class SideChoiceViewController: RootViewController, UITableViewDelegate, UITable
         secondTableView.isHidden = true
         thirdTableView.isHidden = true
         
-        if set != nil {
-            if (set!.sideOneName != nil) {
-                sideChoices.append(set!.sideOneName)
+        if studySets != nil {
+            if studySets!.count == 1 {
+                sideChoices.append(studySets![0].sideOneName!)
+                sideChoices.append(studySets![0].sideTwoName!)
+                if studySets![0].sideThreeName != nil{
+                    sideChoices.append(studySets![0].sideThreeName!)
+                    if studyMode != .manual {
+                        thirdButton.isHidden = true
+                        thirdLabel.isHidden = true
+                        thirdArrowButton.isHidden = true
+                    }
+                }
             }
-            if
-            sideChoices.append(set!.sideTwoName)
-            sideChoices.append(set!.sideThreeName)
+            else {
+                firstButton.isHidden = true
+                firstLabel.isHidden = true
+                firstArrowButton.isHidden = true
+                secondButton.isHidden = true
+                secondLabel.isHidden = true
+                secondArrowButton.isHidden = true
+                thirdButton.isHidden = true
+                thirdLabel.isHidden = true
+                thirdArrowButton.isHidden = true
+                chooseLabel.isHidden = true
+            }
         }
         else {
             errorAlert(message: "No set chosen. Please try again.")
             return;
         }
-        firstChoiceIndex = 1
-        secondChoiceIndex = 2
-        
-        //if side three and correct mode
-        thirdChoice = sideChoices![2]
-        
-        //if no side three (else)
-        thirdButton.isHidden = true
-        thirdLabel.isHidden = true
-        thirdArrowButton.isHidden = true
-        
-        //if mode without answer
-        repeatIncorrectSwitch.isHidden = true
-        repeatIncorrectLabel.isHidden = true
-        
+
+        if !(studyMode == .answer || studyMode == .answerAndRep) {
+            repeatIncorrectSwitch.isHidden = true
+            repeatIncorrectLabel.isHidden = true
+        }
     }
     
-   
-
     @IBAction func selectFirst(_ sender: UIButton) {
         firstTableView.isHidden = !firstTableView.isHidden
     }
@@ -84,7 +96,17 @@ class SideChoiceViewController: RootViewController, UITableViewDelegate, UITable
     @IBAction func selectThird(_ sender: UIButton) {
         thirdTableView.isHidden = !thirdTableView.isHidden
     }
-    
+    @IBAction func toggleRepeat(_ sender: UISwitch) {
+        repeatIncorrect = !repeatIncorrect
+    }
+    @IBAction func gotToStudy(_ sender: UIButton) {
+        if studyMode == .manual {
+            self.performSegue(withIdentifier: "manualStudy", sender: nil)
+        }
+        else {
+            self.performSegue(withIdentifier: "voiceStudy", sender: nil)
+        }
+    }
     
     // MARK: - UITextViewDelegate
     
@@ -95,16 +117,13 @@ class SideChoiceViewController: RootViewController, UITableViewDelegate, UITable
     // MARK: - UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if sideChoices != nil {
-            return sideChoices!.count
-        }
-        return 0
+        return sideChoices.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "sideOptCell", for: indexPath)
-        if sideChoices != nil {
-            cell.textLabel?.text = sideChoices![indexPath.row]
+        if indexPath.row < sideChoices.count {
+            cell.textLabel?.text = sideChoices[indexPath.row]
         }
         if cell.responds(to: #selector(setter: UITableViewCell.separatorInset)){
             cell.separatorInset = UIEdgeInsets.zero
@@ -121,38 +140,52 @@ class SideChoiceViewController: RootViewController, UITableViewDelegate, UITable
     // MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if sideChoices != nil {
-            if tableView.tag == 1 {
+        if tableView.tag == 1 {
+            if indexPath.row < sideChoices.count {
                 firstChoiceIndex = indexPath.row + 1 //side number
-                firstButton.setTitle(sideChoices![indexPath.row], for: .normal)
-                firstButton.setTitle(sideChoices![indexPath.row], for: .selected)
-            }
-            else if tableView.tag == 2 { //termsTableView
-                secondChoiceIndex = indexPath.row + 1
-                secondButton.setTitle(sideChoices![indexPath.row], for: .normal)
-                secondButton.setTitle(sideChoices![indexPath.row], for: .selected)
-            }
-            else if tableView.tag == 3 { //termsTableView
-                thirdChoiceIndex = indexPath.row + 1
-                thirdButton.setTitle(sideChoices![indexPath.row], for: .normal)
-                thirdButton.setTitle(sideChoices![indexPath.row], for: .selected)
-                
+                firstButton.setTitle(sideChoices[indexPath.row], for: .normal)
+                firstButton.setTitle(sideChoices[indexPath.row], for: .selected)
             }
         }
-        else {
-            errorAlert(message: "An error occurred. Please try again.")
+        else if tableView.tag == 2 { //termsTableView
+            if indexPath.row < sideChoices.count {
+                secondChoiceIndex = indexPath.row + 1
+                secondButton.setTitle(sideChoices[indexPath.row], for: .normal)
+                secondButton.setTitle(sideChoices[indexPath.row], for: .selected)
+            }
+        }
+        else if tableView.tag == 3 { //termsTableView
+            if indexPath.row < sideChoices.count {
+                thirdChoiceIndex = indexPath.row + 1
+                thirdButton.setTitle(sideChoices[indexPath.row], for: .normal)
+                thirdButton.setTitle(sideChoices[indexPath.row], for: .selected)
+            }
         }
         tableView.isHidden = true
     }
 
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "manualStudy" {
+            if let manualStudyVC = segue.destination as? ManualStudyViewController {
+                manualStudyVC.studySets = studySets
+                manualStudyVC.firstChoiceIndex = firstChoiceIndex
+                manualStudyVC.secondChoiceIndex = secondChoiceIndex
+                if thirdChoiceIndex != nil {
+                    manualStudyVC.thirdChoiceIndex = thirdChoiceIndex!
+                }
+            }
+        }
+        else if segue.identifier == "voiceStudy" {
+            if let studyVC = segue.destination as? StudyViewController {
+                studyVC.studySets = studySets
+                studyVC.studyMode = studyMode
+                studyVC.firstChoiceIndex = firstChoiceIndex
+                studyVC.secondChoiceIndex = secondChoiceIndex
+            }
+        }
     }
-    */
+    
 
 }

@@ -32,19 +32,28 @@ public class Card: NSManagedObject {
         return nil
     }
     
-    class func card(sideOne: String, sideTwo: String, sideThree: String, set: Set, inManagedObjectContext context: NSManagedObjectContext) -> Card? {
+    class func card(sideOne: String, sideTwo: String, sideThree: String?, set: Set, inManagedObjectContext context: NSManagedObjectContext) -> Card? {
         let request:NSFetchRequest<NSFetchRequestResult> = Card.fetchRequest()
-        request.predicate = NSPredicate(format: "sideOne = %@ AND sideTwo = %@ AND sideThree = %@ AND parentSet = %@", sideOne, sideTwo, sideThree, set)
-        
+        if sideThree != nil {
+            request.predicate = NSPredicate(format: "sideOne = %@ AND sideTwo = %@ AND sideThree = %@ AND parentSet = %@", sideOne, sideTwo, sideThree!, set)
+        }
+        else {
+            request.predicate = NSPredicate(format: "sideOne = %@ AND sideTwo = %@AND parentSet = %@", sideOne, sideTwo, set)
+        }
         if let card = (try? context.fetch(request))?.first as? Card {
             return card
         }
         return nil
     }
     
-    class func removeCard(sideOne: String, sideTwo: String, sideThree: String, set: Set, inManagedObjectContext context: NSManagedObjectContext) {
+    class func removeCard(sideOne: String, sideTwo: String, sideThree: String?, set: Set, inManagedObjectContext context: NSManagedObjectContext) {
         let request:NSFetchRequest<NSFetchRequestResult> = Card.fetchRequest()
-        request.predicate = NSPredicate(format: "sideOne = %@ AND sideTwo = %@ AND sideThree = %@ AND parentSet = %@", sideOne, sideTwo, sideThree, set)
+        if sideThree != nil {
+            request.predicate = NSPredicate(format: "sideOne = %@ AND sideTwo = %@ AND sideThree = %@ AND parentSet = %@", sideOne, sideTwo, sideThree!, set)
+        }
+        else {
+            request.predicate = NSPredicate(format: "sideOne = %@ AND sideTwo = %@ AND parentSet = %@", sideOne, sideTwo, set)
+        }
         
         if let card = (try? context.fetch(request))?.first as? Card {
             context.delete(card)

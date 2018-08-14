@@ -10,18 +10,17 @@ import UIKit
 
 class CardTableViewCell: UITableViewCell {
     
-
-    //@IBOutlet weak var wordLabel: UILabel!
-    //@IBOutlet weak var defLabel: UILabel!
+    @IBOutlet weak var cardCellView: UIView!
+    @IBOutlet weak var sideOneTextField: UITextField!
+    @IBOutlet weak var sideTwoTextField: UITextField!
+    @IBOutlet weak var sideThreeTextField: UITextField!
     
-    @IBOutlet weak var wordTextField: UITextField!
-    @IBOutlet weak var defTextField: UITextField!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        wordTextField.borderStyle = UITextBorderStyle.none
-        defTextField.borderStyle = UITextBorderStyle.none
-        // Initialization code
+        sideOneTextField.borderStyle = UITextBorderStyle.none
+        sideTwoTextField.borderStyle = UITextBorderStyle.none
+        sideThreeTextField.borderStyle = UITextBorderStyle.none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

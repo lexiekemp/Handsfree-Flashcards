@@ -71,7 +71,7 @@ class ImportQuizletViewController: RootViewController, UITextViewDelegate, UITab
 //                return true
 //            }
             
-            var cards = setToParse.components(separatedBy: cardsSepChoice)
+            let cards = setToParse.components(separatedBy: cardsSepChoice)
             for card in cards {
                 var sides = card.components(separatedBy: sideSepChoice)
                 if set?.sideThreeName != nil && set?.sideThreeLangID != nil && numSidesSegControl.selectedSegmentIndex == 1 {

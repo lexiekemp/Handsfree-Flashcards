@@ -17,10 +17,25 @@ class CreateSetViewController: RootViewController, UITextFieldDelegate, UIPicker
     var sideTwoLangID = "en-US"
     var sideTwoName = "Definition"
     var sideThreeLangID:String? = nil
-    var sideThreeName: String? = nil
+    var sideThreeName: String? = nil {
+        didSet {
+            if sideThreeName != nil {
+                sideThreeInfoLabel.text = "Side Three: " + sideThreeName!
+                sideThreeButton.setTitle("Edit third side", for: .normal)
+                sideThreeButton.setTitle("Edit third side", for: .selected)
+            }
+            else {
+                sideThreeInfoLabel.text = "Side Three: None"
+                sideThreeButton.setTitle("Add third side", for: .normal)
+                sideThreeButton.setTitle("Add third side", for: .selected)
+            }
+        }
+    }
     var managedObjectContext:NSManagedObjectContext?
     var currentSet:Set?
     var parentSetTVC:SetsTableViewController? //use this to perform segue to cardstvc upon click of "create" button
+    var editedSideOneName = false
+    var editedSideTwoName = false
     
     @IBOutlet weak var titleTextBox: UITextField!
     @IBOutlet weak var sideOneLangPicker: UIPickerView!
@@ -28,20 +43,15 @@ class CreateSetViewController: RootViewController, UITextFieldDelegate, UIPicker
     @IBOutlet weak var sideOneNameField: UITextField!
     @IBOutlet weak var sideTwoNameField: UITextField!
     @IBOutlet weak var sideThreeInfoLabel: UILabel!
-    
-    var sideThreeInfoLabelText: String! {
-        get {
-            if sideThreeLangID != nil and side
-        }
-    }
-    
+    @IBOutlet weak var sideThreeButton: UIButton!
     //TODO: CHECK FOR WHEN CRASHES WHEN CREATING SET, MAYBE WHEN I COME BACK CONTEXT IS NIL ?? BUT THAT IS CHECKED FOR...
     override func viewDidLoad() {
         super.viewDidLoad()
         titleTextBox.delegate = self
-        titleTextBox.becomeFirstResponder()
         sideOneNameField.delegate = self
         sideTwoNameField.delegate = self
+        sideOneNameField.tag = 1
+        sideTwoNameField.tag = 2
         sideOneLangPicker.delegate = self
         sideTwoLangPicker.delegate = self
         sideOneLangPicker.dataSource = self
@@ -134,6 +144,36 @@ class CreateSetViewController: RootViewController, UITextFieldDelegate, UIPicker
         return true
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField.tag == 1 && editedSideOneName == false {
+            textField.text = ""
+            editedSideOneName = true
+        }
+        else if textField.tag == 2 { //sideTwoNameField
+            moveTextField(textField, moveDistance: -50, up: true)
+            if editedSideTwoName == false {
+                textField.text = ""
+                editedSideTwoName = true
+            }
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField.tag == 2 { //sideTwoNameField
+            moveTextField(textField, moveDistance: -50, up: false)
+        }
+    }
+    
+    func moveTextField(_ textField: UITextField, moveDistance: Int, up: Bool) {
+        let moveDuration = 0.3
+        let movement: CGFloat = CGFloat(up ? moveDistance : -moveDistance)
+        
+        UIView.beginAnimations("animateTextField", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(moveDuration)
+        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+        UIView.commitAnimations()
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "addThirdSide" {
             if let sideThreevc = segue.destination as? SideThreeViewController {

@@ -11,30 +11,33 @@ import AVFoundation
 import Speech
 import CoreData
 
-public enum Mode {
-    case answer, answerAndRep, rep, noVoice
-}
+
 class StudyViewController: UIViewController, SFSpeechRecognizerDelegate, AVSpeechSynthesizerDelegate  {
 
     @IBOutlet weak var wordLabel: UILabel!
 
     var studySets: [Set]?
+    var firstChoiceIndex = 1
+    var secondChoiceIndex = 2
+    
     var studyMode:Mode = .answer
     var repeatIncorrect = false
-    var defFirst = false
+    //var defFirst = false
     
-    var wordLangID = "en-US"
-    var defLangID = "en-US"
     var cards = [Card]()
-    var words = [String]()
-    var definitions = [String]()
     var numArray = [Int]()
+    var sideOneSet = [(term: String, langID: String)]()
+    var sideTwoSet = [(term: String, langID: String)]()
+    var currentSide = 1
+    var currentCardIndex = 0
+    
+
     var incorrectNumArray = [Int]()
     var currNumArray = [Int]()
-    var currCardIndex = 0
-    var wordShowing = false
-    var saidDef = true
-    var saidWord = true
+    
+    var sideOneShowing = false
+    var saidSideTwo = true
+    var saidSideOne = true
     var managedObjectContext: NSManagedObjectContext?
     var gotCards = false
     var visible = false
@@ -54,6 +57,9 @@ class StudyViewController: UIViewController, SFSpeechRecognizerDelegate, AVSpeec
         super.viewDidLoad()
         wordLabel.text = ""
         synth.delegate = self
+        getCards()
+    }
+    private func getCards() {
         if (studySets == nil) {
             print("studySet is nil")
             return
@@ -63,9 +69,9 @@ class StudyViewController: UIViewController, SFSpeechRecognizerDelegate, AVSpeec
             DispatchQueue.main.async {
                 self.managedObjectContext = context
                 for studySet in self.studySets! {
-                    if studySet.name != nil, self.managedObjectContext != nil {
+                    if studySet.setName != nil, self.managedObjectContext != nil {
                         let request = NSFetchRequest<NSFetchRequestResult>(entityName:"Card")
-                        request.predicate = NSPredicate(format: "parentSet.name = %@", studySet.name!)
+                        request.predicate = NSPredicate(format: "parentSet.setName = %@", studySet.setName!)
                         if let fetchedCards = (try? self.managedObjectContext!.fetch(request)) as? [Card] {
                             self.cards = fetchedCards
                         }
@@ -77,21 +83,37 @@ class StudyViewController: UIViewController, SFSpeechRecognizerDelegate, AVSpeec
                     self.gotCards = true
                 
                     for card in self.cards {
-                        if (!self.defFirst) {
-                            if (card.word != nil && card.definition != nil && studySet.wordLangID != nil &&   studySet.defLangID != nil) {
-                                self.words.append(card.word!)
-                                self.definitions.append(card.definition!)
-                                self.wordLangID = studySet.wordLangID!
-                                self.defLangID = studySet.defLangID!
+                        switch self.firstChoiceIndex {
+                        case 1:
+                            if card.sideOne != nil, studySet.sideOneLangID != nil {
+                                self.sideOneSet.append((term: card.sideOne!, langID: studySet.sideOneLangID!))
                             }
+                        case 2:
+                            if card.sideTwo != nil, studySet.sideTwoLangID != nil {
+                                self.sideOneSet.append((term: card.sideTwo!, langID: studySet.sideTwoLangID!))
+                            }
+                        case 3:
+                            if card.sideThree != nil, studySet.sideThreeLangID != nil {
+                                self.sideOneSet.append((term: card.sideThree!, langID: studySet.sideThreeLangID!))
+                            }
+                        default:
+                            print("invalid firstChoiceIndex")
                         }
-                        else {
-                            if (card.word != nil && card.definition != nil && studySet.wordLangID != nil && studySet.defLangID != nil) {
-                                self.words.append(card.definition!)
-                                self.definitions.append(card.word!)
-                                self.wordLangID = studySet.defLangID!
-                                self.defLangID = studySet.wordLangID!
+                        switch self.secondChoiceIndex {
+                        case 1:
+                            if card.sideOne != nil, studySet.sideOneLangID != nil {
+                                self.sideTwoSet.append((term: card.sideOne!, langID: studySet.sideOneLangID!))
                             }
+                        case 2:
+                            if card.sideTwo != nil, studySet.sideTwoLangID != nil {
+                                self.sideTwoSet.append((term: card.sideTwo!, langID: studySet.sideTwoLangID!))
+                            }
+                        case 3:
+                            if card.sideThree != nil, studySet.sideThreeLangID != nil {
+                                self.sideTwoSet.append((term: card.sideThree!, langID: studySet.sideThreeLangID!))
+                            }
+                        default:
+                            print("invalid firstChoiceIndex")
                         }
                     }
                     for num in 0..<self.cards.count {
@@ -127,8 +149,8 @@ class StudyViewController: UIViewController, SFSpeechRecognizerDelegate, AVSpeec
         DispatchQueue.main.async {
             if self.gotCards {
                 self.currNumArray = self.numArray
-                self.saidWord = true
-                self.sayWord()
+                self.saidSideOne = true
+                self.saySideOne()
             }
         }
     }
@@ -167,7 +189,7 @@ class StudyViewController: UIViewController, SFSpeechRecognizerDelegate, AVSpeec
         }
     }
     private func startRecording() throws {
-        speechRecognizer = SFSpeechRecognizer(locale:Locale(identifier:defLangID))!
+        speechRecognizer = SFSpeechRecognizer(locale:Locale(identifier:self.sideTwoSet[self.currentCardIndex].langID))!
 
         if let currRecognitionTask = recognitionTask {
             currRecognitionTask.cancel()
@@ -192,11 +214,11 @@ class StudyViewController: UIViewController, SFSpeechRecognizerDelegate, AVSpeec
             var isFinal = false //TODO: NEED THIS VARIABLE?
             if (result != nil) {
                 let result = result!.bestTranscription.formattedString //check for correct answer
-                if (self.wordShowing && self.studyMode != .rep) {
-                    if (result.lowercased() != self.definitions[self.currCardIndex].lowercased()) {
+                if (self.sideOneShowing && self.studyMode != .rep) {
+                    if (result.lowercased() != self.sideTwoSet[self.currentCardIndex].term.lowercased()) {
                         //play incorrect sound
                         if (self.repeatIncorrect) {
-                            self.incorrectNumArray.append(self.currCardIndex)
+                            self.incorrectNumArray.append(self.currentCardIndex)
                         }
                     }
                     else {
@@ -211,13 +233,13 @@ class StudyViewController: UIViewController, SFSpeechRecognizerDelegate, AVSpeec
                 self.recognitionTask?.cancel()
                 self.recognitionRequest = nil
                 self.recognitionTask = nil
-                if (!self.saidDef && self.wordShowing) {
-                    self.saidDef = true
-                    self.sayDefinition() //TODO: NEED WEAKSELF HERE?
+                if (!self.saidSideTwo && self.sideOneShowing) {
+                    self.saidSideTwo = true
+                    self.saySideTwo() //TODO: NEED WEAKSELF HERE?
                 }
-                else if (!self.saidWord && !self.wordShowing) {
-                    self.saidWord = true
-                    self.sayWord()
+                else if (!self.saidSideOne && !self.sideOneShowing) {
+                    self.saidSideOne = true
+                    self.saySideOne()
                 }
             }
         }
@@ -237,7 +259,7 @@ class StudyViewController: UIViewController, SFSpeechRecognizerDelegate, AVSpeec
         try audioSession.setActive(true, with:.notifyOthersOnDeactivation)
     }
 
-    private func sayWord() {
+    private func saySideOne() {
         do {
             try resetAudioSession()
         }
@@ -265,33 +287,33 @@ class StudyViewController: UIViewController, SFSpeechRecognizerDelegate, AVSpeec
             synth.speak(utterance)
         }
         let randomOffset = Int(arc4random_uniform(UInt32(currNumArray.count)))
-        currCardIndex = currNumArray[randomOffset]
+        currentCardIndex = currNumArray[randomOffset]
         //TODO: NEED PERFORM AND WAIT HERE?
-        let currWord = words[currCardIndex]
+        let currWord = sideOneSet[currentCardIndex].term
         wordLabel.text = currWord
-        wordShowing = true
+        sideOneShowing = true
         currNumArray.remove(at:randomOffset)
         
         utterance = AVSpeechUtterance(string: currWord)
-        utterance.voice = AVSpeechSynthesisVoice(language:wordLangID)
+        utterance.voice = AVSpeechSynthesisVoice(language:sideOneSet[currentCardIndex].term)
         utterance.rate = 0.4
         synth.speak(utterance)
 
     }
     
-    private func sayDefinition() {
+    private func saySideTwo() {
         do {
             try resetAudioSession()
         }
         catch {
             print("error resetting audio session")
         }
-        let currDef = definitions[currCardIndex]
-        wordLabel.text = currDef
-        wordShowing = false
+        let currWord = sideTwoSet[currentCardIndex].term
+        wordLabel.text = currWord
+        sideOneShowing = false
         
-        utterance = AVSpeechUtterance(string: currDef)
-        utterance.voice = AVSpeechSynthesisVoice(language:defLangID)
+        utterance = AVSpeechUtterance(string: currWord)
+        utterance.voice = AVSpeechSynthesisVoice(language:sideTwoSet[currentCardIndex].langID)
         utterance.rate = 0.4
         synth.speak(utterance)
     }
@@ -305,27 +327,27 @@ class StudyViewController: UIViewController, SFSpeechRecognizerDelegate, AVSpeec
             restarting = false
             return
         }
-        if wordShowing {
+        if sideOneShowing {
             if studyMode == .rep {
-                self.sayDefinition()
+                self.saySideTwo()
             }
             else if studyMode == .noVoice {
-                timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (t:Timer) in self.sayDefinition() }
+                timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (t:Timer) in self.saySideTwo() }
             }
             else {
-                self.saidDef = false
+                self.saidSideTwo = false
                 try! startRecording() //TODO: FIX ALL TRY! TO CATCH PROPERLY
             }
         }
         else {
             if (studyMode == .answer) {
-                sayWord()
+                saySideOne()
             }
             else if (studyMode == .noVoice){
-                timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (t:Timer) in self.sayWord() }
+                timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (t:Timer) in self.saySideOne() }
             }
             else {
-                self.saidWord = false
+                self.saidSideOne = false
                 try! startRecording()
             }
         }
