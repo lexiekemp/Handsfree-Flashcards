@@ -154,7 +154,7 @@ class ManualStudyViewController: RootViewController {
         }
     }
     @objc func flipCard(gesture: UITapGestureRecognizer) {
-        UIView.transition(from: cardView, to: cardView, duration: 0.5, options: .transitionFlipFromRight, completion: nil)
+        UIView.transition(with: cardView, duration: 0.5, options: .transitionFlipFromRight, animations: nil)
         switch currentSide {
         case 1:
             showCardSide(2)
