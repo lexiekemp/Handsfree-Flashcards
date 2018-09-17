@@ -28,6 +28,12 @@ public class Card: NSManagedObject {
             card.sideTwo = sideTwo
             card.sideThree = sideThree
             card.parentSet = set
+            do {
+                try context.save()
+            } catch {
+                print("Failed saving card")
+                return nil
+            }
         }
         return nil
     }
@@ -57,6 +63,11 @@ public class Card: NSManagedObject {
         
         if let card = (try? context.fetch(request))?.first as? Card {
             context.delete(card)
+            do {
+                try context.save()
+            } catch {
+                print("Failed saving delete")
+            }
         }
     }
 }

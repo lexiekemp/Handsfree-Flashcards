@@ -37,6 +37,7 @@ class ImportQuizletViewController: RootViewController, UITextViewDelegate, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
+         self.managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard(_:)))
         self.view.addGestureRecognizer(tap)
         setTextView.delegate = self
@@ -53,12 +54,6 @@ class ImportQuizletViewController: RootViewController, UITextViewDelegate, UITab
         if set?.sideThreeName == nil || set?.sideThreeLangID == nil {
             numSidesSegControl.setEnabled(false, forSegmentAt: 1)
         }
-
-        (UIApplication.shared.delegate as? AppDelegate)?.getManagedObjectContext(completionHandler: { (context:NSManagedObjectContext) in
-            DispatchQueue.main.async {
-                self.managedObjectContext = context
-            }
-        })
     }
     
     private func parseText() -> Bool { //use text.components() instead to parse string into an array

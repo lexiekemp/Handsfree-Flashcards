@@ -55,6 +55,7 @@ class StudyViewController: UIViewController, SFSpeechRecognizerDelegate, AVSpeec
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
         wordLabel.text = ""
         synth.delegate = self
         getCards()
@@ -65,63 +66,61 @@ class StudyViewController: UIViewController, SFSpeechRecognizerDelegate, AVSpeec
             return
         }
         
-        (UIApplication.shared.delegate as? AppDelegate)?.getManagedObjectContext(completionHandler: { (context:NSManagedObjectContext) in
-            DispatchQueue.main.async {
-                self.managedObjectContext = context
-                for studySet in self.studySets! {
-                    if studySet.setName != nil, self.managedObjectContext != nil {
-                        let request = NSFetchRequest<NSFetchRequestResult>(entityName:"Card")
-                        request.predicate = NSPredicate(format: "parentSet.setName = %@", studySet.setName!)
-                        if let fetchedCards = (try? self.managedObjectContext!.fetch(request)) as? [Card] {
-                            self.cards = fetchedCards
-                        }
-                    }
-                    if (self.cards.isEmpty) {
-                        self.wordLabel.text = "Please choose a nonempty study set."
-                        return
-                    }
-                    self.gotCards = true
-                
-                    for card in self.cards {
-                        switch self.firstChoiceIndex {
-                        case 1:
-                            if card.sideOne != nil, studySet.sideOneLangID != nil {
-                                self.sideOneSet.append((term: card.sideOne!, langID: studySet.sideOneLangID!))
-                            }
-                        case 2:
-                            if card.sideTwo != nil, studySet.sideTwoLangID != nil {
-                                self.sideOneSet.append((term: card.sideTwo!, langID: studySet.sideTwoLangID!))
-                            }
-                        case 3:
-                            if card.sideThree != nil, studySet.sideThreeLangID != nil {
-                                self.sideOneSet.append((term: card.sideThree!, langID: studySet.sideThreeLangID!))
-                            }
-                        default:
-                            print("invalid firstChoiceIndex")
-                        }
-                        switch self.secondChoiceIndex {
-                        case 1:
-                            if card.sideOne != nil, studySet.sideOneLangID != nil {
-                                self.sideTwoSet.append((term: card.sideOne!, langID: studySet.sideOneLangID!))
-                            }
-                        case 2:
-                            if card.sideTwo != nil, studySet.sideTwoLangID != nil {
-                                self.sideTwoSet.append((term: card.sideTwo!, langID: studySet.sideTwoLangID!))
-                            }
-                        case 3:
-                            if card.sideThree != nil, studySet.sideThreeLangID != nil {
-                                self.sideTwoSet.append((term: card.sideThree!, langID: studySet.sideThreeLangID!))
-                            }
-                        default:
-                            print("invalid firstChoiceIndex")
-                        }
-                    }
-                    for num in 0..<self.cards.count {
-                        self.numArray.append(num)
+        if managedObjectContext != nil {
+            for studySet in self.studySets! {
+                if studySet.setName != nil, self.managedObjectContext != nil {
+                    let request = NSFetchRequest<NSFetchRequestResult>(entityName:"Card")
+                    request.predicate = NSPredicate(format: "parentSet.setName = %@", studySet.setName!)
+                    if let fetchedCards = (try? self.managedObjectContext!.fetch(request)) as? [Card] {
+                        self.cards = fetchedCards
                     }
                 }
+                if (self.cards.isEmpty) {
+                    self.wordLabel.text = "Please choose a nonempty study set."
+                    return
+                }
+                self.gotCards = true
+            
+                for card in self.cards {
+                    switch self.firstChoiceIndex {
+                    case 1:
+                        if card.sideOne != nil, studySet.sideOneLangID != nil {
+                            self.sideOneSet.append((term: card.sideOne!, langID: studySet.sideOneLangID!))
+                        }
+                    case 2:
+                        if card.sideTwo != nil, studySet.sideTwoLangID != nil {
+                            self.sideOneSet.append((term: card.sideTwo!, langID: studySet.sideTwoLangID!))
+                        }
+                    case 3:
+                        if card.sideThree != nil, studySet.sideThreeLangID != nil {
+                            self.sideOneSet.append((term: card.sideThree!, langID: studySet.sideThreeLangID!))
+                        }
+                    default:
+                        print("invalid firstChoiceIndex")
+                    }
+                    switch self.secondChoiceIndex {
+                    case 1:
+                        if card.sideOne != nil, studySet.sideOneLangID != nil {
+                            self.sideTwoSet.append((term: card.sideOne!, langID: studySet.sideOneLangID!))
+                        }
+                    case 2:
+                        if card.sideTwo != nil, studySet.sideTwoLangID != nil {
+                            self.sideTwoSet.append((term: card.sideTwo!, langID: studySet.sideTwoLangID!))
+                        }
+                    case 3:
+                        if card.sideThree != nil, studySet.sideThreeLangID != nil {
+                            self.sideTwoSet.append((term: card.sideThree!, langID: studySet.sideThreeLangID!))
+                        }
+                    default:
+                        print("invalid firstChoiceIndex")
+                    }
+                }
+                for num in 0..<self.cards.count {
+                    self.numArray.append(num)
+                }
+                numArray.shuffle()
             }
-        })
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

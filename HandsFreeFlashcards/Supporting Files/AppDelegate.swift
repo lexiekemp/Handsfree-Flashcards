@@ -41,8 +41,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        self.saveContext()
     }
-    
+    /*
     func getManagedObjectContext(completionHandler: @escaping (_ context: NSManagedObjectContext) -> ()) {
         let fm = FileManager.default
         if let docsDir = fm.urls(for: .documentDirectory, in: .userDomainMask).first {
@@ -84,8 +85,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-    
- /*
+    */
+ 
     // MARK: - Core Data stack
     
     lazy var persistentContainer: NSPersistentContainer = {
@@ -136,7 +137,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-*/
+
     
 }
 

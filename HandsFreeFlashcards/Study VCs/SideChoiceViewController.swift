@@ -53,14 +53,25 @@ class SideChoiceViewController: RootViewController, UITableViewDelegate, UITable
         if studySets != nil {
             if studySets!.count == 1 {
                 sideChoices.append(studySets![0].sideOneName!)
+                firstTableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .none)
+                self.tableView(firstTableView, didSelectRowAt: IndexPath(row: 0, section: 0))
                 sideChoices.append(studySets![0].sideTwoName!)
+                secondTableView.selectRow(at: IndexPath(row: 1, section: 0), animated: false, scrollPosition: .none)
+                self.tableView(secondTableView, didSelectRowAt: IndexPath(row: 1, section: 0))
                 if studySets![0].sideThreeName != nil{
                     sideChoices.append(studySets![0].sideThreeName!)
+                    thirdTableView.selectRow(at: IndexPath(row: 2, section: 0), animated: false, scrollPosition: .none)
+                    self.tableView(thirdTableView, didSelectRowAt: IndexPath(row: 2, section: 0))
                     if studyMode != .manual {
                         thirdButton.isHidden = true
                         thirdLabel.isHidden = true
                         thirdArrowButton.isHidden = true
                     }
+                }
+                else {
+                    thirdButton.isHidden = true
+                    thirdLabel.isHidden = true
+                    thirdArrowButton.isHidden = true
                 }
             }
             else {
@@ -87,6 +98,15 @@ class SideChoiceViewController: RootViewController, UITableViewDelegate, UITable
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if studySets != nil, studySets!.count == 1 {
+            firstTableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .none)
+            secondTableView.selectRow(at: IndexPath(row: 1, section: 0), animated: false, scrollPosition: .none)
+             if studySets![0].sideThreeName != nil {
+                thirdTableView.selectRow(at: IndexPath(row: 2, section: 0), animated: false, scrollPosition: .none)
+            }
+        }
+    }
     @IBAction func selectFirst(_ sender: UIButton) {
         firstTableView.isHidden = !firstTableView.isHidden
     }

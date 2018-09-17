@@ -21,6 +21,7 @@ class CardsTableViewController: CoreDataTableViewController, UITextFieldDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = parentSet?.setName
+         self.managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -31,8 +32,8 @@ class CardsTableViewController: CoreDataTableViewController, UITextFieldDelegate
     private func updateUI() {
         if let context = managedObjectContext, parentSet != nil {
             let request = NSFetchRequest<NSFetchRequestResult>(entityName:"Card")
-            request.predicate = NSPredicate(format:"parentSet.name = %@", parentSet!.setName!)
-            request.sortDescriptors = [NSSortDescriptor(key: "word", ascending: true, selector: #selector(NSString.localizedStandardCompare(_:)))]
+            request.predicate = NSPredicate(format:"parentSet.setName = %@", parentSet!.setName!)
+            request.sortDescriptors = [NSSortDescriptor(key: "sideOne", ascending: true, selector: #selector(NSString.localizedStandardCompare(_:)))]
             fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
             if let newCount = fetchedResultsController?.fetchedObjects?.count {
                 cardCount = newCount
@@ -73,15 +74,16 @@ class CardsTableViewController: CoreDataTableViewController, UITextFieldDelegate
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cardCell", for: indexPath) as! CardTableViewCell
         updateCardCellUI(cell)
-        if indexPath.row == 1 {
+        if indexPath.row == 0 {
             cell.sideOneTextField?.text = parentSet?.sideOneName
             cell.sideTwoTextField?.text = parentSet?.sideTwoName
             if parentSet?.sideThreeName != nil {
                 cell.sideThreeTextField?.text = parentSet?.sideThreeName!
             }
         }
-        else if indexPath.row < cardCount {
-            if let card = fetchedResultsController?.object(at: (indexPath)) as? Card { //TODO: make sure index Path is corrent and not offset by one
+        else if indexPath.row < (cardCount + 1) {
+            let newIndexPath = IndexPath(row: indexPath.row - 1, section: indexPath.section)
+            if let card = fetchedResultsController?.object(at: (newIndexPath)) as? Card { 
                 var sideOneWord = ""
                 var sideTwoWord = ""
                 var sideThreeWord = ""
@@ -127,16 +129,16 @@ class CardsTableViewController: CoreDataTableViewController, UITextFieldDelegate
     }
     
     private func updateCardCellUI(_ cell: CardTableViewCell) {
-        let twoToView = NSLayoutConstraint(item: cell.sideTwoTextField, attribute: .trailing, relatedBy: .equal, toItem: cell.cardCellView, attribute: .trailing, multiplier: 0, constant: 10)
-        let twoToThree = NSLayoutConstraint(item: cell.sideTwoTextField, attribute: .trailing, relatedBy: .equal, toItem: cell.sideThreeTextField, attribute: .leading, multiplier: 0, constant: 0)
+        let twoToView = NSLayoutConstraint(item: cell.sideTwoTextField, attribute: .trailing, relatedBy: .equal, toItem: cell.cardCellView, attribute: .trailing, multiplier: 1.0, constant: 10.0)
+        let twoToThree = NSLayoutConstraint(item: cell.sideTwoTextField, attribute: .trailing, relatedBy: .equal, toItem: cell.sideThreeTextField, attribute: .leading, multiplier: 1.0, constant: 0.0)
         if parentSet?.sideThreeName == nil {
             cell.sideThreeTextField.removeFromSuperview()
-            cell.sideTwoTextField.addConstraint(twoToView)
+            cell.cardCellView.addConstraint(twoToView)
         }
         else {
             cell.cardCellView.addSubview(cell.sideThreeTextField)
-            cell.sideTwoTextField.removeConstraint(twoToView)
-            cell.sideTwoTextField.addConstraint(twoToThree)
+            cell.cardCellView.removeConstraint(twoToView)
+            cell.cardCellView.addConstraint(twoToThree)
         }
     }
     
@@ -257,7 +259,7 @@ class CardsTableViewController: CoreDataTableViewController, UITextFieldDelegate
                 else {
                     errorAlert(message: "Failed to save card. Please try again.")
                 }
-                tableView.reloadData()
+                updateUI()
             }
         }
     }

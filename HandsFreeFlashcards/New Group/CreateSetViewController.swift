@@ -44,9 +44,10 @@ class CreateSetViewController: RootViewController, UITextFieldDelegate, UIPicker
     @IBOutlet weak var sideTwoNameField: UITextField!
     @IBOutlet weak var sideThreeInfoLabel: UILabel!
     @IBOutlet weak var sideThreeButton: UIButton!
-    //TODO: CHECK FOR WHEN CRASHES WHEN CREATING SET, MAYBE WHEN I COME BACK CONTEXT IS NIL ?? BUT THAT IS CHECKED FOR...
+
     override func viewDidLoad() {
         super.viewDidLoad()
+         self.managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
         titleTextBox.delegate = self
         sideOneNameField.delegate = self
         sideTwoNameField.delegate = self
@@ -141,6 +142,12 @@ class CreateSetViewController: RootViewController, UITextFieldDelegate, UIPicker
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        if textField.tag == 1, textField.text != nil {
+            self.sideOneName = textField.text!
+        }
+        else if textField.tag == 2, textField.text != nil {
+            self.sideTwoName = textField.text!
+        }
         return true
     }
     

@@ -38,11 +38,13 @@ class SetsTableViewController: CoreDataTableViewController, UITextFieldDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         studyButton.title = ""
+        self.managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
+        /*
         (UIApplication.shared.delegate as? AppDelegate)?.getManagedObjectContext(completionHandler: { (context:NSManagedObjectContext) in
             DispatchQueue.main.async {
                 self.managedObjectContext = context
             }
-        })
+        })*/
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -195,7 +197,6 @@ class SetsTableViewController: CoreDataTableViewController, UITextFieldDelegate 
         if segue.identifier == "showCards" {
             if let cardstvc = segue.destination as? CardsTableViewController, !selectedSets.isEmpty {
                 cardstvc.parentSet = selectedSets[0]
-                cardstvc.managedObjectContext = managedObjectContext
                 cardstvc.setFirstResponder = setFirstResponder
                 setFirstResponder = false
             }
@@ -203,7 +204,6 @@ class SetsTableViewController: CoreDataTableViewController, UITextFieldDelegate 
         else if segue.identifier == "createSet" {
             if let createSetvc = segue.destination as? CreateSetViewController {
                 createSetvc.parentSetTVC = self
-                createSetvc.managedObjectContext = managedObjectContext
             }
         }
         else if segue.identifier == "goToStudyModes" {

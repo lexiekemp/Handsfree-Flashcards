@@ -23,14 +23,20 @@ class ManualStudyViewController: RootViewController {
     var sideThreeSet = [(term: String, langID: String)]()
     var useSideThree = false
     var currentSide = 1
-    var currentCardIndex = 0
+    var currentCardIndex = 0 {
+        didSet {
+            progressLabel.text = "\(currentCardIndex+1)/\(cards.count)"
+        }
+    }
     var managedObjectContext: NSManagedObjectContext?
     
     @IBOutlet weak var cardView: UIView!
     @IBOutlet weak var wordLabel : UILabel!
+    @IBOutlet weak var progressLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+         self.managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
         wordLabel.text = ""
         getCards()
         setGestureRecognizers()
@@ -42,88 +48,92 @@ class ManualStudyViewController: RootViewController {
             return
         }
         
-        (UIApplication.shared.delegate as? AppDelegate)?.getManagedObjectContext(completionHandler: { (context:NSManagedObjectContext) in
-            DispatchQueue.main.async {
-                self.managedObjectContext = context
-                for studySet in self.studySets! {
-                    if studySet.setName != nil, self.managedObjectContext != nil {
-                        let request = NSFetchRequest<NSFetchRequestResult>(entityName:"Card")
-                        request.predicate = NSPredicate(format: "parentSet.setName = %@", studySet.setName!)
-                        if let fetchedCards = (try? self.managedObjectContext!.fetch(request)) as? [Card] {
-                            self.cards = fetchedCards
-                        }
-                    }
-                    if (self.cards.isEmpty) {
-                        self.wordLabel.text = "Please choose a nonempty study set."
-                        return
-                    }
-                    for card in self.cards {
-                        switch self.firstChoiceIndex {
-                        case 1:
-                            if card.sideOne != nil, studySet.sideOneLangID != nil {
-                                self.sideOneSet.append((term: card.sideOne!, langID: studySet.sideOneLangID!))
-                            }
-                        case 2:
-                            if card.sideTwo != nil, studySet.sideTwoLangID != nil {
-                                self.sideOneSet.append((term: card.sideTwo!, langID: studySet.sideTwoLangID!))
-                            }
-                        case 3:
-                            if card.sideThree != nil, studySet.sideThreeLangID != nil {
-                                self.sideOneSet.append((term: card.sideThree!, langID: studySet.sideThreeLangID!))
-                            }
-                        default:
-                            print("invalid firstChoiceIndex")
-                        }
-                        switch self.secondChoiceIndex {
-                        case 1:
-                            if card.sideOne != nil, studySet.sideOneLangID != nil {
-                                self.sideTwoSet.append((term: card.sideOne!, langID: studySet.sideOneLangID!))
-                            }
-                        case 2:
-                            if card.sideTwo != nil, studySet.sideTwoLangID != nil {
-                                self.sideTwoSet.append((term: card.sideTwo!, langID: studySet.sideTwoLangID!))
-                            }
-                        case 3:
-                            if card.sideThree != nil, studySet.sideThreeLangID != nil {
-                                self.sideTwoSet.append((term: card.sideThree!, langID: studySet.sideThreeLangID!))
-                            }
-                        default:
-                            print("invalid firstChoiceIndex")
-                        }
-                        if self.thirdChoiceIndex != nil {
-                            self.useSideThree = true
-                            switch self.thirdChoiceIndex {
-                            case 1?:
-                                if card.sideOne != nil, studySet.sideOneLangID != nil {
-                                    self.sideThreeSet.append((term: card.sideOne!, langID: studySet.sideOneLangID!))
-                                }
-                            case 2?:
-                                if card.sideTwo != nil, studySet.sideTwoLangID != nil {
-                                    self.sideThreeSet.append((term: card.sideTwo!, langID: studySet.sideTwoLangID!))
-                                }
-                            case 3?:
-                                if card.sideThree != nil, studySet.sideThreeLangID != nil {
-                                    self.sideThreeSet.append((term: card.sideThree!, langID: studySet.sideThreeLangID!))
-                                }
-                            default:
-                                print("invalid firstChoiceIndex")
-                            }
-                        }
-                    }
-                    for num in 0..<self.cards.count {
-                        self.numArray.append(num)
+        if managedObjectContext != nil {
+            for studySet in studySets! {
+                if studySet.setName != nil {
+                    let request = NSFetchRequest<NSFetchRequestResult>(entityName:"Card")
+                    request.predicate = NSPredicate(format: "parentSet.setName = %@", studySet.setName!)
+                    if let fetchedCards = (try? managedObjectContext!.fetch(request)) as? [Card] {
+                        cards = fetchedCards
                     }
                 }
+                if (cards.isEmpty) {
+                    wordLabel.text = "Please choose a nonempty study set."
+                    return
+                }
+                for card in cards {
+                    switch firstChoiceIndex {
+                    case 1:
+                        if card.sideOne != nil, studySet.sideOneLangID != nil {
+                            sideOneSet.append((term: card.sideOne!, langID: studySet.sideOneLangID!))
+                        }
+                    case 2:
+                        if card.sideTwo != nil, studySet.sideTwoLangID != nil {
+                            sideOneSet.append((term: card.sideTwo!, langID: studySet.sideTwoLangID!))
+                        }
+                    case 3:
+                        if card.sideThree != nil, studySet.sideThreeLangID != nil {
+                            sideOneSet.append((term: card.sideThree!, langID: studySet.sideThreeLangID!))
+                        }
+                    default:
+                        print("invalid firstChoiceIndex")
+                    }
+                    switch secondChoiceIndex {
+                    case 1:
+                        if card.sideOne != nil, studySet.sideOneLangID != nil {
+                            sideTwoSet.append((term: card.sideOne!, langID: studySet.sideOneLangID!))
+                        }
+                    case 2:
+                        if card.sideTwo != nil, studySet.sideTwoLangID != nil {
+                            sideTwoSet.append((term: card.sideTwo!, langID: studySet.sideTwoLangID!))
+                        }
+                    case 3:
+                        if card.sideThree != nil, studySet.sideThreeLangID != nil {
+                            sideTwoSet.append((term: card.sideThree!, langID: studySet.sideThreeLangID!))
+                        }
+                    default:
+                        print("invalid firstChoiceIndex")
+                    }
+                    if thirdChoiceIndex != nil {
+                        useSideThree = true
+                        switch thirdChoiceIndex {
+                        case 1?:
+                            if card.sideOne != nil, studySet.sideOneLangID != nil {
+                                sideThreeSet.append((term: card.sideOne!, langID: studySet.sideOneLangID!))
+                            }
+                        case 2?:
+                            if card.sideTwo != nil, studySet.sideTwoLangID != nil {
+                                sideThreeSet.append((term: card.sideTwo!, langID: studySet.sideTwoLangID!))
+                            }
+                        case 3?:
+                            if card.sideThree != nil, studySet.sideThreeLangID != nil {
+                                sideThreeSet.append((term: card.sideThree!, langID: studySet.sideThreeLangID!))
+                            }
+                        default:
+                            print("invalid firstChoiceIndex")
+                        }
+                    }
+                }
+                for num in 0..<cards.count {
+                    numArray.append(num)
+                }
+                numArray = numArray.shuffled()
+                progressLabel.text = "\(currentCardIndex+1)/\(cards.count)"
+                showCardSide(1)
             }
-        })
-        
-        //numArray = numArray.shuffled() //swift 4.2
+        }
     }
     private func setGestureRecognizers() {
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.flipCard))
         cardView.addGestureRecognizer(tapRecognizer)
-        let swipeRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(self.changeCard))
-        self.view.addGestureRecognizer(swipeRecognizer)
+        let leftSwipeRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(self.changeCard))
+        leftSwipeRecognizer.direction = .left
+        let rightSwipeRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(self.changeCard))
+        rightSwipeRecognizer.direction = .right
+        self.cardView.addGestureRecognizer(leftSwipeRecognizer)
+        self.cardView.addGestureRecognizer(rightSwipeRecognizer)
+        self.view.addGestureRecognizer(leftSwipeRecognizer)
+        self.view.addGestureRecognizer(rightSwipeRecognizer)
     }
     private func showCardSide(_ side: Int){
         switch side {
@@ -159,24 +169,35 @@ class ManualStudyViewController: RootViewController {
         }
     }
     @objc func changeCard(gesture: UISwipeGestureRecognizer) {
-        UIView.animate(withDuration: 0.5) {
-            self.cardView.frame.origin.x = 0
-            }
-        self.cardView.frame.origin.x = self.view.frame.width
-        UIView.animate(withDuration: 0.5) {
-            self.cardView.center = self.view.center
-        }
         if gesture.direction == UISwipeGestureRecognizerDirection.right {
-            if currentCardIndex > 0 {
-                currentCardIndex -= 1
-                showCardSide(1)
-            }
+            if currentCardIndex <= 0 { return }
+            currentCardIndex -= 1
+            UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                self.cardView.frame.origin.x = self.view.frame.width
+            }, completion: { [weak self] finish in
+                if self == nil { return }
+                self!.cardView.frame.origin.x = -self!.cardView.frame.width
+                self!.showCardSide(1)
+                UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+                    self!.cardView.frame.origin.x = self!.view.frame.width/2 - self!.cardView.frame.width/2
+                }, completion: nil
+                )
+            })
         }
         else if gesture.direction == UISwipeGestureRecognizerDirection.left {
-            if currentCardIndex < (cards.count - 1) {
-                currentCardIndex += 1
-                showCardSide(1)
-            }
+            if currentCardIndex >= (cards.count - 1) { return }
+            currentCardIndex += 1
+            UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                    self.cardView.frame.origin.x = -self.cardView.frame.width
+            }, completion: { [weak self] finish in
+                if self == nil { return }
+                self!.cardView.frame.origin.x = self!.view.frame.width
+                self!.showCardSide(1)
+                UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+                    self!.cardView.frame.origin.x = self!.view.frame.width/2 - self!.cardView.frame.width/2
+                }, completion: nil
+                )
+            })
         }
     }
 

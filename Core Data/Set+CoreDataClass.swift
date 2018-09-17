@@ -14,7 +14,7 @@ import CoreData
 public class Set: NSManagedObject {
     class func addSet(setName: String, sideOneLangID: String, sideTwoLangID: String, sideThreeLangID: String?, sideOneName: String, sideTwoName: String, sideThreeName: String?, inManagedObjectContext context: NSManagedObjectContext) -> Set? {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Set")
-       // let request:NSFetchRequest<NSFetchRequestResult> = Set.fetchRequest()
+       // let request: = Set.fetchRequest()
         request.predicate = NSPredicate(format: "setName = %@", setName)
         
         if let set = (try? context.fetch(request))?.first as? Set {
@@ -28,6 +28,12 @@ public class Set: NSManagedObject {
             set.sideOneName = sideOneName
             set.sideTwoName = sideTwoName
             set.sideThreeName = sideThreeName
+            do {
+                try context.save()
+            } catch {
+                print("Failed saving card")
+                return nil
+            }
             return set
         }
         return nil
@@ -46,6 +52,11 @@ public class Set: NSManagedObject {
         request.predicate = NSPredicate(format: "setName = %@", setName)
         if let set = (try? context.fetch(request))?.first as? Set {
             context.delete(set)
+            do {
+                try context.save()
+            } catch {
+                print("Failed saving delete")
+            }
         }
     }
 }
