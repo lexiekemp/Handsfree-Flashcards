@@ -33,11 +33,14 @@ class ManualStudyViewController: RootViewController {
     @IBOutlet weak var cardView: UIView!
     @IBOutlet weak var wordLabel : UILabel!
     @IBOutlet weak var progressLabel: UILabel!
+    @IBOutlet weak var cardViewConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
          self.managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
         wordLabel.text = ""
+        cardViewConstraint.constant = self.view.frame.width/2 - self.cardView.frame.width/2
+        self.view.layoutIfNeeded()
         getCards()
         setGestureRecognizers()
     }
@@ -173,13 +176,18 @@ class ManualStudyViewController: RootViewController {
             if currentCardIndex <= 0 { return }
             currentCardIndex -= 1
             UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
-                self.cardView.frame.origin.x = self.view.frame.width
+                self.cardViewConstraint.constant = self.view.frame.width
+                self.view.layoutIfNeeded()
             }, completion: { [weak self] finish in
                 if self == nil { return }
-                self!.cardView.frame.origin.x = -self!.cardView.frame.width
+                
+                self!.cardViewConstraint.constant = -self!.cardView.frame.width
+                self!.view.layoutIfNeeded()
                 self!.showCardSide(1)
+                
                 UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.curveEaseOut, animations: {
-                    self!.cardView.frame.origin.x = self!.view.frame.width/2 - self!.cardView.frame.width/2
+                    self!.cardViewConstraint.constant = self!.view.frame.width/2 - self!.cardView.frame.width/2
+                    self!.view.layoutIfNeeded()
                 }, completion: nil
                 )
             })
@@ -188,16 +196,21 @@ class ManualStudyViewController: RootViewController {
             if currentCardIndex >= (cards.count - 1) { return }
             currentCardIndex += 1
             UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
-                    self.cardView.frame.origin.x = -self.cardView.frame.width
+                self.cardViewConstraint.constant = -self.cardView.frame.width
+                self.view.layoutIfNeeded()
             }, completion: { [weak self] finish in
                 if self == nil { return }
-                self!.cardView.frame.origin.x = self!.view.frame.width
+                
+                self!.cardViewConstraint.constant = self!.view.frame.width
+                self!.view.layoutIfNeeded()
                 self!.showCardSide(1)
+                
                 UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.curveEaseOut, animations: {
-                    self!.cardView.frame.origin.x = self!.view.frame.width/2 - self!.cardView.frame.width/2
+                    self!.cardViewConstraint.constant = self!.view.frame.width/2 - self!.cardView.frame.width/2
+                    self!.view.layoutIfNeeded()
                 }, completion: nil
-                )
-            })
+             )}
+            )
         }
     }
 

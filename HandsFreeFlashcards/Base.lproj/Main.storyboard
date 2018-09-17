@@ -994,10 +994,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HmU-cR-tXW">
-                                <rect key="frame" x="72.5" y="165.5" width="230" height="400"/>
+                                <rect key="frame" x="72.5" y="114" width="275" height="483"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Word" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4cq-fc-dcG">
-                                        <rect key="frame" x="94.5" y="190" width="41" height="20.5"/>
+                                        <rect key="frame" x="117" y="231.5" width="41" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -1006,9 +1006,8 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="4cq-fc-dcG" firstAttribute="centerY" secondItem="HmU-cR-tXW" secondAttribute="centerY" id="CjF-AT-HSl"/>
-                                    <constraint firstAttribute="height" constant="400" id="bJs-wV-ube"/>
+                                    <constraint firstAttribute="width" constant="275" id="KuZ-NC-QiS"/>
                                     <constraint firstItem="4cq-fc-dcG" firstAttribute="centerX" secondItem="HmU-cR-tXW" secondAttribute="centerX" id="rkV-wk-j0j"/>
-                                    <constraint firstAttribute="width" constant="230" id="sZC-Pv-OB6"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1Z-lP-Mvh">
@@ -1020,15 +1019,17 @@
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="HmU-cR-tXW" firstAttribute="centerY" secondItem="xB1-GJ-BIi" secondAttribute="centerY" id="Efc-8U-bbj"/>
+                            <constraint firstItem="HmU-cR-tXW" firstAttribute="top" secondItem="xB1-GJ-BIi" secondAttribute="top" constant="50" id="W7Q-k1-ZtM"/>
                             <constraint firstItem="xB1-GJ-BIi" firstAttribute="bottom" secondItem="l1Z-lP-Mvh" secondAttribute="bottom" constant="20" id="Xpy-Xn-GTr"/>
+                            <constraint firstItem="l1Z-lP-Mvh" firstAttribute="top" secondItem="HmU-cR-tXW" secondAttribute="bottom" constant="50" id="aGh-BO-AQa"/>
+                            <constraint firstItem="HmU-cR-tXW" firstAttribute="leading" secondItem="xB1-GJ-BIi" secondAttribute="leading" constant="72.5" id="b9h-QM-3nJ"/>
                             <constraint firstItem="l1Z-lP-Mvh" firstAttribute="centerX" secondItem="xB1-GJ-BIi" secondAttribute="centerX" id="p7M-rg-gQH"/>
-                            <constraint firstItem="HmU-cR-tXW" firstAttribute="centerX" secondItem="xB1-GJ-BIi" secondAttribute="centerX" id="pJW-8L-kzQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xB1-GJ-BIi"/>
                     </view>
                     <connections>
                         <outlet property="cardView" destination="HmU-cR-tXW" id="YcH-1t-4NZ"/>
+                        <outlet property="cardViewConstraint" destination="b9h-QM-3nJ" id="i3n-8H-69y"/>
                         <outlet property="progressLabel" destination="l1Z-lP-Mvh" id="nHe-OK-4KV"/>
                         <outlet property="wordLabel" destination="4cq-fc-dcG" id="RgP-E1-2KG"/>
                     </connections>
