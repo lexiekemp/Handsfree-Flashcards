@@ -198,8 +198,26 @@ class CardsTableViewController: CoreDataTableViewController, UITextFieldDelegate
             if text.count > 0 {
                 let currTag = textField.tag
                 let cardRow = currTag/3
-                let indexPath = IndexPath(row: cardRow, section: 0)
-                if (cardRow-1) < cardCount { //update existing card
+                let indexPath = IndexPath(row: cardRow - 1, section: 0)
+                if cardRow == 0 { //updating row titles
+                    setFirstResponder = false
+                    textField.resignFirstResponder()
+                    if currTag%3 == 0 { //sideOne
+                        parentSet?.sideOneName = text
+                    }
+                    else if currTag%3 == 1 { //sideTwo
+                        parentSet?.sideTwoName = text
+                    }
+                    else { //sideThree
+                        parentSet?.sideThreeName = text
+                    }
+                    do {
+                        try managedObjectContext?.save()
+                    } catch {
+                        errorAlert(message: "Failed to save card")
+                    }
+                }
+                else if (cardRow) <= cardCount { //update existing card
                     setFirstResponder = false
                     textField.resignFirstResponder()
                     if let card = fetchedResultsController?.object(at: indexPath) as? Card {
@@ -209,7 +227,7 @@ class CardsTableViewController: CoreDataTableViewController, UITextFieldDelegate
                         else if currTag%3 == 1 { //sideTwo
                             card.sideTwo = text
                         }
-                        else {
+                        else { //sideThree
                             card.sideThree = text
                         }
                         do {
@@ -219,7 +237,7 @@ class CardsTableViewController: CoreDataTableViewController, UITextFieldDelegate
                         }
                     }
                 }
-                else if (cardRow-1) == cardCount { //creating new card
+                else if (cardRow) > cardCount { //creating new card
                     if managedObjectContext != nil, parentSet != nil {
                         if (currTag%3 == 1 && parentSet!.sideThreeName == nil) || (currTag%3 == 2) { //finished editing card
                             let cell = tableView.cellForRow(at: IndexPath(row: currTag/3, section: 0)) as! CardTableViewCell
