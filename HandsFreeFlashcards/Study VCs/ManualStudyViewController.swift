@@ -23,11 +23,16 @@ class ManualStudyViewController: RootViewController {
     var sideThreeSet = [(term: String, langID: String)]()
     var useSideThree = false
     var currentSide = 1
+    
     var currentCardIndex = 0 {
         didSet {
             progressLabel.text = "\(currentCardIndex+1)/\(sideOneSet.count)"
+            if currentCardIndex < numArray.count {
+                setIndex = numArray[currentCardIndex]
+            }
         }
     }
+    var setIndex = 0
     var managedObjectContext: NSManagedObjectContext?
     
     @IBOutlet weak var cardView: UIView!
@@ -120,11 +125,12 @@ class ManualStudyViewController: RootViewController {
                 for num in numArray.count..<(numArray.count + cards.count) {
                     numArray.append(num)
                 }
-                numArray = numArray.shuffled()
-                progressLabel.text = "\(currentCardIndex+1)/\(sideOneSet.count)"
-                showCardSide(1)
             }
         }
+        numArray = numArray.shuffled()
+        currentCardIndex = 0
+        progressLabel.text = "\(currentCardIndex+1)/\(sideOneSet.count)"
+        showCardSide(1)
     }
     private func setGestureRecognizers() {
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.flipCard))
@@ -141,13 +147,13 @@ class ManualStudyViewController: RootViewController {
     private func showCardSide(_ side: Int){
         switch side {
         case 1:
-            wordLabel.text = sideOneSet[currentCardIndex].term
+            wordLabel.text = sideOneSet[setIndex].term
             currentSide = 1
         case 2:
-            wordLabel.text = sideTwoSet[currentCardIndex].term
+            wordLabel.text = sideTwoSet[setIndex].term
             currentSide = 2
         case 3:
-            wordLabel.text = sideThreeSet[currentCardIndex].term
+            wordLabel.text = sideThreeSet[setIndex].term
             currentSide = 3
         default:
             return;
