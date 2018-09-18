@@ -196,10 +196,10 @@ class CardsTableViewController: CoreDataTableViewController, UITextFieldDelegate
     
     func textFieldUpdate(_ textField: UITextField) {
         if let text = textField.text {
+            let currTag = textField.tag
+            let cardRow = currTag/3
+            let indexPath = IndexPath(row: cardRow - 1, section: 0)
             if text.count > 0 {
-                let currTag = textField.tag
-                let cardRow = currTag/3
-                let indexPath = IndexPath(row: cardRow - 1, section: 0)
                 if cardRow == 0 { //updating row titles
                     setFirstResponder = false
                     textField.resignFirstResponder()
@@ -238,7 +238,7 @@ class CardsTableViewController: CoreDataTableViewController, UITextFieldDelegate
                         }
                     }
                 }
-                else if (cardRow) > cardCount { //creating new card
+                else if cardRow > cardCount { //creating new card
                     if managedObjectContext != nil, parentSet != nil {
                         if (currTag%3 == 1 && parentSet!.sideThreeName == nil) || (currTag%3 == 2) { //finished editing card
                             let cell = tableView.cellForRow(at: IndexPath(row: currTag/3, section: 0)) as! CardTableViewCell
@@ -280,6 +280,10 @@ class CardsTableViewController: CoreDataTableViewController, UITextFieldDelegate
                 }
                 updateUI()
             }
+            else if cardRow > cardCount {
+                setFirstResponder = false
+                textField.resignFirstResponder()
+            }
         }
     }
     // MARK: - Navigation
@@ -291,7 +295,6 @@ class CardsTableViewController: CoreDataTableViewController, UITextFieldDelegate
             }
         }
         if segue.identifier == "import" {
-            //todo：because segue is to nav controller, need to get out actual vc
             if let navC = segue.destination as? UINavigationController, parentSet != nil {
                 if let importQuizletvc = navC.topViewController as? ImportQuizletViewController {
                     importQuizletvc.set = parentSet!
