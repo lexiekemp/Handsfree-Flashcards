@@ -119,7 +119,7 @@ class SetsTableViewController: CoreDataTableViewController, UITextFieldDelegate 
     @IBAction func goToCards(_ sender: UIButton) {
         if sender.tag < setCount {
             if let set = fetchedResultsController?.object(at: IndexPath(row:sender.tag, section:0)) as? Set {
-                selectedSets.append(set)
+                //selectedSets.append(set)
                 if sender.isSelected {
                     if let i = selectedSets.index(of: set) {
                         selectedSets.remove(at: i)

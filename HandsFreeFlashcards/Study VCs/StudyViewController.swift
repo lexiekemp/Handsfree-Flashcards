@@ -15,7 +15,8 @@ import CoreData
 class StudyViewController: UIViewController, SFSpeechRecognizerDelegate, AVSpeechSynthesizerDelegate  {
 
     @IBOutlet weak var wordLabel: UILabel!
-
+    @IBOutlet weak var progressLabel: UILabel!
+    
     var studySets: [Set]?
     var firstChoiceIndex = 1
     var secondChoiceIndex = 2
@@ -29,9 +30,16 @@ class StudyViewController: UIViewController, SFSpeechRecognizerDelegate, AVSpeec
     var sideOneSet = [(term: String, langID: String)]()
     var sideTwoSet = [(term: String, langID: String)]()
     var currentSide = 1
-    var currentCardIndex = 0
-    
-
+    var currentCardIndex = 0 {
+        didSet {
+            progressLabel.text = "\(currentCardIndex+1)/\(sideOneSet.count)"
+            if currentCardIndex < currNumArray.count {
+                setIndex = currNumArray[currentCardIndex]
+            }
+        }
+    }
+    var setIndex = 0
+    var starting = true
     var incorrectNumArray = [Int]()
     var currNumArray = [Int]()
     
@@ -115,10 +123,9 @@ class StudyViewController: UIViewController, SFSpeechRecognizerDelegate, AVSpeec
                         print("invalid firstChoiceIndex")
                     }
                 }
-                for num in 0..<self.cards.count {
+                for num in self.numArray.count..<(self.numArray.count + self.cards.count) {
                     self.numArray.append(num)
                 }
-                numArray.shuffle()
             }
         }
     }
@@ -148,7 +155,10 @@ class StudyViewController: UIViewController, SFSpeechRecognizerDelegate, AVSpeec
         DispatchQueue.main.async {
             if self.gotCards {
                 self.currNumArray = self.numArray
+                self.currNumArray.shuffle()
                 self.saidSideOne = true
+                //self.progressLabel.text = "\(self.currentCardIndex+1)/\(self.sideOneSet.count)"
+                self.currentCardIndex = self.currNumArray.count - 1
                 self.saySideOne()
             }
         }
@@ -214,10 +224,10 @@ class StudyViewController: UIViewController, SFSpeechRecognizerDelegate, AVSpeec
             if (result != nil) {
                 let result = result!.bestTranscription.formattedString //check for correct answer
                 if (self.sideOneShowing && self.studyMode != .rep) {
-                    if (result.lowercased() != self.sideTwoSet[self.currentCardIndex].term.lowercased()) {
+                    if (result.lowercased() != self.sideTwoSet[self.setIndex].term.lowercased()) {
                         //play incorrect sound
                         if (self.repeatIncorrect) {
-                            self.incorrectNumArray.append(self.currentCardIndex)
+                            self.incorrectNumArray.append(self.setIndex)
                         }
                     }
                     else {
@@ -265,10 +275,12 @@ class StudyViewController: UIViewController, SFSpeechRecognizerDelegate, AVSpeec
         catch {
             print("error resetting audio session")
         }
-        if (currNumArray.isEmpty) {
+        if (currentCardIndex == (currNumArray.count-1)) {
             restarting = true
             if (studyMode != .rep && !incorrectNumArray.isEmpty) {
                 currNumArray = incorrectNumArray
+                currNumArray.shuffle()
+                currentCardIndex = 0
                 if incorrectNumArray.count == 1 {
                     utterance = AVSpeechUtterance(string: "Starting over with " + String(incorrectNumArray.count) + "incorrect word.")
                 }
@@ -279,22 +291,33 @@ class StudyViewController: UIViewController, SFSpeechRecognizerDelegate, AVSpeec
             }
             else {
                 currNumArray = numArray
+                currNumArray.shuffle()
+                currentCardIndex = 0
                 utterance = AVSpeechUtterance(string: "Round complete. Starting over.")
             }
             utterance.voice = AVSpeechSynthesisVoice(language:"en-US")
             utterance.rate = 0.4
-            synth.speak(utterance)
+            if !starting {
+                synth.speak(utterance)
+            }
+            else {
+                restarting = false
+                starting = false
+            }
         }
-        let randomOffset = Int(arc4random_uniform(UInt32(currNumArray.count)))
-        currentCardIndex = currNumArray[randomOffset]
+        else {
+            currentCardIndex += 1
+        }
+        //let randomOffset = Int(arc4random_uniform(UInt32(currNumArray.count)))
+        //currentCardIndex = currNumArray[randomOffset]
         //TODO: NEED PERFORM AND WAIT HERE?
-        let currWord = sideOneSet[currentCardIndex].term
+        let currWord = sideOneSet[setIndex].term
         wordLabel.text = currWord
         sideOneShowing = true
-        currNumArray.remove(at:randomOffset)
+       // currNumArray.remove(at:randomOffset)
         
         utterance = AVSpeechUtterance(string: currWord)
-        utterance.voice = AVSpeechSynthesisVoice(language:sideOneSet[currentCardIndex].term)
+        utterance.voice = AVSpeechSynthesisVoice(language:sideOneSet[setIndex].term)
         utterance.rate = 0.4
         synth.speak(utterance)
 
@@ -307,12 +330,12 @@ class StudyViewController: UIViewController, SFSpeechRecognizerDelegate, AVSpeec
         catch {
             print("error resetting audio session")
         }
-        let currWord = sideTwoSet[currentCardIndex].term
+        let currWord = sideTwoSet[setIndex].term
         wordLabel.text = currWord
         sideOneShowing = false
         
         utterance = AVSpeechUtterance(string: currWord)
-        utterance.voice = AVSpeechSynthesisVoice(language:sideTwoSet[currentCardIndex].langID)
+        utterance.voice = AVSpeechSynthesisVoice(language:sideTwoSet[setIndex].langID)
         utterance.rate = 0.4
         synth.speak(utterance)
     }

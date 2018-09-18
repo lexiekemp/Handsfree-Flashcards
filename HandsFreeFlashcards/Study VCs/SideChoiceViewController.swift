@@ -137,6 +137,9 @@ class SideChoiceViewController: RootViewController, UITableViewDelegate, UITable
     // MARK: - UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView.tag == 3 {
+            return sideChoices.count + 1
+        }
         return sideChoices.count
     }
     
@@ -144,6 +147,9 @@ class SideChoiceViewController: RootViewController, UITableViewDelegate, UITable
         let cell = tableView.dequeueReusableCell(withIdentifier: "sideOptCell", for: indexPath)
         if indexPath.row < sideChoices.count {
             cell.textLabel?.text = sideChoices[indexPath.row]
+        }
+        else {
+            cell.textLabel?.text = "None"
         }
         if cell.responds(to: #selector(setter: UITableViewCell.separatorInset)){
             cell.separatorInset = UIEdgeInsets.zero
@@ -179,6 +185,11 @@ class SideChoiceViewController: RootViewController, UITableViewDelegate, UITable
                 thirdChoiceIndex = indexPath.row + 1
                 thirdButton.setTitle(sideChoices[indexPath.row], for: .normal)
                 thirdButton.setTitle(sideChoices[indexPath.row], for: .selected)
+            }
+            else {
+                thirdChoiceIndex = nil
+                thirdButton.setTitle("None", for: .normal)
+                thirdButton.setTitle("None", for: .selected)
             }
         }
         tableView.isHidden = true

@@ -965,6 +965,12 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="CIV-Ux-KAZ"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="85F-kN-STj">
+                                <rect key="frame" x="187.5" y="647" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -972,12 +978,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Zgp-v4-YRf" firstAttribute="bottom" secondItem="85F-kN-STj" secondAttribute="bottom" constant="20" id="AkO-oc-Bjo"/>
                             <constraint firstItem="C5U-2s-aNE" firstAttribute="centerY" secondItem="Zgp-v4-YRf" secondAttribute="centerY" id="DzR-pM-WdQ"/>
                             <constraint firstItem="C5U-2s-aNE" firstAttribute="centerX" secondItem="Zgp-v4-YRf" secondAttribute="centerX" id="oGi-Jd-0WW"/>
+                            <constraint firstItem="85F-kN-STj" firstAttribute="centerX" secondItem="Zgp-v4-YRf" secondAttribute="centerX" id="wEy-vr-KnV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Zgp-v4-YRf"/>
                     </view>
                     <connections>
+                        <outlet property="progressLabel" destination="85F-kN-STj" id="0PR-6d-ALX"/>
                         <outlet property="wordLabel" destination="C5U-2s-aNE" id="ZDi-tl-L0u"/>
                     </connections>
                 </viewController>
@@ -1096,23 +1105,23 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="My Sets" id="2Bq-Cd-mhy">
-                        <leftBarButtonItems>
-                            <barButtonItem title="Select Multiple" id="ien-bQ-rRk">
-                                <connections>
-                                    <action selector="selectMultiple:" destination="NKp-to-dKs" id="7QF-1h-2xV"/>
-                                </connections>
-                            </barButtonItem>
+                        <barButtonItem key="leftBarButtonItem" title="Create" id="aUa-US-hDx">
+                            <connections>
+                                <segue destination="BQo-KG-wZy" kind="presentation" identifier="createSet" id="GUR-8c-sTA"/>
+                            </connections>
+                        </barButtonItem>
+                        <rightBarButtonItems>
                             <barButtonItem title="Study" id="lK9-xi-NjG">
                                 <connections>
                                     <action selector="goToStudyModes:" destination="NKp-to-dKs" id="9TU-nq-DbU"/>
                                 </connections>
                             </barButtonItem>
-                        </leftBarButtonItems>
-                        <barButtonItem key="rightBarButtonItem" title="Create" id="aUa-US-hDx">
-                            <connections>
-                                <segue destination="BQo-KG-wZy" kind="presentation" identifier="createSet" id="GUR-8c-sTA"/>
-                            </connections>
-                        </barButtonItem>
+                            <barButtonItem title="Select Multiple" id="ien-bQ-rRk">
+                                <connections>
+                                    <action selector="selectMultiple:" destination="NKp-to-dKs" id="7QF-1h-2xV"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="selectMultipleButton" destination="ien-bQ-rRk" id="O2d-Oi-mF8"/>
@@ -1168,6 +1177,6 @@
         <image name="right_arrow_icon" width="280" height="280"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3jd-mc-pTS"/>
+        <segue reference="SCz-2l-TbM"/>
     </inferredMetricsTieBreakers>
 </document>

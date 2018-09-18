@@ -25,7 +25,7 @@ class ManualStudyViewController: RootViewController {
     var currentSide = 1
     var currentCardIndex = 0 {
         didSet {
-            progressLabel.text = "\(currentCardIndex+1)/\(cards.count)"
+            progressLabel.text = "\(currentCardIndex+1)/\(sideOneSet.count)"
         }
     }
     var managedObjectContext: NSManagedObjectContext?
@@ -117,11 +117,11 @@ class ManualStudyViewController: RootViewController {
                         }
                     }
                 }
-                for num in 0..<cards.count {
+                for num in numArray.count..<(numArray.count + cards.count) {
                     numArray.append(num)
                 }
                 numArray = numArray.shuffled()
-                progressLabel.text = "\(currentCardIndex+1)/\(cards.count)"
+                progressLabel.text = "\(currentCardIndex+1)/\(sideOneSet.count)"
                 showCardSide(1)
             }
         }
@@ -193,7 +193,7 @@ class ManualStudyViewController: RootViewController {
             })
         }
         else if gesture.direction == UISwipeGestureRecognizerDirection.left {
-            if currentCardIndex >= (cards.count - 1) { return }
+            if currentCardIndex >= (sideOneSet.count - 1) { return }
             currentCardIndex += 1
             UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
                 self.cardViewConstraint.constant = -self.cardView.frame.width

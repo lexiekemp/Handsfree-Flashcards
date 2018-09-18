@@ -76,6 +76,7 @@ class CardsTableViewController: CoreDataTableViewController, UITextFieldDelegate
         updateCardCellUI(cell)
         if indexPath.row == 0 {
             cell.sideOneTextField?.text = parentSet?.sideOneName
+            //cell.sideOneTextField?.attributedText = NSAttributedString(string: parentSet?.sideOneName, attributes: [.font: UIFont(UISystemFont.bold)])
             cell.sideTwoTextField?.text = parentSet?.sideTwoName
             if parentSet?.sideThreeName != nil {
                 cell.sideThreeTextField?.text = parentSet?.sideThreeName!
