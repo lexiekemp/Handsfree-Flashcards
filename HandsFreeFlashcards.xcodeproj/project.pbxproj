@@ -13,6 +13,7 @@
 		E90C17D61FF4358D00086115 /* CoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90C17D51FF4358D00086115 /* CoreDataTableViewController.swift */; };
 		E9205772210D60790056A185 /* SideChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9205771210D60790056A185 /* SideChoiceViewController.swift */; };
 		E9205774210D60930056A185 /* ManualStudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9205773210D60930056A185 /* ManualStudyViewController.swift */; };
+		E93734DA21513ABD00F4DF21 /* ModeInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93734D921513ABD00F4DF21 /* ModeInfoViewController.swift */; };
 		E93776832071E06500B92880 /* BigButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93776822071E06500B92880 /* BigButton.swift */; };
 		E943A3E81FFDA848002F3FB5 /* CardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E943A3E71FFDA847002F3FB5 /* CardTableViewCell.swift */; };
 		E943A3EA2000A3ED002F3FB5 /* StudyModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E943A3E92000A3ED002F3FB5 /* StudyModeViewController.swift */; };
@@ -41,6 +42,7 @@
 		E90C17D51FF4358D00086115 /* CoreDataTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTableViewController.swift; sourceTree = "<group>"; };
 		E9205771210D60790056A185 /* SideChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideChoiceViewController.swift; sourceTree = "<group>"; };
 		E9205773210D60930056A185 /* ManualStudyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualStudyViewController.swift; sourceTree = "<group>"; };
+		E93734D921513ABD00F4DF21 /* ModeInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeInfoViewController.swift; sourceTree = "<group>"; };
 		E93776822071E06500B92880 /* BigButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigButton.swift; sourceTree = "<group>"; };
 		E943A3E71FFDA847002F3FB5 /* CardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTableViewCell.swift; sourceTree = "<group>"; };
 		E943A3E92000A3ED002F3FB5 /* StudyModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyModeViewController.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 		E9A2DA45207151F100FD9D54 /* Study VCs */ = {
 			isa = PBXGroup;
 			children = (
+				E93734D921513ABD00F4DF21 /* ModeInfoViewController.swift */,
 				E9205773210D60930056A185 /* ManualStudyViewController.swift */,
 				E9205771210D60790056A185 /* SideChoiceViewController.swift */,
 				E943A3E92000A3ED002F3FB5 /* StudyModeViewController.swift */,
@@ -269,6 +272,7 @@
 				E93776832071E06500B92880 /* BigButton.swift in Sources */,
 				E9205774210D60930056A185 /* ManualStudyViewController.swift in Sources */,
 				E90744821FB6B8AC00FFC852 /* StudyViewController.swift in Sources */,
+				E93734DA21513ABD00F4DF21 /* ModeInfoViewController.swift in Sources */,
 				E9205772210D60790056A185 /* SideChoiceViewController.swift in Sources */,
 				E90C17A61FF0DE1100086115 /* Model.xcdatamodeld in Sources */,
 				E98B4FC61FB2F22C00DC349D /* AppDelegate.swift in Sources */,

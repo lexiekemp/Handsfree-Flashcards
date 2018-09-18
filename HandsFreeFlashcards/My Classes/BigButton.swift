@@ -11,7 +11,7 @@ import UIKit
 class BigButton: UIButton {
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        /*
         self.tintColor = UIColor.black
         
         self.layer.cornerRadius = 10.0
@@ -25,5 +25,18 @@ class BigButton: UIButton {
         
         self.titleEdgeInsets = UIEdgeInsetsMake(2, 2, 2, 2)
         self.titleLabel?.textAlignment = .center
+        
+        
+        */
+        //round corners
+        self.layer.cornerRadius = 5.0
+        self.clipsToBounds = true
+        self.layer.borderWidth = 2.0
+        self.titleEdgeInsets = UIEdgeInsets(top: 10, left:10, bottom: 10, right: 10)
+        
+        //set color
+        let aquaColor = UIColor(red:0.07, green:0.64, blue:0.67, alpha:1.0)
+        self.setTitleColor(aquaColor, for: .normal)
+        self.layer.borderColor = aquaColor.cgColor
     }
 }
