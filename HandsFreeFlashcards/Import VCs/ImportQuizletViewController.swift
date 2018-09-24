@@ -55,34 +55,55 @@ class ImportQuizletViewController: RootViewController, UITextViewDelegate, UITab
             numSidesSegControl.setEnabled(false, forSegmentAt: 1)
         }
     }
+    private func checkSyntax(_ cards: [String]) -> Bool {
+        for card in cards {
+            var sides = card.components(separatedBy: sideSepChoice)
+            if set?.sideThreeName != nil && set?.sideThreeLangID != nil && numSidesSegControl.selectedSegmentIndex == 1 {
+                if sides.count != 3 {
+                    if sides.count > 0 {
+                        errorAlert(message: "Error in syntax near \(sides[0])")
+                    }
+                    else {
+                        errorAlert(message: "Please enter correct syntax for importing 3 sides")
+                    }
+                    return false
+                }
+            }
+            else {
+                if sides.count != 2 {
+                    if sides.count > 0 {
+                        errorAlert(message: "Error in syntax near \(sides[0])")
+                    }
+                    else {
+                        errorAlert(message: "Please enter correct syntax for importing 2 sides")
+                    }
+                    return false
+                }
+            }
+        }
+        return true
+    }
     
-    private func parseText() -> Bool { //use text.components() instead to parse string into an array
+    private func parseText() -> Bool { 
         if managedObjectContext == nil {
             return false
         }
-        if let setToParse = setTextView.text {
-//            if !checkSyntax(setToParse) {
-//                errorAlert(message: "Please enter correct syntax for set")
-//                return true
-//            }
-            
-            let cards = setToParse.components(separatedBy: cardsSepChoice)
-            for card in cards {
-                var sides = card.components(separatedBy: sideSepChoice)
-                if set?.sideThreeName != nil && set?.sideThreeLangID != nil && numSidesSegControl.selectedSegmentIndex == 1 {
-                    if sides.count != 3 {
-                        errorAlert(message: "Please enter correct syntax for importing 3 sides")
-                        return true
-                    }
-                    _ = Card.addCard(sideOne: sides[0], sideTwo: sides[1], sideThree: sides[2], set: set!, inManagedObjectContext: managedObjectContext!)
-                }
-                else {
-                    if sides.count != 2 {
-                        errorAlert(message: "Please enter correct syntax for importing 2 sides")
-                        return true
-                    }
-                    _ = Card.addCard(sideOne: sides[0], sideTwo: sides[1], sideThree: nil, set: set!, inManagedObjectContext: managedObjectContext!)
-                }
+        guard let setToParse = setTextView.text else {
+            errorAlert(message: "Please enter text")
+            return true
+        }
+        let cards = setToParse.components(separatedBy: cardsSepChoice)
+        if !checkSyntax(cards) {
+            return true
+        }
+        //add cards
+        for card in cards {
+            var sides = card.components(separatedBy: sideSepChoice)
+            if set?.sideThreeName != nil && set?.sideThreeLangID != nil && numSidesSegControl.selectedSegmentIndex == 1 {
+                _ = Card.addCard(sideOne: sides[0], sideTwo: sides[1], sideThree: sides[2], set: set!, inManagedObjectContext: managedObjectContext!)
+            }
+            else {
+                _ = Card.addCard(sideOne: sides[0], sideTwo: sides[1], sideThree: nil, set: set!, inManagedObjectContext: managedObjectContext!)
             }
         }
         return true
