@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="t1T-o8-blC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="t1T-o8-blC">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -1079,10 +1079,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C5U-2s-aNE">
-                                <rect key="frame" x="37.5" y="365.5" width="300" height="0.0"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="CIV-Ux-KAZ"/>
-                                </constraints>
+                                <rect key="frame" x="25" y="365.5" width="325" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1098,7 +1095,9 @@
                         <constraints>
                             <constraint firstItem="Zgp-v4-YRf" firstAttribute="bottom" secondItem="85F-kN-STj" secondAttribute="bottom" constant="20" id="AkO-oc-Bjo"/>
                             <constraint firstItem="C5U-2s-aNE" firstAttribute="centerY" secondItem="Zgp-v4-YRf" secondAttribute="centerY" id="DzR-pM-WdQ"/>
+                            <constraint firstItem="C5U-2s-aNE" firstAttribute="leading" secondItem="Zgp-v4-YRf" secondAttribute="leading" constant="25" id="f1P-SE-QiD"/>
                             <constraint firstItem="C5U-2s-aNE" firstAttribute="centerX" secondItem="Zgp-v4-YRf" secondAttribute="centerX" id="oGi-Jd-0WW"/>
+                            <constraint firstItem="Zgp-v4-YRf" firstAttribute="trailing" secondItem="C5U-2s-aNE" secondAttribute="trailing" constant="25" id="vN4-91-iFy"/>
                             <constraint firstItem="85F-kN-STj" firstAttribute="centerX" secondItem="Zgp-v4-YRf" secondAttribute="centerX" id="wEy-vr-KnV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Zgp-v4-YRf"/>
@@ -1124,7 +1123,7 @@
                                 <rect key="frame" x="72.5" y="114" width="275" height="483"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Word" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4cq-fc-dcG">
-                                        <rect key="frame" x="109" y="226.5" width="57.5" height="30"/>
+                                        <rect key="frame" x="10" y="226.5" width="255" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -1132,25 +1131,49 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="4cq-fc-dcG" secondAttribute="trailing" constant="10" id="4Co-w2-AkU"/>
                                     <constraint firstItem="4cq-fc-dcG" firstAttribute="centerY" secondItem="HmU-cR-tXW" secondAttribute="centerY" id="CjF-AT-HSl"/>
                                     <constraint firstAttribute="width" constant="275" id="KuZ-NC-QiS"/>
+                                    <constraint firstItem="4cq-fc-dcG" firstAttribute="leading" secondItem="HmU-cR-tXW" secondAttribute="leading" constant="10" id="ovK-7A-PTL"/>
                                     <constraint firstItem="4cq-fc-dcG" firstAttribute="centerX" secondItem="HmU-cR-tXW" secondAttribute="centerX" id="rkV-wk-j0j"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1Z-lP-Mvh">
-                                <rect key="frame" x="187.5" y="647" width="0.0" height="0.0"/>
+                                <rect key="frame" x="187.5" y="74" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="pnq-Qo-DpY">
+                                <rect key="frame" x="35" y="617" width="216" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mqr-O0-zqb">
+                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                        <state key="normal" title="1"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQG-mz-GWX">
+                                        <rect key="frame" x="62" y="0.0" width="30" height="30"/>
+                                        <state key="normal" title="2"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i8v-zk-tdN">
+                                        <rect key="frame" x="124" y="0.0" width="30" height="30"/>
+                                        <state key="normal" title="3"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c1L-Ke-CHu">
+                                        <rect key="frame" x="186" y="0.0" width="30" height="30"/>
+                                        <state key="normal" title="4"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="HmU-cR-tXW" firstAttribute="top" secondItem="xB1-GJ-BIi" secondAttribute="top" constant="50" id="W7Q-k1-ZtM"/>
-                            <constraint firstItem="xB1-GJ-BIi" firstAttribute="bottom" secondItem="l1Z-lP-Mvh" secondAttribute="bottom" constant="20" id="Xpy-Xn-GTr"/>
-                            <constraint firstItem="l1Z-lP-Mvh" firstAttribute="top" secondItem="HmU-cR-tXW" secondAttribute="bottom" constant="50" id="aGh-BO-AQa"/>
+                            <constraint firstItem="l1Z-lP-Mvh" firstAttribute="top" secondItem="xB1-GJ-BIi" secondAttribute="top" constant="10" id="8Ys-Lc-cm7"/>
+                            <constraint firstItem="HmU-cR-tXW" firstAttribute="top" secondItem="l1Z-lP-Mvh" secondAttribute="bottom" constant="40" id="MXT-Cl-oN5"/>
                             <constraint firstItem="HmU-cR-tXW" firstAttribute="leading" secondItem="xB1-GJ-BIi" secondAttribute="leading" constant="72.5" id="b9h-QM-3nJ"/>
                             <constraint firstItem="l1Z-lP-Mvh" firstAttribute="centerX" secondItem="xB1-GJ-BIi" secondAttribute="centerX" id="p7M-rg-gQH"/>
+                            <constraint firstItem="xB1-GJ-BIi" firstAttribute="bottom" secondItem="HmU-cR-tXW" secondAttribute="bottom" constant="70" id="r9b-Ln-Veb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xB1-GJ-BIi"/>
                     </view>
