@@ -18,7 +18,6 @@ class ManualStudyViewController: RootViewController {
     var sortChoiceIndex:Int?
     
     var cards = [Card]()
-    var numArray = [Int]()
     var sideOneSet = [(term: String, langID: String)]()
     var sideTwoSet = [(term: String, langID: String)]()
     var sideThreeSet = [(term: String, langID: String)]()
@@ -42,12 +41,9 @@ class ManualStudyViewController: RootViewController {
     var currentCardIndex = 0 {
         didSet {
             progressLabel.text = "\(currentCardIndex+1)/\(sideOneSet.count)"
-            if currentCardIndex < numArray.count {
-                setIndex = numArray[currentCardIndex]
-            }
         }
     }
-    var setIndex = 0
+
     var managedObjectContext: NSManagedObjectContext?
     
     @IBOutlet weak var cardView: UIView!
@@ -69,7 +65,7 @@ class ManualStudyViewController: RootViewController {
         addStudyInfo(rating: 4)
     }
     private func addStudyInfo(rating: Int64) {
-        let currentCard = cards[setIndex]
+        let currentCard = cards[currentCardIndex]
         guard let side = Side.side(card:currentCard, index:(Int64(sideIndex)), inManagedObjectContext: managedObjectContext!) else {
             errorAlert(message: "Could not save rating")
             return
@@ -110,6 +106,7 @@ class ManualStudyViewController: RootViewController {
                     wordLabel.text = "Please choose a nonempty study set."
                     return
                 }
+                cards.shuffle()
                 for card in cards {
                     switch firstChoiceIndex {
                     case 1:
@@ -163,14 +160,9 @@ class ManualStudyViewController: RootViewController {
                         }
                     }
                 }
-                for num in numArray.count..<(numArray.count + cards.count) {
-                    numArray.append(num)
-                }
             }
         }
-        numArray = numArray.shuffled()
         currentCardIndex = 0
-        progressLabel.text = "\(currentCardIndex+1)/\(sideOneSet.count)"
         showCardSide(1)
     }
     private func setGestureRecognizers() {
@@ -186,7 +178,7 @@ class ManualStudyViewController: RootViewController {
         self.view.addGestureRecognizer(rightSwipeRecognizer)
     }
     private func getLastStudyInfo() -> StudyInfo? {
-        let currentCard = cards[setIndex]
+        let currentCard = cards[currentCardIndex]
         guard let side = Side.side(card:currentCard, index:(Int64(sideIndex)), inManagedObjectContext: managedObjectContext!) else {
             return nil
         }
@@ -199,13 +191,13 @@ class ManualStudyViewController: RootViewController {
     private func showCardSide(_ side: Int){
         switch side {
         case 1:
-            wordLabel.text = sideOneSet[setIndex].term
+            wordLabel.text = sideOneSet[currentCardIndex].term
             currentSide = 1
         case 2:
-            wordLabel.text = sideTwoSet[setIndex].term
+            wordLabel.text = sideTwoSet[currentCardIndex].term
             currentSide = 2
         case 3:
-            wordLabel.text = sideThreeSet[setIndex].term
+            wordLabel.text = sideThreeSet[currentCardIndex].term
             currentSide = 3
         default:
             return;
