@@ -34,6 +34,7 @@ public class Card: NSManagedObject {
                 print("Failed saving card")
                 return nil
             }
+            return card
         }
         return nil
     }

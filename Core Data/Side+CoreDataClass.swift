@@ -26,4 +26,14 @@ public class Side: NSManagedObject {
         }
         return nil
     }
+    class func side(card: Card, index: Int64, inManagedObjectContext context: NSManagedObjectContext) -> Side? {
+        let request:NSFetchRequest<NSFetchRequestResult> = Side.fetchRequest()
+        
+        request.predicate = NSPredicate(format: "parentCard = %@ AND index = %d", card, index)
+
+        if let side = (try? context.fetch(request))?.first as? Side {
+            return side
+        }
+        return nil
+    }
 }

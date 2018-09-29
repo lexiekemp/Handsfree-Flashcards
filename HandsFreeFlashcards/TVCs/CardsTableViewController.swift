@@ -251,20 +251,35 @@ class CardsTableViewController: CoreDataTableViewController, UITextFieldDelegate
                                 if sideTwoText != nil, sideTwoText!.count == 0 {
                                     sideTwoText = " "
                                 }
-                                if Card.addCard(sideOne: sideOneText!, sideTwo: sideTwoText!, sideThree: text, set: parentSet!, inManagedObjectContext: managedObjectContext!) != nil {
+                                if Card.card(sideOne: sideOneText!, sideTwo: sideTwoText!, sideThree: text, set: parentSet!, inManagedObjectContext: managedObjectContext!) != nil {
                                     errorAlert(message: "Cannot create duplicate cards.")
                                     cell.sideOneTextField.becomeFirstResponder()
                                 }
-                                else {
+                                else if let card = Card.addCard(sideOne: sideOneText!, sideTwo: sideTwoText!, sideThree: text, set: parentSet!, inManagedObjectContext: managedObjectContext!) {
+                                    if let sideOne = Side.addSide(word: sideOneText!, index: 0, inManagedObjectContext: managedObjectContext!) {
+                                        card.addToSides(sideOne)
+                                    }
+                                    if let sideTwo = Side.addSide(word: sideTwoText!, index: 1, inManagedObjectContext: managedObjectContext!) {
+                                        card.addToSides(sideTwo)
+                                    }
+                                    if let sideThree = Side.addSide(word: text, index: 2, inManagedObjectContext: managedObjectContext!) {
+                                        card.addToSides(sideThree)
+                                    }
                                     setFirstResponder = true
                                 }
                             }
                             else { //sideTwo, no sideThree
-                                if Card.addCard(sideOne: sideOneText!, sideTwo: text, sideThree: nil, set: parentSet!, inManagedObjectContext: managedObjectContext!) != nil {
+                                if Card.card(sideOne: sideOneText!, sideTwo: text, sideThree: nil, set: parentSet!, inManagedObjectContext: managedObjectContext!) != nil {
                                     errorAlert(message: "Cannot create duplicate cards.")
                                     cell.sideOneTextField.becomeFirstResponder()
                                 }
-                                else {
+                                else if let card = Card.addCard(sideOne: sideOneText!, sideTwo: text, sideThree: nil, set: parentSet!, inManagedObjectContext: managedObjectContext!) {
+                                    if let sideOne = Side.addSide(word: sideOneText!, index: 0, inManagedObjectContext: managedObjectContext!) {
+                                        card.addToSides(sideOne)
+                                    }
+                                    if let sideTwo = Side.addSide(word: text, index: 1, inManagedObjectContext: managedObjectContext!) {
+                                        card.addToSides(sideTwo)
+                                    }
                                     setFirstResponder = true
                                 }
                             }

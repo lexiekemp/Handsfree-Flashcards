@@ -129,7 +129,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="DLK-dA-dfW" firstAttribute="trailing" secondItem="gpu-w6-vE8" secondAttribute="trailing" constant="15" id="1kp-H3-0AI"/>
                             <constraint firstItem="M90-fd-AAu" firstAttribute="leading" secondItem="V6n-ya-fty" secondAttribute="leading" id="3K3-8t-afB"/>
@@ -1128,14 +1128,22 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date - Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wi4-me-Sdc">
+                                        <rect key="frame" x="163.5" y="26" width="101.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="4cq-fc-dcG" secondAttribute="trailing" constant="10" id="4Co-w2-AkU"/>
                                     <constraint firstItem="4cq-fc-dcG" firstAttribute="centerY" secondItem="HmU-cR-tXW" secondAttribute="centerY" id="CjF-AT-HSl"/>
+                                    <constraint firstAttribute="trailing" secondItem="wi4-me-Sdc" secondAttribute="trailing" constant="10" id="IiF-QI-whh"/>
                                     <constraint firstAttribute="width" constant="275" id="KuZ-NC-QiS"/>
                                     <constraint firstItem="4cq-fc-dcG" firstAttribute="leading" secondItem="HmU-cR-tXW" secondAttribute="leading" constant="10" id="ovK-7A-PTL"/>
                                     <constraint firstItem="4cq-fc-dcG" firstAttribute="centerX" secondItem="HmU-cR-tXW" secondAttribute="centerX" id="rkV-wk-j0j"/>
+                                    <constraint firstItem="wi4-me-Sdc" firstAttribute="top" secondItem="HmU-cR-tXW" secondAttribute="top" constant="26" id="zup-ua-FZG"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1Z-lP-Mvh">
@@ -1150,18 +1158,30 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mqr-O0-zqb">
                                         <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                         <state key="normal" title="1"/>
+                                        <connections>
+                                            <action selector="onePressed:" destination="2RR-0V-WvR" eventType="touchUpInside" id="rUx-nt-LfI"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQG-mz-GWX">
                                         <rect key="frame" x="62" y="0.0" width="30" height="30"/>
                                         <state key="normal" title="2"/>
+                                        <connections>
+                                            <action selector="twoPressed:" destination="2RR-0V-WvR" eventType="touchUpInside" id="7IV-gV-xxo"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i8v-zk-tdN">
                                         <rect key="frame" x="124" y="0.0" width="30" height="30"/>
                                         <state key="normal" title="3"/>
+                                        <connections>
+                                            <action selector="threePressed:" destination="2RR-0V-WvR" eventType="touchUpInside" id="5Rv-yh-AdP"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c1L-Ke-CHu">
                                         <rect key="frame" x="186" y="0.0" width="30" height="30"/>
                                         <state key="normal" title="4"/>
+                                        <connections>
+                                            <action selector="fourPressed:" destination="2RR-0V-WvR" eventType="touchUpInside" id="PHa-Cf-6vY"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -1182,6 +1202,7 @@
                         <outlet property="cardView" destination="HmU-cR-tXW" id="YcH-1t-4NZ"/>
                         <outlet property="cardViewConstraint" destination="b9h-QM-3nJ" id="i3n-8H-69y"/>
                         <outlet property="progressLabel" destination="l1Z-lP-Mvh" id="nHe-OK-4KV"/>
+                        <outlet property="studyInfoLabel" destination="wi4-me-Sdc" id="5GN-Sm-Hcc"/>
                         <outlet property="wordLabel" destination="4cq-fc-dcG" id="RgP-E1-2KG"/>
                     </connections>
                 </viewController>

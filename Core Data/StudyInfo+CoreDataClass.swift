@@ -26,4 +26,9 @@ public class StudyInfo: NSManagedObject {
         }
         return nil
     }
+    class func studyInfoByDate(side: Side, inManagedObjectContext context: NSManagedObjectContext) -> [StudyInfo] {
+        var infoArray = (side.studyInfo?.allObjects as? [StudyInfo]) ?? [StudyInfo]()
+        infoArray.sort(by: { ($0.date! as Date).compare($1.date! as Date) == .orderedDescending })
+        return infoArray
+    }
 }

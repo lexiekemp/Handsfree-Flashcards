@@ -15,6 +15,7 @@ class ManualStudyViewController: RootViewController {
     var firstChoiceIndex = 1
     var secondChoiceIndex = 2
     var thirdChoiceIndex:Int?
+    var sortChoiceIndex:Int?
     
     var cards = [Card]()
     var numArray = [Int]()
@@ -22,7 +23,21 @@ class ManualStudyViewController: RootViewController {
     var sideTwoSet = [(term: String, langID: String)]()
     var sideThreeSet = [(term: String, langID: String)]()
     var useSideThree = false
-    var currentSide = 1
+    var currentSide = 1 {
+        didSet {
+            switch currentSide {
+            case 1:
+                sideIndex = firstChoiceIndex - 1
+            case 2:
+                sideIndex = secondChoiceIndex - 1
+            case 3:
+                sideIndex = thirdChoiceIndex! - 1
+            default:
+                return
+            }
+        }
+    }
+    var sideIndex = 0
     
     var currentCardIndex = 0 {
         didSet {
@@ -38,8 +53,34 @@ class ManualStudyViewController: RootViewController {
     @IBOutlet weak var cardView: UIView!
     @IBOutlet weak var wordLabel : UILabel!
     @IBOutlet weak var progressLabel: UILabel!
+    @IBOutlet weak var studyInfoLabel: UILabel!
     @IBOutlet weak var cardViewConstraint: NSLayoutConstraint!
     
+    @IBAction func onePressed(_ sender: UIButton) {
+        addStudyInfo(rating: 1)
+    }
+    @IBAction func twoPressed(_ sender: UIButton) {
+        addStudyInfo(rating: 2)
+    }
+    @IBAction func threePressed(_ sender: UIButton) {
+        addStudyInfo(rating: 3)
+    }
+    @IBAction func fourPressed(_ sender: UIButton) {
+        addStudyInfo(rating: 4)
+    }
+    private func addStudyInfo(rating: Int64) {
+        let currentCard = cards[setIndex]
+        guard let side = Side.side(card:currentCard, index:(Int64(sideIndex)), inManagedObjectContext: managedObjectContext!) else {
+            errorAlert(message: "Could not save rating")
+            return
+        }
+        guard let studyInfo = StudyInfo.addStudyInfo(rating: rating, date: NSDate(), inManagedObjectContext: managedObjectContext!) else {
+            errorAlert(message: "Could not save rating")
+            return
+        }
+        side.addToStudyInfo(studyInfo)
+        goToNextCard()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
          self.managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
@@ -144,6 +185,17 @@ class ManualStudyViewController: RootViewController {
         self.view.addGestureRecognizer(leftSwipeRecognizer)
         self.view.addGestureRecognizer(rightSwipeRecognizer)
     }
+    private func getLastStudyInfo() -> StudyInfo? {
+        let currentCard = cards[setIndex]
+        guard let side = Side.side(card:currentCard, index:(Int64(sideIndex)), inManagedObjectContext: managedObjectContext!) else {
+            return nil
+        }
+        if let lastStudyInfo = StudyInfo.studyInfoByDate(side: side, inManagedObjectContext: managedObjectContext!).first {
+            return lastStudyInfo
+        }
+        return nil
+    }
+    
     private func showCardSide(_ side: Int){
         switch side {
         case 1:
@@ -157,6 +209,12 @@ class ManualStudyViewController: RootViewController {
             currentSide = 3
         default:
             return;
+        }
+        if let lastStudyInfo = getLastStudyInfo(), lastStudyInfo.date != nil {
+            studyInfoLabel.text = "\(lastStudyInfo.date!) - \(lastStudyInfo.rating)"
+        }
+        else {
+            studyInfoLabel.text = "no rating"
         }
     }
     @objc func flipCard(gesture: UITapGestureRecognizer) {
@@ -177,47 +235,52 @@ class ManualStudyViewController: RootViewController {
             return;
         }
     }
+    private func goToNextCard() {
+        if currentCardIndex >= (sideOneSet.count - 1) { return }
+        currentCardIndex += 1
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            self.cardViewConstraint.constant = -self.cardView.frame.width
+            self.view.layoutIfNeeded()
+        }, completion: { [weak self] finish in
+            if self == nil { return }
+            
+            self!.cardViewConstraint.constant = self!.view.frame.width
+            self!.view.layoutIfNeeded()
+            self!.showCardSide(1)
+            
+            UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+                self!.cardViewConstraint.constant = self!.view.frame.width/2 - self!.cardView.frame.width/2
+                self!.view.layoutIfNeeded()
+            }, completion: nil
+            )}
+        )
+    }
+    private func goToPreviousCard() {
+        if currentCardIndex <= 0 { return }
+        currentCardIndex -= 1
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            self.cardViewConstraint.constant = self.view.frame.width
+            self.view.layoutIfNeeded()
+        }, completion: { [weak self] finish in
+            if self == nil { return }
+            
+            self!.cardViewConstraint.constant = -self!.cardView.frame.width
+            self!.view.layoutIfNeeded()
+            self!.showCardSide(1)
+            
+            UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+                self!.cardViewConstraint.constant = self!.view.frame.width/2 - self!.cardView.frame.width/2
+                self!.view.layoutIfNeeded()
+            }, completion: nil
+            )
+        })
+    }
     @objc func changeCard(gesture: UISwipeGestureRecognizer) {
         if gesture.direction == UISwipeGestureRecognizerDirection.right {
-            if currentCardIndex <= 0 { return }
-            currentCardIndex -= 1
-            UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
-                self.cardViewConstraint.constant = self.view.frame.width
-                self.view.layoutIfNeeded()
-            }, completion: { [weak self] finish in
-                if self == nil { return }
-                
-                self!.cardViewConstraint.constant = -self!.cardView.frame.width
-                self!.view.layoutIfNeeded()
-                self!.showCardSide(1)
-                
-                UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.curveEaseOut, animations: {
-                    self!.cardViewConstraint.constant = self!.view.frame.width/2 - self!.cardView.frame.width/2
-                    self!.view.layoutIfNeeded()
-                }, completion: nil
-                )
-            })
+            goToPreviousCard()
         }
         else if gesture.direction == UISwipeGestureRecognizerDirection.left {
-            if currentCardIndex >= (sideOneSet.count - 1) { return }
-            currentCardIndex += 1
-            UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
-                self.cardViewConstraint.constant = -self.cardView.frame.width
-                self.view.layoutIfNeeded()
-            }, completion: { [weak self] finish in
-                if self == nil { return }
-                
-                self!.cardViewConstraint.constant = self!.view.frame.width
-                self!.view.layoutIfNeeded()
-                self!.showCardSide(1)
-                
-                UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.curveEaseOut, animations: {
-                    self!.cardViewConstraint.constant = self!.view.frame.width/2 - self!.cardView.frame.width/2
-                    self!.view.layoutIfNeeded()
-                }, completion: nil
-             )}
-            )
+            goToNextCard()
         }
     }
-
 }
