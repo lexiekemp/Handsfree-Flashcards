@@ -108,6 +108,18 @@ class CreateSetViewController: RootViewController, UITextFieldDelegate, UIPicker
             errorAlert(message: "currentSet is nil.")
         }
         else {
+            if let sideOneInfo = SideInfo.addSideInfo(name: sideOneName, langID: sideOneLangID, index: 0, inManagedObjectContext: managedObjectContext!) {
+                 currentSet?.addToSideInfo(sideOneInfo)
+            }
+            if let sideTwoInfo = SideInfo.addSideInfo(name: sideTwoName, langID: sideTwoLangID, index: 1, inManagedObjectContext: managedObjectContext!) {
+                currentSet?.addToSideInfo(sideTwoInfo)
+            }
+            if sideThreeName != nil && sideThreeLangID != nil {
+                if let sideThreeInfo = SideInfo.addSideInfo(name: sideThreeName!, langID: sideThreeLangID!, index: 2, inManagedObjectContext: managedObjectContext!) {
+                    currentSet?.addToSideInfo(sideThreeInfo)
+                }
+            }
+        
             self.dismiss(animated: true) { //TODO: NEED WEAKSELF?
                 self.parentSetTVC?.selectedSets.insert(self.currentSet!, at: 0)
                 self.parentSetTVC?.setFirstResponder = true

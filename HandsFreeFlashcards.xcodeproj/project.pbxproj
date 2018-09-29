@@ -11,6 +11,13 @@
 		E90744821FB6B8AC00FFC852 /* StudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90744811FB6B8AC00FFC852 /* StudyViewController.swift */; };
 		E90C17A61FF0DE1100086115 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E90C17A41FF0DE1100086115 /* Model.xcdatamodeld */; };
 		E90C17D61FF4358D00086115 /* CoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90C17D51FF4358D00086115 /* CoreDataTableViewController.swift */; };
+		E91F68B4215F34150029BCA6 /* Set+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91F68AF215F34150029BCA6 /* Set+CoreDataProperties.swift */; };
+		E91F68B5215F34150029BCA6 /* SideInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91F68B0215F34150029BCA6 /* SideInfo+CoreDataProperties.swift */; };
+		E91F68B7215F34150029BCA6 /* Card+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91F68B2215F34150029BCA6 /* Card+CoreDataProperties.swift */; };
+		E91F68BD215F36F30029BCA6 /* StudyInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91F68B9215F36F30029BCA6 /* StudyInfo+CoreDataClass.swift */; };
+		E91F68BE215F36F30029BCA6 /* StudyInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91F68BA215F36F30029BCA6 /* StudyInfo+CoreDataProperties.swift */; };
+		E91F68BF215F36F30029BCA6 /* Side+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91F68BB215F36F30029BCA6 /* Side+CoreDataClass.swift */; };
+		E91F68C0215F36F30029BCA6 /* Side+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91F68BC215F36F30029BCA6 /* Side+CoreDataProperties.swift */; };
 		E9205772210D60790056A185 /* SideChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9205771210D60790056A185 /* SideChoiceViewController.swift */; };
 		E9205774210D60930056A185 /* ManualStudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9205773210D60930056A185 /* ManualStudyViewController.swift */; };
 		E93734DA21513ABD00F4DF21 /* ModeInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93734D921513ABD00F4DF21 /* ModeInfoViewController.swift */; };
@@ -18,9 +25,8 @@
 		E943A3E81FFDA848002F3FB5 /* CardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E943A3E71FFDA847002F3FB5 /* CardTableViewCell.swift */; };
 		E943A3EA2000A3ED002F3FB5 /* StudyModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E943A3E92000A3ED002F3FB5 /* StudyModeViewController.swift */; };
 		E943A3ED2006844B002F3FB5 /* Card+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E943A3EB2006844B002F3FB5 /* Card+CoreDataClass.swift */; };
-		E943A3EE2006844B002F3FB5 /* Card+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E943A3EC2006844B002F3FB5 /* Card+CoreDataProperties.swift */; };
 		E943A3F1200684D1002F3FB5 /* Set+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E943A3EF200684D1002F3FB5 /* Set+CoreDataClass.swift */; };
-		E943A3F2200684D1002F3FB5 /* Set+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E943A3F0200684D1002F3FB5 /* Set+CoreDataProperties.swift */; };
+		E956D55521593F17007D5D82 /* SideInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E956D54D21593F17007D5D82 /* SideInfo+CoreDataClass.swift */; };
 		E98B4FC61FB2F22C00DC349D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98B4FC51FB2F22C00DC349D /* AppDelegate.swift */; };
 		E98B4FCB1FB2F22C00DC349D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E98B4FC91FB2F22C00DC349D /* Main.storyboard */; };
 		E98B4FCD1FB2F22C00DC349D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E98B4FCC1FB2F22C00DC349D /* Assets.xcassets */; };
@@ -40,6 +46,13 @@
 		E90744811FB6B8AC00FFC852 /* StudyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyViewController.swift; sourceTree = "<group>"; };
 		E90C17A51FF0DE1100086115 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		E90C17D51FF4358D00086115 /* CoreDataTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTableViewController.swift; sourceTree = "<group>"; };
+		E91F68AF215F34150029BCA6 /* Set+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Set+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E91F68B0215F34150029BCA6 /* SideInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SideInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E91F68B2215F34150029BCA6 /* Card+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E91F68B9215F36F30029BCA6 /* StudyInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StudyInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E91F68BA215F36F30029BCA6 /* StudyInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StudyInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E91F68BB215F36F30029BCA6 /* Side+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Side+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E91F68BC215F36F30029BCA6 /* Side+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Side+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E9205771210D60790056A185 /* SideChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideChoiceViewController.swift; sourceTree = "<group>"; };
 		E9205773210D60930056A185 /* ManualStudyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualStudyViewController.swift; sourceTree = "<group>"; };
 		E93734D921513ABD00F4DF21 /* ModeInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeInfoViewController.swift; sourceTree = "<group>"; };
@@ -47,9 +60,8 @@
 		E943A3E71FFDA847002F3FB5 /* CardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTableViewCell.swift; sourceTree = "<group>"; };
 		E943A3E92000A3ED002F3FB5 /* StudyModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyModeViewController.swift; sourceTree = "<group>"; };
 		E943A3EB2006844B002F3FB5 /* Card+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card+CoreDataClass.swift"; sourceTree = "<group>"; };
-		E943A3EC2006844B002F3FB5 /* Card+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E943A3EF200684D1002F3FB5 /* Set+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Set+CoreDataClass.swift"; sourceTree = "<group>"; };
-		E943A3F0200684D1002F3FB5 /* Set+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Set+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E956D54D21593F17007D5D82 /* SideInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SideInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E98B4FC21FB2F22C00DC349D /* HandsFreeFlashcards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HandsFreeFlashcards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E98B4FC51FB2F22C00DC349D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E98B4FCA1FB2F22C00DC349D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -87,10 +99,16 @@
 		E90C17D01FF2EF9700086115 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				E943A3EF200684D1002F3FB5 /* Set+CoreDataClass.swift */,
-				E943A3F0200684D1002F3FB5 /* Set+CoreDataProperties.swift */,
+				E91F68B9215F36F30029BCA6 /* StudyInfo+CoreDataClass.swift */,
+				E91F68BA215F36F30029BCA6 /* StudyInfo+CoreDataProperties.swift */,
+				E91F68BB215F36F30029BCA6 /* Side+CoreDataClass.swift */,
+				E91F68BC215F36F30029BCA6 /* Side+CoreDataProperties.swift */,
+				E956D54D21593F17007D5D82 /* SideInfo+CoreDataClass.swift */,
+				E91F68B0215F34150029BCA6 /* SideInfo+CoreDataProperties.swift */,
 				E943A3EB2006844B002F3FB5 /* Card+CoreDataClass.swift */,
-				E943A3EC2006844B002F3FB5 /* Card+CoreDataProperties.swift */,
+				E91F68B2215F34150029BCA6 /* Card+CoreDataProperties.swift */,
+				E943A3EF200684D1002F3FB5 /* Set+CoreDataClass.swift */,
+				E91F68AF215F34150029BCA6 /* Set+CoreDataProperties.swift */,
 				E90C17D51FF4358D00086115 /* CoreDataTableViewController.swift */,
 				E90C17A41FF0DE1100086115 /* Model.xcdatamodeld */,
 			);
@@ -272,17 +290,23 @@
 				E93776832071E06500B92880 /* BigButton.swift in Sources */,
 				E9205774210D60930056A185 /* ManualStudyViewController.swift in Sources */,
 				E90744821FB6B8AC00FFC852 /* StudyViewController.swift in Sources */,
+				E91F68B7215F34150029BCA6 /* Card+CoreDataProperties.swift in Sources */,
 				E93734DA21513ABD00F4DF21 /* ModeInfoViewController.swift in Sources */,
+				E91F68BD215F36F30029BCA6 /* StudyInfo+CoreDataClass.swift in Sources */,
 				E9205772210D60790056A185 /* SideChoiceViewController.swift in Sources */,
 				E90C17A61FF0DE1100086115 /* Model.xcdatamodeld in Sources */,
+				E91F68B5215F34150029BCA6 /* SideInfo+CoreDataProperties.swift in Sources */,
+				E91F68B4215F34150029BCA6 /* Set+CoreDataProperties.swift in Sources */,
+				E956D55521593F17007D5D82 /* SideInfo+CoreDataClass.swift in Sources */,
 				E98B4FC61FB2F22C00DC349D /* AppDelegate.swift in Sources */,
-				E943A3EE2006844B002F3FB5 /* Card+CoreDataProperties.swift in Sources */,
 				E943A3EA2000A3ED002F3FB5 /* StudyModeViewController.swift in Sources */,
 				E9B1969520748271007B2EC1 /* SetTableViewCell.swift in Sources */,
+				E91F68C0215F36F30029BCA6 /* Side+CoreDataProperties.swift in Sources */,
 				E9B400B22105A4DD0031B9F9 /* SideThreeViewController.swift in Sources */,
-				E943A3F2200684D1002F3FB5 /* Set+CoreDataProperties.swift in Sources */,
 				E9A2DA482071527300FD9D54 /* CardsTableViewController.swift in Sources */,
 				E9A2DA532071907F00FD9D54 /* ImportQuizletViewController.swift in Sources */,
+				E91F68BE215F36F30029BCA6 /* StudyInfo+CoreDataProperties.swift in Sources */,
+				E91F68BF215F36F30029BCA6 /* Side+CoreDataClass.swift in Sources */,
 				E9A2DA5120715CB400FD9D54 /* CreateSetViewController.swift in Sources */,
 				E943A3E81FFDA848002F3FB5 /* CardTableViewCell.swift in Sources */,
 			);

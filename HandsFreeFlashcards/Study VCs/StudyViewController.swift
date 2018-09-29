@@ -317,7 +317,7 @@ class StudyViewController: UIViewController, SFSpeechRecognizerDelegate, AVSpeec
        // currNumArray.remove(at:randomOffset)
         
         utterance = AVSpeechUtterance(string: currWord)
-        utterance.voice = AVSpeechSynthesisVoice(language:sideOneSet[setIndex].term)
+        utterance.voice = AVSpeechSynthesisVoice(language:sideOneSet[setIndex].langID)
         utterance.rate = 0.4
         synth.speak(utterance)
 
