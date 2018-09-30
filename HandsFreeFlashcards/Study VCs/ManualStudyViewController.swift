@@ -26,17 +26,17 @@ class ManualStudyViewController: RootViewController {
         didSet {
             switch currentSide {
             case 1:
-                sideIndex = firstChoiceIndex - 1
+                currSideIndex = firstChoiceIndex - 1
             case 2:
-                sideIndex = secondChoiceIndex - 1
+                currSideIndex = secondChoiceIndex - 1
             case 3:
-                sideIndex = thirdChoiceIndex! - 1
+                currSideIndex = thirdChoiceIndex! - 1
             default:
                 return
             }
         }
     }
-    var sideIndex = 0
+    var currSideIndex = 0
     
     var currentCardIndex = 0 {
         didSet {
@@ -66,7 +66,7 @@ class ManualStudyViewController: RootViewController {
     }
     private func addStudyInfo(rating: Int64) {
         let currentCard = cards[currentCardIndex]
-        guard let side = Side.side(card:currentCard, index:(Int64(sideIndex)), inManagedObjectContext: managedObjectContext!) else {
+        guard let side = Side.side(card:currentCard, index:(Int64(currSideIndex)), inManagedObjectContext: managedObjectContext!) else {
             errorAlert(message: "Could not save rating")
             return
         }
@@ -106,7 +106,7 @@ class ManualStudyViewController: RootViewController {
                     wordLabel.text = "Please choose a nonempty study set."
                     return
                 }
-                cards.shuffle()
+                sortCards()
                 for card in cards {
                     switch firstChoiceIndex {
                     case 1:
@@ -165,6 +165,37 @@ class ManualStudyViewController: RootViewController {
         currentCardIndex = 0
         showCardSide(1)
     }
+    private func sortCards() {
+        if sortChoiceIndex != nil {
+            cards.sort(by: {
+                let studyInfo1 = getLastStudyInfo(card: $0, sideIndex: sortChoiceIndex!)
+                let studyInfo2 = getLastStudyInfo(card: $1, sideIndex: sortChoiceIndex!)
+                if studyInfo1 == nil {
+                    return true
+                }
+                if studyInfo2 == nil {
+                    return false
+                }
+                if var age1 = studyInfo1!.date?.timeIntervalSinceNow, var age2 = studyInfo2!.date?.timeIntervalSinceNow {
+                    age1 = abs(age1)
+                    age2 = abs(age2)
+                    let rating1 = studyInfo1!.rating
+                    let rating2 = studyInfo2!.rating
+                    if rating1 == rating2 {
+                        return age1 > age2
+                    }
+                    return rating1 < rating2
+                }
+                else {
+                    return true
+                }
+                
+            })
+        }
+        else {
+            cards.shuffle()
+        }
+    }
     private func setGestureRecognizers() {
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.flipCard))
         cardView.addGestureRecognizer(tapRecognizer)
@@ -177,9 +208,8 @@ class ManualStudyViewController: RootViewController {
         self.view.addGestureRecognizer(leftSwipeRecognizer)
         self.view.addGestureRecognizer(rightSwipeRecognizer)
     }
-    private func getLastStudyInfo() -> StudyInfo? {
-        let currentCard = cards[currentCardIndex]
-        guard let side = Side.side(card:currentCard, index:(Int64(sideIndex)), inManagedObjectContext: managedObjectContext!) else {
+    private func getLastStudyInfo(card: Card, sideIndex: Int) -> StudyInfo? {
+        guard let side = Side.side(card:card, index:(Int64(sideIndex)), inManagedObjectContext: managedObjectContext!) else {
             return nil
         }
         if let lastStudyInfo = StudyInfo.studyInfoByDate(side: side, inManagedObjectContext: managedObjectContext!).first {
@@ -202,8 +232,11 @@ class ManualStudyViewController: RootViewController {
         default:
             return;
         }
-        if let lastStudyInfo = getLastStudyInfo(), lastStudyInfo.date != nil {
-            studyInfoLabel.text = "\(lastStudyInfo.date!) - \(lastStudyInfo.rating)"
+        if let lastStudyInfo = getLastStudyInfo(card: cards[currentCardIndex], sideIndex: currSideIndex), lastStudyInfo.date != nil {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MM/dd/yyyy"
+            
+            studyInfoLabel.text = "\(dateFormatter.string(from: lastStudyInfo.date! as Date)) - \(lastStudyInfo.rating)"
         }
         else {
             studyInfoLabel.text = "no rating"

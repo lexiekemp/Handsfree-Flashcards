@@ -18,6 +18,7 @@ class SideChoiceViewController: RootViewController, UITableViewDelegate, UITable
     var secondChoiceIndex = 2
     var thirdChoiceIndex:Int?
     var repeatIncorrect = false
+    var sortByIndex: Int?
     
     @IBOutlet weak var chooseLabel: UILabel!
     @IBOutlet weak var firstButton: UIButton!
@@ -34,6 +35,11 @@ class SideChoiceViewController: RootViewController, UITableViewDelegate, UITable
     @IBOutlet weak var thirdArrowButton: UIButton!
     @IBOutlet weak var repeatIncorrectSwitch: UISwitch!
     @IBOutlet weak var repeatIncorrectLabel: UILabel!
+    @IBOutlet weak var sortByLabel: UILabel!
+    @IBOutlet weak var sortByFirstButton: UIButton!
+    @IBOutlet weak var sortBySecondButton: UIButton!
+    @IBOutlet weak var sortByThirdButton: UIButton!
+    @IBOutlet weak var sortByShuffleButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,6 +102,13 @@ class SideChoiceViewController: RootViewController, UITableViewDelegate, UITable
             repeatIncorrectSwitch.isHidden = true
             repeatIncorrectLabel.isHidden = true
         }
+        if studyMode != .manual {
+            sortByFirstButton.isHidden = true
+            sortBySecondButton.isHidden = true
+            sortByThirdButton.isHidden = true
+            sortByShuffleButton.isHidden = true
+            sortByLabel.isHidden = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -106,6 +119,22 @@ class SideChoiceViewController: RootViewController, UITableViewDelegate, UITable
                 thirdTableView.selectRow(at: IndexPath(row: 2, section: 0), animated: false, scrollPosition: .none)
             }
         }
+    }
+    @IBAction func sortByFirst(_ sender: UIButton) {
+        sortByIndex = 1
+        sortByLabel.text = "Sort by: first side"
+    }
+    @IBAction func sortBySecond(_ sender: UIButton) {
+        sortByIndex = 2
+        sortByLabel.text = "Sort by: second side"
+    }
+    @IBAction func sortByThird(_ sender: UIButton) {
+        sortByIndex = 3
+        sortByLabel.text = "Sort by: third side"
+    }
+    @IBAction func sortByShuffle(_ sender: UIButton) {
+        sortByIndex = nil
+        sortByLabel.text = "Sort by: shuffle"
     }
     @IBAction func selectFirst(_ sender: UIButton) {
         firstTableView.isHidden = !firstTableView.isHidden
@@ -205,6 +234,18 @@ class SideChoiceViewController: RootViewController, UITableViewDelegate, UITable
                 manualStudyVC.secondChoiceIndex = secondChoiceIndex
                 if thirdChoiceIndex != nil {
                     manualStudyVC.thirdChoiceIndex = thirdChoiceIndex!
+                }
+                switch sortByIndex {
+                case 1:
+                    manualStudyVC.sortChoiceIndex = firstChoiceIndex - 1
+                case 2:
+                    manualStudyVC.sortChoiceIndex = secondChoiceIndex - 1
+                case 3:
+                    if thirdChoiceIndex != nil {
+                        manualStudyVC.sortChoiceIndex = thirdChoiceIndex! - 1
+                    }
+                default:
+                    manualStudyVC.sortChoiceIndex = nil
                 }
             }
         }
