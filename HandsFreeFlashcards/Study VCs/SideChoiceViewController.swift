@@ -78,6 +78,7 @@ class SideChoiceViewController: RootViewController, UITableViewDelegate, UITable
                     thirdButton.isHidden = true
                     thirdLabel.isHidden = true
                     thirdArrowButton.isHidden = true
+                    sortByThirdButton.isHidden = true
                 }
             }
             else {
@@ -91,6 +92,13 @@ class SideChoiceViewController: RootViewController, UITableViewDelegate, UITable
                 thirdLabel.isHidden = true
                 thirdArrowButton.isHidden = true
                 chooseLabel.isHidden = true
+                if studySets!.count  > 1 {
+                    for set in studySets! {
+                        if set.sideThreeName == nil {
+                            sortByThirdButton.isHidden = true //only allow to sort by third side if all desks selected have three side
+                        }
+                    }
+                }
             }
         }
         else {

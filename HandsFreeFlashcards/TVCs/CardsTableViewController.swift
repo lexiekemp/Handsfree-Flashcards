@@ -75,11 +75,17 @@ class CardsTableViewController: CoreDataTableViewController, UITextFieldDelegate
         let cell = tableView.dequeueReusableCell(withIdentifier: "cardCell", for: indexPath) as! CardTableViewCell
         updateCardCellUI(cell)
         if indexPath.row == 0 {
-            cell.sideOneTextField?.text = parentSet?.sideOneName
-            //cell.sideOneTextField?.attributedText = NSAttributedString(string: parentSet?.sideOneName, attributes: [.font: UIFont(UISystemFont.bold)])
-            cell.sideTwoTextField?.text = parentSet?.sideTwoName
+            //cell.sideOneTextField?.text = parentSet?.sideOneName
+            if parentSet?.sideOneName != nil {
+                cell.sideOneTextField?.attributedText = NSAttributedString(string: parentSet!.sideOneName!, attributes: [.font: UIFont.boldSystemFont(ofSize: 16.0)])
+            }
+            if parentSet?.sideTwoName != nil {
+                cell.sideTwoTextField?.attributedText = NSAttributedString(string: parentSet!.sideTwoName!, attributes: [.font: UIFont.boldSystemFont(ofSize: 16.0)])
+            }
+           // cell.sideTwoTextField?.text = parentSet?.sideTwoName
             if parentSet?.sideThreeName != nil {
-                cell.sideThreeTextField?.text = parentSet?.sideThreeName!
+                cell.sideThreeTextField?.attributedText = NSAttributedString(string: parentSet!.sideThreeName!, attributes: [.font: UIFont.boldSystemFont(ofSize: 16.0)])
+                //cell.sideThreeTextField?.text = parentSet?.sideThreeName!
             }
         }
         else if indexPath.row < (cardCount + 1) {
@@ -130,15 +136,15 @@ class CardsTableViewController: CoreDataTableViewController, UITextFieldDelegate
     }
     
     private func updateCardCellUI(_ cell: CardTableViewCell) {
-        let twoToView = NSLayoutConstraint(item: cell.sideTwoTextField, attribute: .trailing, relatedBy: .equal, toItem: cell.cardCellView, attribute: .trailing, multiplier: 1.0, constant: 10.0)
-        let twoToThree = NSLayoutConstraint(item: cell.sideTwoTextField, attribute: .trailing, relatedBy: .equal, toItem: cell.sideThreeTextField, attribute: .leading, multiplier: 1.0, constant: 0.0)
         if parentSet?.sideThreeName == nil {
-            cell.sideThreeTextField.removeFromSuperview()
+            cell.sideThreeTextField?.removeFromSuperview()
+            let twoToView = NSLayoutConstraint(item: cell.sideTwoTextField, attribute: .trailing, relatedBy: .equal, toItem: cell.cardCellView, attribute: .trailing, multiplier: 1.0, constant: 10.0)
             cell.cardCellView.addConstraint(twoToView)
         }
         else {
             cell.cardCellView.addSubview(cell.sideThreeTextField)
-            cell.cardCellView.removeConstraint(twoToView)
+           // cell.cardCellView.removeConstraint(twoToView)
+            let twoToThree = NSLayoutConstraint(item: cell.sideTwoTextField, attribute: .trailing, relatedBy: .equal, toItem: cell.sideThreeTextField, attribute: .leading, multiplier: 1.0, constant: 0.0)
             cell.cardCellView.addConstraint(twoToThree)
         }
     }
@@ -255,16 +261,7 @@ class CardsTableViewController: CoreDataTableViewController, UITextFieldDelegate
                                     errorAlert(message: "Cannot create duplicate cards.")
                                     cell.sideOneTextField.becomeFirstResponder()
                                 }
-                                else if let card = Card.addCard(sideOne: sideOneText!, sideTwo: sideTwoText!, sideThree: text, set: parentSet!, inManagedObjectContext: managedObjectContext!) {
-                                    if let sideOne = Side.addSide(word: sideOneText!, index: 0, inManagedObjectContext: managedObjectContext!) {
-                                        card.addToSides(sideOne)
-                                    }
-                                    if let sideTwo = Side.addSide(word: sideTwoText!, index: 1, inManagedObjectContext: managedObjectContext!) {
-                                        card.addToSides(sideTwo)
-                                    }
-                                    if let sideThree = Side.addSide(word: text, index: 2, inManagedObjectContext: managedObjectContext!) {
-                                        card.addToSides(sideThree)
-                                    }
+                                else if Card.addCard(sideOne: sideOneText!, sideTwo: sideTwoText!, sideThree: text, set: parentSet!, inManagedObjectContext: managedObjectContext!) != nil {
                                     setFirstResponder = true
                                 }
                             }
@@ -273,13 +270,7 @@ class CardsTableViewController: CoreDataTableViewController, UITextFieldDelegate
                                     errorAlert(message: "Cannot create duplicate cards.")
                                     cell.sideOneTextField.becomeFirstResponder()
                                 }
-                                else if let card = Card.addCard(sideOne: sideOneText!, sideTwo: text, sideThree: nil, set: parentSet!, inManagedObjectContext: managedObjectContext!) {
-                                    if let sideOne = Side.addSide(word: sideOneText!, index: 0, inManagedObjectContext: managedObjectContext!) {
-                                        card.addToSides(sideOne)
-                                    }
-                                    if let sideTwo = Side.addSide(word: text, index: 1, inManagedObjectContext: managedObjectContext!) {
-                                        card.addToSides(sideTwo)
-                                    }
+                                else if Card.addCard(sideOne: sideOneText!, sideTwo: text, sideThree: nil, set: parentSet!, inManagedObjectContext: managedObjectContext!) != nil {
                                     setFirstResponder = true
                                 }
                             }

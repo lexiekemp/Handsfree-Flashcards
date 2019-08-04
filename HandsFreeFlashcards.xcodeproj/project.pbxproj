@@ -31,6 +31,10 @@
 		E98B4FCB1FB2F22C00DC349D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E98B4FC91FB2F22C00DC349D /* Main.storyboard */; };
 		E98B4FCD1FB2F22C00DC349D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E98B4FCC1FB2F22C00DC349D /* Assets.xcassets */; };
 		E98B4FD01FB2F22C00DC349D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E98B4FCE1FB2F22C00DC349D /* LaunchScreen.storyboard */; };
+		E99AA68F22EA5FA90005749C /* LanguageCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99AA68E22EA5FA90005749C /* LanguageCodes.swift */; };
+		E99AA69122EA63890005749C /* NewSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99AA69022EA63890005749C /* NewSetViewController.swift */; };
+		E99AA69322EA63DF0005749C /* NewSideTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99AA69222EA63DF0005749C /* NewSideTableViewCell.swift */; };
+		E99AA69522F45A360005749C /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99AA69422F45A360005749C /* HelperFunctions.swift */; };
 		E9A2DA482071527300FD9D54 /* CardsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A2DA472071527300FD9D54 /* CardsTableViewController.swift */; };
 		E9A2DA4F20715B0F00FD9D54 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A2DA4E20715B0F00FD9D54 /* RootViewController.swift */; };
 		E9A2DA5120715CB400FD9D54 /* CreateSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A2DA5020715CB400FD9D54 /* CreateSetViewController.swift */; };
@@ -68,6 +72,10 @@
 		E98B4FCC1FB2F22C00DC349D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E98B4FCF1FB2F22C00DC349D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E98B4FD11FB2F22C00DC349D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E99AA68E22EA5FA90005749C /* LanguageCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LanguageCodes.swift; path = "HandsFreeFlashcards/Create VCs/LanguageCodes.swift"; sourceTree = SOURCE_ROOT; };
+		E99AA69022EA63890005749C /* NewSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSetViewController.swift; sourceTree = "<group>"; };
+		E99AA69222EA63DF0005749C /* NewSideTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSideTableViewCell.swift; sourceTree = "<group>"; };
+		E99AA69422F45A360005749C /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
 		E9A2DA472071527300FD9D54 /* CardsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsTableViewController.swift; sourceTree = "<group>"; };
 		E9A2DA4E20715B0F00FD9D54 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		E9A2DA5020715CB400FD9D54 /* CreateSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSetViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +148,8 @@
 				E9B1969420748271007B2EC1 /* SetTableViewCell.swift */,
 				E943A3E71FFDA847002F3FB5 /* CardTableViewCell.swift */,
 				E93776822071E06500B92880 /* BigButton.swift */,
+				E99AA68E22EA5FA90005749C /* LanguageCodes.swift */,
+				E99AA69422F45A360005749C /* HelperFunctions.swift */,
 			);
 			path = "My Classes";
 			sourceTree = "<group>";
@@ -204,6 +214,8 @@
 			children = (
 				E9B400B12105A4DD0031B9F9 /* SideThreeViewController.swift */,
 				E9A2DA5020715CB400FD9D54 /* CreateSetViewController.swift */,
+				E99AA69022EA63890005749C /* NewSetViewController.swift */,
+				E99AA69222EA63DF0005749C /* NewSideTableViewCell.swift */,
 			);
 			name = "Create VCs";
 			path = "New Group";
@@ -290,18 +302,22 @@
 				E93776832071E06500B92880 /* BigButton.swift in Sources */,
 				E9205774210D60930056A185 /* ManualStudyViewController.swift in Sources */,
 				E90744821FB6B8AC00FFC852 /* StudyViewController.swift in Sources */,
+				E99AA69522F45A360005749C /* HelperFunctions.swift in Sources */,
 				E91F68B7215F34150029BCA6 /* Card+CoreDataProperties.swift in Sources */,
 				E93734DA21513ABD00F4DF21 /* ModeInfoViewController.swift in Sources */,
 				E91F68BD215F36F30029BCA6 /* StudyInfo+CoreDataClass.swift in Sources */,
 				E9205772210D60790056A185 /* SideChoiceViewController.swift in Sources */,
 				E90C17A61FF0DE1100086115 /* Model.xcdatamodeld in Sources */,
+				E99AA69122EA63890005749C /* NewSetViewController.swift in Sources */,
 				E91F68B5215F34150029BCA6 /* SideInfo+CoreDataProperties.swift in Sources */,
 				E91F68B4215F34150029BCA6 /* Set+CoreDataProperties.swift in Sources */,
 				E956D55521593F17007D5D82 /* SideInfo+CoreDataClass.swift in Sources */,
+				E99AA68F22EA5FA90005749C /* LanguageCodes.swift in Sources */,
 				E98B4FC61FB2F22C00DC349D /* AppDelegate.swift in Sources */,
 				E943A3EA2000A3ED002F3FB5 /* StudyModeViewController.swift in Sources */,
 				E9B1969520748271007B2EC1 /* SetTableViewCell.swift in Sources */,
 				E91F68C0215F36F30029BCA6 /* Side+CoreDataProperties.swift in Sources */,
+				E99AA69322EA63DF0005749C /* NewSideTableViewCell.swift in Sources */,
 				E9B400B22105A4DD0031B9F9 /* SideThreeViewController.swift in Sources */,
 				E9A2DA482071527300FD9D54 /* CardsTableViewController.swift in Sources */,
 				E9A2DA532071907F00FD9D54 /* ImportQuizletViewController.swift in Sources */,

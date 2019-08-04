@@ -28,6 +28,15 @@ public class Card: NSManagedObject {
             card.sideTwo = sideTwo
             card.sideThree = sideThree
             card.parentSet = set
+            if let sideOne = Side.addSide(word: sideOne, index: 0, inManagedObjectContext: context) {
+                card.addToSides(sideOne)
+            }
+            if let sideTwo = Side.addSide(word: sideTwo, index: 1, inManagedObjectContext: context) {
+                card.addToSides(sideTwo)
+            }
+            if let sideThree = Side.addSide(word: sideThree ?? "", index: 2, inManagedObjectContext: context) {
+                card.addToSides(sideThree)
+            }
             do {
                 try context.save()
             } catch {

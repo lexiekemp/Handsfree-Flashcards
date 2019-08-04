@@ -202,7 +202,7 @@ class SetsTableViewController: CoreDataTableViewController, UITextFieldDelegate 
             }
         }
         else if segue.identifier == "createSet" {
-            if let createSetvc = segue.destination as? CreateSetViewController {
+            if let createSetvc = segue.destination as? NewSetViewController {
                 createSetvc.parentSetTVC = self
             }
         }
