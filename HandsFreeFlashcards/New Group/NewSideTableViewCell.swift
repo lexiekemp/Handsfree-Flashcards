@@ -14,9 +14,11 @@ class NewSideTableViewCell: UITableViewCell {
     @IBOutlet weak var sideNameTextField: UITextField!
     @IBOutlet weak var sideLangTextField: UITextField!
     @IBOutlet weak var removeSideButton: UIButton!
+    @IBOutlet weak var langTableView: UITableView!
     
     var parentVC: NewSetViewController?
     var index: Int?
+    var suggestedLangs: [String] = ["English"]
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,7 +28,12 @@ class NewSideTableViewCell: UITableViewCell {
         sideLangTextField.delegate = self
         sideLangTextField.tag = 1
         sideLangTextField.addBottomBorder()
-        // Initialization code
+        langTableView.delegate = self
+        langTableView.dataSource = self
+        langTableView.isHidden = true
+        
+        sideLangTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+
     }
     func inflateCell(parent: NewSetViewController, side: Int, info: CellSideInfo) {
         parentVC = parent
@@ -61,14 +68,53 @@ class NewSideTableViewCell: UITableViewCell {
 extension NewSideTableViewCell: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        langTableView.isHidden = true
         if index == nil { return true }
         if textField.tag == 0 {
             parentVC?.addName(index: index!, name: textField.text ?? "")
         }
         else if textField.tag == 1 {
+            if langCodeDict[(textField.text ?? "")] == nil {
+                parentVC?.errorAlert(message: "Please enter a valid language")
+            }
             parentVC?.addLanguage(index: index!, lang: textField.text ?? "")
         }
         return true
+    }
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if index != (parentVC?.sideCount ?? 0) - 2 { return true }
+        let _ = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { [weak self] _ in
+            self?.parentVC?.view.frame.origin.y -= (self?.parentVC?.keyboardHeight ?? 150)
+        }
+        return true
+    }
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        guard let text = textField.text else { return }
+        if text == "" { return }
+        // let results = dict.flatMap { (key, value) in key.lowercased().contains("o") ? value : nil }
+        parentVC?.view.bringSubview(toFront: langTableView)
+        langTableView.isHidden = false
+    }
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        self.parentVC?.view.frame.origin.y = 0
+        return true
+    }
+}
+extension NewSideTableViewCell: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return suggestedLangs.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "langCell") else {
+            fatalError("langCell is not dequeueable")
+        }
+        cell.textLabel?.text = suggestedLangs[indexPath.row]
+        return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        sideLangTextField.text = suggestedLangs[indexPath.row]
+        langTableView.isHidden = true
     }
     
 }

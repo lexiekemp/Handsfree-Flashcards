@@ -25,5 +25,15 @@ extension UITextField {
         self.layer.addSublayer(bottomLine)
     }
 }
-
+extension UIView {
+    func addShadow(scale: Bool = true, radius: CGFloat = 1.0) {
+        layer.masksToBounds = false
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 0.2
+        layer.shadowOffset = .zero
+        layer.shadowRadius = radius
+//        layer.shouldRasterize = true
+//        layer.rasterizationScale = scale ? UIScreen.main.scale : 1
+    }
+}
 

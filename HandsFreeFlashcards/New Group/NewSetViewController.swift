@@ -15,14 +15,18 @@ struct CellSideInfo {
 }
 class NewSetViewController: RootViewController {
 
+    @IBOutlet weak var setTitleView: UIView!
     @IBOutlet weak var setTitleLabel: UILabel!
     @IBOutlet weak var setTitleTextField: UITextField!
     @IBOutlet weak var sidesTable: UITableView!
+    @IBOutlet weak var createSetButton: UIButton!
     
     var cellSideInfo: [CellSideInfo] = []
     var managedObjectContext:NSManagedObjectContext?
     var currentSet:Set?
     var parentSetTVC:SetsTableViewController? //use this to perform segue to cardstvc upon click of "create" button
+    var sideCount = 3
+    var keyboardHeight: CGFloat?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,8 +38,18 @@ class NewSetViewController: RootViewController {
         
         let defaultSideInfo = CellSideInfo(name: nil, language: nil)
         self.cellSideInfo = Array(repeating: defaultSideInfo, count: 2)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        self.setTitleView.addGestureRecognizer(tap)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     @IBAction func createSetClicked(_ sender: UIButton) {
+        if let err = isValidInput() {
+            errorAlert(message: err)
+            return
+        }
         if managedObjectContext == nil {
             errorAlert(message: "Context is nil.")
             return
@@ -60,7 +74,7 @@ class NewSetViewController: RootViewController {
             errorAlert(message: "Please enter valid languages")
             return
         }
-        if nameOne.isEmpty || nameOne.isEmpty {
+        if nameOne.isEmpty || nameTwo.isEmpty {
             errorAlert(message: "Please enter valid names")
             return
         }
@@ -103,23 +117,53 @@ class NewSetViewController: RootViewController {
             self.parentSetTVC?.performSegue(withIdentifier: "showCards", sender: nil)
         }
     }
-    
     @IBAction func cancelClicked(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
+    }
+    //return error or nil if valid
+    func isValidInput() -> String? {
+        var error: String?
+        let setName = setTitleTextField.text
+        if setName == nil || setName!.isEmpty {
+            error = "Please enter a valid set name"
+        }
+        else {
+            for i in 0..<cellSideInfo.count {
+                let name = cellSideInfo[i].name ?? ""
+                let lang = cellSideInfo[i].language ?? ""
+                
+                if name.isEmpty {
+                    error = "Please enter a valid name for side " + (i+1).numToWord()
+                    break
+                }
+                if langCodeDict[lang] == nil {
+                    error = "Please enter a valid language for side " + (i+1).numToWord()
+                    break
+                }
+            }
+        }
+        (error == nil) ? setCreateSetButtonAqua():setCreateSetButtonGrey()
+        return error
+    }
+    func setCreateSetButtonAqua() {
+        createSetButton.backgroundColor = UIColor(red:0.10, green:0.73, blue:0.76, alpha:1.0)
+    }
+    func setCreateSetButtonGrey() {
+        createSetButton.backgroundColor = UIColor(red:0.68, green:0.71, blue:0.71, alpha:1.0)
     }
 }
 
 extension NewSetViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row < cellSideInfo.count {
-            return 160
+            return 145
         }
         else {
             return 44
         }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cellSideInfo.count + 1
+        return sideCount
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row < cellSideInfo.count {
@@ -132,10 +176,13 @@ extension NewSetViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //tapped +add a side button
-        let defaultSideInfo = CellSideInfo(name: nil, language: nil)
-        cellSideInfo.append(defaultSideInfo)
-        sidesTable.insertRows(at: [IndexPath(row: cellSideInfo.count - 1, section: 0)], with: .automatic)
+        if indexPath.row == cellSideInfo.count {
+            //tapped +add a side button
+            let defaultSideInfo = CellSideInfo(name: nil, language: nil)
+            cellSideInfo.append(defaultSideInfo)
+            tableView.reloadData()
+        }
+        setTitleTextField.resignFirstResponder()
     }
     func removeSide() {
         _ = cellSideInfo.popLast()
@@ -147,6 +194,8 @@ extension NewSetViewController: UITableViewDataSource, UITableViewDelegate {
             return
         }
         cellSideInfo[index].name = name
+        _ = isValidInput()
+        return
     }
     func addLanguage(index: Int, lang: String) {
         if index >= cellSideInfo.count {
@@ -154,14 +203,31 @@ extension NewSetViewController: UITableViewDataSource, UITableViewDelegate {
             return
         }
         cellSideInfo[index].language = lang
+        _ = isValidInput()
     }
 
 }
 extension NewSetViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         setTitleLabel.text = textField.text
-//        textField.resignFirstResponder()
+        textField.resignFirstResponder()
+        _ = isValidInput()
         return true
+    }
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            self.keyboardHeight = keyboardSize.height
+//            if (self.view.frame.origin.y ?? 1) == 0{
+//                self.view.frame.origin.y -= (keyboardSize.height)
+//            }
+        }
+    }
+//    @objc func keyboardWillHide(notification: NSNotification) {
+//        self.view.frame.origin.y = 0
+//    }
+    @objc func handleTap(_ tap: UITapGestureRecognizer) {
+        setTitleTextField.resignFirstResponder()
+        self.view.endEditing(true)
     }
 }
 
