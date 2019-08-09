@@ -8,6 +8,10 @@
 
 import Foundation
 
+let commonLangs = ["English", "Spanish", "French", "Italian", "German", "Russian", "Chinese - Simplified", "Chinese - Traditional", "Korean"]
+
+
+//japanese?
 let langCodeDict =
 [
     "English":"en",

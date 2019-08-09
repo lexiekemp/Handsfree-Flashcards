@@ -120,6 +120,9 @@ class NewSetViewController: RootViewController {
     @IBAction func cancelClicked(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
+    func goToLangPicker(index: Int) {
+        self.performSegue(withIdentifier: "goToLangPicker", sender: index)
+    }
     //return error or nil if valid
     func isValidInput() -> String? {
         var error: String?
@@ -150,6 +153,10 @@ class NewSetViewController: RootViewController {
     }
     func setCreateSetButtonGrey() {
         createSetButton.backgroundColor = UIColor(red:0.68, green:0.71, blue:0.71, alpha:1.0)
+    }
+    
+    func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //add parent
     }
 }
 

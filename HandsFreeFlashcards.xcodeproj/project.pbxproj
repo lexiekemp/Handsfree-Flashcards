@@ -35,6 +35,7 @@
 		E99AA69122EA63890005749C /* NewSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99AA69022EA63890005749C /* NewSetViewController.swift */; };
 		E99AA69322EA63DF0005749C /* NewSideTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99AA69222EA63DF0005749C /* NewSideTableViewCell.swift */; };
 		E99AA69522F45A360005749C /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99AA69422F45A360005749C /* HelperFunctions.swift */; };
+		E99AA69722FB8C400005749C /* LangPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99AA69622FB8C400005749C /* LangPickerViewController.swift */; };
 		E9A2DA482071527300FD9D54 /* CardsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A2DA472071527300FD9D54 /* CardsTableViewController.swift */; };
 		E9A2DA4F20715B0F00FD9D54 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A2DA4E20715B0F00FD9D54 /* RootViewController.swift */; };
 		E9A2DA5120715CB400FD9D54 /* CreateSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A2DA5020715CB400FD9D54 /* CreateSetViewController.swift */; };
@@ -76,6 +77,7 @@
 		E99AA69022EA63890005749C /* NewSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSetViewController.swift; sourceTree = "<group>"; };
 		E99AA69222EA63DF0005749C /* NewSideTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSideTableViewCell.swift; sourceTree = "<group>"; };
 		E99AA69422F45A360005749C /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
+		E99AA69622FB8C400005749C /* LangPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LangPickerViewController.swift; sourceTree = "<group>"; };
 		E9A2DA472071527300FD9D54 /* CardsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsTableViewController.swift; sourceTree = "<group>"; };
 		E9A2DA4E20715B0F00FD9D54 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		E9A2DA5020715CB400FD9D54 /* CreateSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSetViewController.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				E9A2DA5020715CB400FD9D54 /* CreateSetViewController.swift */,
 				E99AA69022EA63890005749C /* NewSetViewController.swift */,
 				E99AA69222EA63DF0005749C /* NewSideTableViewCell.swift */,
+				E99AA69622FB8C400005749C /* LangPickerViewController.swift */,
 			);
 			name = "Create VCs";
 			path = "New Group";
@@ -324,6 +327,7 @@
 				E91F68BE215F36F30029BCA6 /* StudyInfo+CoreDataProperties.swift in Sources */,
 				E91F68BF215F36F30029BCA6 /* Side+CoreDataClass.swift in Sources */,
 				E9A2DA5120715CB400FD9D54 /* CreateSetViewController.swift in Sources */,
+				E99AA69722FB8C400005749C /* LangPickerViewController.swift in Sources */,
 				E943A3E81FFDA848002F3FB5 /* CardTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

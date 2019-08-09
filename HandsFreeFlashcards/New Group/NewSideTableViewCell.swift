@@ -12,9 +12,8 @@ class NewSideTableViewCell: UITableViewCell {
     @IBOutlet weak var sideLabel: UILabel!
     @IBOutlet weak var sideNameLabel: UILabel!
     @IBOutlet weak var sideNameTextField: UITextField!
-    @IBOutlet weak var sideLangTextField: UITextField!
+   // @IBOutlet weak var sideLangTextField: UITextField!
     @IBOutlet weak var removeSideButton: UIButton!
-    @IBOutlet weak var langTableView: UITableView!
     
     var parentVC: NewSetViewController?
     var index: Int?
@@ -25,14 +24,11 @@ class NewSideTableViewCell: UITableViewCell {
         sideNameTextField.delegate = self
         sideNameTextField.tag = 0
         sideNameTextField.addBottomBorder()
-        sideLangTextField.delegate = self
-        sideLangTextField.tag = 1
-        sideLangTextField.addBottomBorder()
-        langTableView.delegate = self
-        langTableView.dataSource = self
-        langTableView.isHidden = true
+//        sideLangTextField.delegate = self
+//        sideLangTextField.tag = 1
+//        sideLangTextField.addBottomBorder()
         
-        sideLangTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+//        sideLangTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
 
     }
     func inflateCell(parent: NewSetViewController, side: Int, info: CellSideInfo) {
@@ -47,19 +43,22 @@ class NewSideTableViewCell: UITableViewCell {
             sideNameTextField.text = ""
             sideNameTextField.placeholder = "Enter name here..."
         }
-        if let lang = info.language {
-            sideLangTextField.text = lang
-        }
-        else {
-            sideLangTextField.text = ""
-            sideLangTextField.placeholder = "Enter language here..."
-        }
+//        if let lang = info.language {
+//            sideLangTextField.text = lang
+//        }
+//        else {
+//            sideLangTextField.text = ""
+//            sideLangTextField.placeholder = "Enter language here..."
+//        }
         if side > 2 {
             removeSideButton.isHidden = false
         }
         else {
             removeSideButton.isHidden = true
         }
+    }
+    @IBAction func langButtonClicked(_ sender: UIButton) {
+        parentVC?.goToLangPicker(index: index)
     }
     @IBAction func removeSideClicked(_ sender: UIButton) {
         parentVC?.removeSide()
@@ -68,17 +67,17 @@ class NewSideTableViewCell: UITableViewCell {
 extension NewSideTableViewCell: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        langTableView.isHidden = true
         if index == nil { return true }
-        if textField.tag == 0 {
-            parentVC?.addName(index: index!, name: textField.text ?? "")
-        }
-        else if textField.tag == 1 {
-            if langCodeDict[(textField.text ?? "")] == nil {
-                parentVC?.errorAlert(message: "Please enter a valid language")
-            }
-            parentVC?.addLanguage(index: index!, lang: textField.text ?? "")
-        }
+        parentVC?.addName(index: index!, name: textField.text ?? "")
+//        if textField.tag == 0 {
+//            parentVC?.addName(index: index!, name: textField.text ?? "")
+//        }
+//        else if textField.tag == 1 {
+//            if langCodeDict[(textField.text ?? "")] == nil {
+//                parentVC?.errorAlert(message: "Please enter a valid language")
+//            }
+//            parentVC?.addLanguage(index: index!, lang: textField.text ?? "")
+//        }
         return true
     }
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -88,33 +87,33 @@ extension NewSideTableViewCell: UITextFieldDelegate {
         }
         return true
     }
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        guard let text = textField.text else { return }
-        if text == "" { return }
-        // let results = dict.flatMap { (key, value) in key.lowercased().contains("o") ? value : nil }
-        parentVC?.view.bringSubview(toFront: langTableView)
-        langTableView.isHidden = false
-    }
+//    @objc func textFieldDidChange(_ textField: UITextField) {
+//        guard let text = textField.text else { return }
+//        if text == "" { return }
+//        // let results = dict.flatMap { (key, value) in key.lowercased().contains("o") ? value : nil }
+//        parentVC?.view.bringSubview(toFront: langTableView)
+//       // langTableView.isHidden = false
+//    }
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         self.parentVC?.view.frame.origin.y = 0
         return true
     }
 }
-extension NewSideTableViewCell: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return suggestedLangs.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "langCell") else {
-            fatalError("langCell is not dequeueable")
-        }
-        cell.textLabel?.text = suggestedLangs[indexPath.row]
-        return cell
-    }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        sideLangTextField.text = suggestedLangs[indexPath.row]
-        langTableView.isHidden = true
-    }
-    
-}
+//extension NewSideTableViewCell: UITableViewDelegate, UITableViewDataSource {
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return suggestedLangs.count
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "langCell") else {
+//            fatalError("langCell is not dequeueable")
+//        }
+//        cell.textLabel?.text = suggestedLangs[indexPath.row]
+//        return cell
+//    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        sideLangTextField.text = suggestedLangs[indexPath.row]
+//        langTableView.isHidden = true
+//    }
+//
+//}
