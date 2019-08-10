@@ -12,7 +12,8 @@ class NewSideTableViewCell: UITableViewCell {
     @IBOutlet weak var sideLabel: UILabel!
     @IBOutlet weak var sideNameLabel: UILabel!
     @IBOutlet weak var sideNameTextField: UITextField!
-   // @IBOutlet weak var sideLangTextField: UITextField!
+    @IBOutlet weak var sideLangButton: UIButton!
+    // @IBOutlet weak var sideLangTextField: UITextField!
     @IBOutlet weak var removeSideButton: UIButton!
     
     var parentVC: NewSetViewController?
@@ -22,14 +23,8 @@ class NewSideTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         sideNameTextField.delegate = self
-        sideNameTextField.tag = 0
         sideNameTextField.addBottomBorder()
-//        sideLangTextField.delegate = self
-//        sideLangTextField.tag = 1
-//        sideLangTextField.addBottomBorder()
-        
-//        sideLangTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
-
+        sideLangButton.addBottomBorder()
     }
     func inflateCell(parent: NewSetViewController, side: Int, info: CellSideInfo) {
         parentVC = parent
@@ -43,13 +38,13 @@ class NewSideTableViewCell: UITableViewCell {
             sideNameTextField.text = ""
             sideNameTextField.placeholder = "Enter name here..."
         }
-//        if let lang = info.language {
-//            sideLangTextField.text = lang
-//        }
-//        else {
-//            sideLangTextField.text = ""
-//            sideLangTextField.placeholder = "Enter language here..."
-//        }
+        if let lang = info.language {
+            sideLangButton.setTitle(lang, for: .normal)
+        }
+        else {
+            sideLangButton.setTitle("Choose a language...", for: .normal)
+        }
+        
         if side > 2 {
             removeSideButton.isHidden = false
         }
@@ -58,7 +53,8 @@ class NewSideTableViewCell: UITableViewCell {
         }
     }
     @IBAction func langButtonClicked(_ sender: UIButton) {
-        parentVC?.goToLangPicker(index: index)
+        guard let i = index else { return }
+        parentVC?.goToLangPicker(index: i)
     }
     @IBAction func removeSideClicked(_ sender: UIButton) {
         parentVC?.removeSide()
@@ -67,8 +63,8 @@ class NewSideTableViewCell: UITableViewCell {
 extension NewSideTableViewCell: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        if index == nil { return true }
-        parentVC?.addName(index: index!, name: textField.text ?? "")
+        guard let i = index else { return true }
+        parentVC?.addName(index: i, name: textField.text ?? "")
 //        if textField.tag == 0 {
 //            parentVC?.addName(index: index!, name: textField.text ?? "")
 //        }

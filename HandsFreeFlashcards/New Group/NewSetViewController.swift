@@ -45,6 +45,10 @@ class NewSetViewController: RootViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
 //        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        sidesTable.reloadData()
+    }
     @IBAction func createSetClicked(_ sender: UIButton) {
         if let err = isValidInput() {
             errorAlert(message: err)
@@ -155,8 +159,13 @@ class NewSetViewController: RootViewController {
         createSetButton.backgroundColor = UIColor(red:0.68, green:0.71, blue:0.71, alpha:1.0)
     }
     
-    func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //add parent
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToLangPicker" {
+            if let langPickerVC = segue.destination as? LangPickerViewController, let index = sender as? Int {
+                langPickerVC.newSetVC = self
+                langPickerVC.sideIndex = index
+            }
+        }
     }
 }
 

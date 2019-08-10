@@ -92,12 +92,6 @@
                                                     <color key="textColor" red="0.45098039220000002" green="0.45098039220000002" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter language here..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1MD-nZ-WpP">
-                                                    <rect key="frame" x="167" y="100.5" width="192" height="17"/>
-                                                    <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fls-Aq-d6W">
                                                     <rect key="frame" x="34" y="143.5" width="307" height="1"/>
                                                     <color key="backgroundColor" red="0.90588235294117647" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
@@ -116,30 +110,28 @@
                                                     </connections>
                                                 </button>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter name here..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PYa-RC-FgO">
-                                                    <rect key="frame" x="167" y="54.5" width="192" height="17"/>
+                                                    <rect key="frame" x="153" y="54.5" width="206" height="17"/>
                                                     <edgeInsets key="layoutMargins" top="8" left="8" bottom="16" right="8"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jiW-cV-K6m" userLabel="Side Lang Button">
-                                                    <rect key="frame" x="167" y="94" width="192" height="30"/>
-                                                    <state key="normal" title="Enter language here..."/>
+                                                    <rect key="frame" x="153" y="94.5" width="206" height="29"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <state key="normal" title="Choose a language..."/>
                                                     <connections>
                                                         <action selector="langButtonClicked:" destination="1PU-cV-9h8" eventType="touchUpInside" id="LX7-EL-f0Q"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="1MD-nZ-WpP" firstAttribute="centerY" secondItem="FVU-mh-Auk" secondAttribute="centerY" id="0GZ-Xn-vn4"/>
                                                 <constraint firstItem="Fls-Aq-d6W" firstAttribute="leading" secondItem="gZJ-2l-bom" secondAttribute="leading" constant="34" id="0lm-5q-ehV"/>
                                                 <constraint firstItem="bYv-rP-X4a" firstAttribute="leading" secondItem="gZJ-2l-bom" secondAttribute="leading" constant="16" id="4hg-gp-3wS"/>
                                                 <constraint firstItem="PYa-RC-FgO" firstAttribute="centerY" secondItem="lyM-ME-Jvs" secondAttribute="centerY" id="92w-x6-PBZ"/>
                                                 <constraint firstItem="bYv-rP-X4a" firstAttribute="top" secondItem="gZJ-2l-bom" secondAttribute="top" constant="16" id="BqR-Yz-SED"/>
-                                                <constraint firstItem="PYa-RC-FgO" firstAttribute="leading" secondItem="lyM-ME-Jvs" secondAttribute="trailing" constant="26" id="CD5-Xo-s6J"/>
+                                                <constraint firstItem="PYa-RC-FgO" firstAttribute="leading" secondItem="lyM-ME-Jvs" secondAttribute="trailing" constant="12" id="CD5-Xo-s6J"/>
                                                 <constraint firstAttribute="trailing" secondItem="lSm-m6-0Qn" secondAttribute="trailing" constant="16" id="D1z-lm-7zm"/>
-                                                <constraint firstAttribute="trailing" secondItem="1MD-nZ-WpP" secondAttribute="trailing" constant="16" id="FP8-vy-8AC"/>
-                                                <constraint firstItem="1MD-nZ-WpP" firstAttribute="leading" secondItem="PYa-RC-FgO" secondAttribute="leading" id="KPJ-3R-2sK"/>
                                                 <constraint firstItem="jiW-cV-K6m" firstAttribute="leading" secondItem="PYa-RC-FgO" secondAttribute="leading" id="UI8-R9-AVU"/>
                                                 <constraint firstItem="jiW-cV-K6m" firstAttribute="trailing" secondItem="PYa-RC-FgO" secondAttribute="trailing" id="YKR-4h-L4O"/>
                                                 <constraint firstItem="FVU-mh-Auk" firstAttribute="top" secondItem="lyM-ME-Jvs" secondAttribute="bottom" constant="28" id="bIs-kY-nQg"/>
@@ -156,7 +148,7 @@
                                         <connections>
                                             <outlet property="removeSideButton" destination="lSm-m6-0Qn" id="KEd-Aw-uAE"/>
                                             <outlet property="sideLabel" destination="bYv-rP-X4a" id="ofj-RN-DIV"/>
-                                            <outlet property="sideLangTextField" destination="1MD-nZ-WpP" id="YZ1-b3-W1O"/>
+                                            <outlet property="sideLangButton" destination="jiW-cV-K6m" id="AQX-Sx-5WW"/>
                                             <outlet property="sideNameLabel" destination="lyM-ME-Jvs" id="qCL-Sp-kmd"/>
                                             <outlet property="sideNameTextField" destination="PYa-RC-FgO" id="rzJ-Fm-RMO"/>
                                         </connections>
@@ -251,16 +243,16 @@
             </objects>
             <point key="canvasLocation" x="2045.5999999999999" y="-467.3163418290855"/>
         </scene>
-        <!--View Controller-->
+        <!--Lang Picker View Controller-->
         <scene sceneID="eOk-cx-GJT">
             <objects>
-                <viewController id="yHH-3V-h7M" sceneMemberID="viewController">
+                <viewController id="yHH-3V-h7M" customClass="LangPickerViewController" customModule="HandsFreeFlashcards" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XtT-Bn-vVz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bhb-Pg-b8Z">
-                                <rect key="frame" x="0.0" y="85" width="375" height="582"/>
+                                <rect key="frame" x="0.0" y="124" width="375" height="543"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="langCell" id="p0I-oY-1O8">
@@ -274,23 +266,21 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b83-Yu-qoa">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="60"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter language here..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="r1Y-SY-Fsp">
-                                        <rect key="frame" x="16" y="38" width="343" height="35"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="35" id="tLb-p1-C2N"/>
-                                        </constraints>
+                                        <rect key="frame" x="12" y="12" width="351" height="36"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="85" id="8Wu-bx-zM1"/>
-                                    <constraint firstItem="r1Y-SY-Fsp" firstAttribute="leading" secondItem="b83-Yu-qoa" secondAttribute="leading" constant="16" id="Dhh-gL-bDZ"/>
+                                    <constraint firstAttribute="height" constant="60" id="8Wu-bx-zM1"/>
+                                    <constraint firstItem="r1Y-SY-Fsp" firstAttribute="leading" secondItem="b83-Yu-qoa" secondAttribute="leading" constant="12" id="Dhh-gL-bDZ"/>
                                     <constraint firstItem="r1Y-SY-Fsp" firstAttribute="centerX" secondItem="b83-Yu-qoa" secondAttribute="centerX" id="R6R-2X-6eI"/>
+                                    <constraint firstItem="r1Y-SY-Fsp" firstAttribute="centerY" secondItem="b83-Yu-qoa" secondAttribute="centerY" id="Uql-nW-ccv"/>
                                     <constraint firstAttribute="bottom" secondItem="r1Y-SY-Fsp" secondAttribute="bottom" constant="12" id="bXt-By-Fk9"/>
                                 </constraints>
                             </view>
@@ -300,13 +290,17 @@
                             <constraint firstItem="b83-Yu-qoa" firstAttribute="leading" secondItem="Gvg-ER-HFL" secondAttribute="leading" id="7pJ-Da-2qz"/>
                             <constraint firstItem="bhb-Pg-b8Z" firstAttribute="leading" secondItem="Gvg-ER-HFL" secondAttribute="leading" id="EAi-Cq-35M"/>
                             <constraint firstItem="bhb-Pg-b8Z" firstAttribute="top" secondItem="b83-Yu-qoa" secondAttribute="bottom" id="PUY-k4-rO2"/>
-                            <constraint firstItem="b83-Yu-qoa" firstAttribute="top" secondItem="XtT-Bn-vVz" secondAttribute="top" id="Q5F-aS-21e"/>
                             <constraint firstItem="bhb-Pg-b8Z" firstAttribute="bottom" secondItem="Gvg-ER-HFL" secondAttribute="bottom" id="awe-aY-cOL"/>
+                            <constraint firstItem="Gvg-ER-HFL" firstAttribute="top" secondItem="b83-Yu-qoa" secondAttribute="top" id="kdr-En-6Kz"/>
                             <constraint firstItem="b83-Yu-qoa" firstAttribute="trailing" secondItem="Gvg-ER-HFL" secondAttribute="trailing" id="mo5-XG-FQB"/>
                             <constraint firstItem="bhb-Pg-b8Z" firstAttribute="trailing" secondItem="Gvg-ER-HFL" secondAttribute="trailing" id="vrx-f3-o5G"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Gvg-ER-HFL"/>
                     </view>
+                    <connections>
+                        <outlet property="langTableView" destination="bhb-Pg-b8Z" id="K0i-en-FEd"/>
+                        <outlet property="langTextField" destination="r1Y-SY-Fsp" id="vOL-4g-4UX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VaM-UM-Lxg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

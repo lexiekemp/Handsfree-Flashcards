@@ -19,9 +19,17 @@ extension Int {
 extension UITextField {
     func addBottomBorder()  {
         let bottomLine = CALayer()
-        bottomLine.frame = CGRect(x: 0, y: self.frame.height - 1, width: self.frame.width, height: 1)
+        bottomLine.frame = CGRect(x: 0, y: self.frame.height - 2, width: self.frame.width, height: 1)
         bottomLine.backgroundColor = UIColor.gray.cgColor // background color
         self.borderStyle = UITextBorderStyle.none // border style
+        self.layer.addSublayer(bottomLine)
+    }
+}
+extension UIButton {
+    func addBottomBorder()  {
+        let bottomLine = CALayer()
+        bottomLine.frame = CGRect(x: 0, y: self.frame.height - 1, width: self.frame.width, height: 1)
+        bottomLine.backgroundColor = UIColor.gray.cgColor // background color
         self.layer.addSublayer(bottomLine)
     }
 }
