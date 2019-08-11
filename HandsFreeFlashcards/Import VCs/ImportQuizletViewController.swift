@@ -54,6 +54,11 @@ class ImportQuizletViewController: RootViewController, UITextViewDelegate, UITab
         if set?.sideThreeName == nil || set?.sideThreeLangID == nil {
             numSidesSegControl.setEnabled(false, forSegmentAt: 1)
         }
+        setTextView.layer.borderColor = UIColor.black.cgColor
+        setTextView.layer.borderWidth = 2.0
+        
+        sidesButton.addBottomBorder()
+        termsButton.addBottomBorder()
     }
     private func checkSyntax(_ cards: [String]) -> Bool {
         for card in cards {

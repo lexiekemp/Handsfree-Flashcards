@@ -12,9 +12,7 @@ class RootViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(red:0.79, green:0.79, blue:0.79, alpha:1.0) //light grey
     }
-    
     func errorAlert(message: String) {
         let alertController = UIAlertController(title:"Error", message: message, preferredStyle:.alert)
         let alertAction = UIAlertAction(title: "Okay", style: .default, handler: nil)

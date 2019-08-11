@@ -36,18 +36,20 @@ class NewSetViewController: RootViewController {
         sidesTable.dataSource = self
         sidesTable.delegate = self
         
+        let backItem = UIBarButtonItem()
+        backItem.title = "Cancel"
+        navigationController?.navigationBar.topItem?.backBarButtonItem = backItem
+        
         let defaultSideInfo = CellSideInfo(name: nil, language: nil)
         self.cellSideInfo = Array(repeating: defaultSideInfo, count: 2)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         self.setTitleView.addGestureRecognizer(tap)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         sidesTable.reloadData()
+        _ = isValidInput()
     }
     @IBAction func createSetClicked(_ sender: UIButton) {
         if let err = isValidInput() {
@@ -115,14 +117,19 @@ class NewSetViewController: RootViewController {
                 currentSet?.addToSideInfo(sideThreeInfo)
             }
         }
-        self.dismiss(animated: true) {
-            self.parentSetTVC?.selectedSets.insert(self.currentSet!, at: 0)
-            self.parentSetTVC?.setFirstResponder = true
-            self.parentSetTVC?.performSegue(withIdentifier: "showCards", sender: nil)
-        }
+        navigationController?.popViewController(animated: true)
+        self.parentSetTVC?.selectedSets.insert(self.currentSet!, at: 0)
+        self.parentSetTVC?.setFirstResponder = true
+        self.parentSetTVC?.performSegue(withIdentifier: "showCards", sender: nil)
+        
+//        self.dismiss(animated: true) {
+//            self.parentSetTVC?.selectedSets.insert(self.currentSet!, at: 0)
+//            self.parentSetTVC?.setFirstResponder = true
+//            self.parentSetTVC?.performSegue(withIdentifier: "showCards", sender: nil)
+//        }
     }
     @IBAction func cancelClicked(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
     func goToLangPicker(index: Int) {
         self.performSegue(withIdentifier: "goToLangPicker", sender: index)
@@ -230,17 +237,6 @@ extension NewSetViewController: UITextFieldDelegate {
         _ = isValidInput()
         return true
     }
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            self.keyboardHeight = keyboardSize.height
-//            if (self.view.frame.origin.y ?? 1) == 0{
-//                self.view.frame.origin.y -= (keyboardSize.height)
-//            }
-        }
-    }
-//    @objc func keyboardWillHide(notification: NSNotification) {
-//        self.view.frame.origin.y = 0
-//    }
     @objc func handleTap(_ tap: UITapGestureRecognizer) {
         setTitleTextField.resignFirstResponder()
         self.view.endEditing(true)

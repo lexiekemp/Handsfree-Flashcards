@@ -678,25 +678,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. Log into Quizlet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xAY-cX-PVq">
-                                <rect key="frame" x="10" y="431.5" width="365" height="20.5"/>
+                                <rect key="frame" x="10" y="426.5" width="365" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2. Open Set" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e9z-YS-XsF">
-                                <rect key="frame" x="10" y="452" width="365" height="20.5"/>
+                                <rect key="frame" x="10" y="447" width="365" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3. Click Export" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pap-mY-Znm">
-                                <rect key="frame" x="10" y="472.5" width="365" height="20.5"/>
+                                <rect key="frame" x="10" y="467.5" width="365" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4. Between Sides:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="jPm-P4-fR3">
-                                <rect key="frame" x="10" y="493.5" width="137" height="20.5"/>
+                                <rect key="frame" x="10" y="488.5" width="137" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20.5" id="jWq-yt-eYf"/>
                                 </constraints>
@@ -705,7 +705,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5. Between Cards:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YFi-lJ-ifL">
-                                <rect key="frame" x="10" y="514.5" width="139.5" height="20.5"/>
+                                <rect key="frame" x="10" y="509.5" width="139.5" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20.5" id="Hh2-3d-6nR"/>
                                 </constraints>
@@ -714,42 +714,31 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6. Copy Text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3yR-KY-cEI">
-                                <rect key="frame" x="10" y="535" width="365" height="20.5"/>
+                                <rect key="frame" x="10" y="530" width="365" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7. Paste Above" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZMr-Ms-54w">
-                                <rect key="frame" x="10" y="555.5" width="365" height="20.5"/>
+                                <rect key="frame" x="10" y="550.5" width="365" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZJV-XR-gMk" customClass="BigButton" customModule="HandsFreeFlashcards" customModuleProvider="target">
-                                <rect key="frame" x="112.5" y="616" width="150" height="36"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="3o6-9H-MuS"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Go To Quizlet"/>
-                                <connections>
-                                    <segue destination="KU0-jo-DC6" kind="show" identifier="goToQuizlet" id="V3g-RT-tfZ"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instructions: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LVm-1C-Qk8">
-                                <rect key="frame" x="5" y="403" width="370" height="20.5"/>
+                                <rect key="frame" x="5" y="398" width="370" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="HNZ-5T-gA2">
-                                <rect key="frame" x="30" y="120" width="315" height="273"/>
+                                <rect key="frame" x="30" y="120" width="315" height="268"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8uN-FL-rRv">
-                                <rect key="frame" x="150.5" y="514.5" width="55" height="20.5"/>
+                                <rect key="frame" x="150.5" y="509.5" width="55" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="55" id="3eI-BX-5a0"/>
                                 </constraints>
@@ -759,7 +748,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vKo-WD-yeK" userLabel="SidesTableView">
-                                <rect key="frame" x="146" y="521" width="55" height="126"/>
+                                <rect key="frame" x="146" y="516" width="55" height="131"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="sepOptCell" id="p14-4u-GmD">
@@ -773,7 +762,7 @@
                                 </prototypes>
                             </tableView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JT1-dz-skW" userLabel="TermsTableView">
-                                <rect key="frame" x="150.5" y="535" width="55" height="112"/>
+                                <rect key="frame" x="150.5" y="530" width="55" height="117"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="sepOptCell" id="k7U-SY-eo1">
@@ -787,7 +776,7 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fFc-f3-ivA">
-                                <rect key="frame" x="146" y="493.5" width="55" height="20.5"/>
+                                <rect key="frame" x="146" y="488.5" width="55" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="55" id="XJ1-Wp-Kgf"/>
                                 </constraints>
@@ -797,7 +786,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WyC-tH-3SW">
-                                <rect key="frame" x="201" y="493.5" width="20.5" height="20.5"/>
+                                <rect key="frame" x="201" y="488.5" width="20.5" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="WyC-tH-3SW" secondAttribute="height" multiplier="1:1" id="fn7-Oo-YvQ"/>
                                 </constraints>
@@ -807,7 +796,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w4H-HS-LfG">
-                                <rect key="frame" x="205.5" y="514.5" width="20.5" height="20.5"/>
+                                <rect key="frame" x="205.5" y="509.5" width="20.5" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="w4H-HS-LfG" secondAttribute="height" multiplier="1:1" id="hym-px-DXz"/>
                                 </constraints>
@@ -829,6 +818,20 @@
                                     <segment title="3"/>
                                 </segments>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZJV-XR-gMk">
+                                <rect key="frame" x="16" y="611" width="343" height="40"/>
+                                <color key="backgroundColor" red="0.1019607843" green="0.72549019609999998" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Gia-2l-syZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="Go To Quizlet">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <segue destination="KU0-jo-DC6" kind="show" identifier="goToQuizlet" id="V3g-RT-tfZ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -846,8 +849,7 @@
                             <constraint firstItem="Pap-mY-Znm" firstAttribute="top" secondItem="e9z-YS-XsF" secondAttribute="bottom" id="Icq-yv-lSn"/>
                             <constraint firstItem="LVm-1C-Qk8" firstAttribute="leading" secondItem="TsZ-eF-jch" secondAttribute="leading" constant="5" id="JOL-36-w0V"/>
                             <constraint firstItem="YFi-lJ-ifL" firstAttribute="leading" secondItem="xAY-cX-PVq" secondAttribute="leading" id="KRf-Z5-sY1"/>
-                            <constraint firstItem="ZJV-XR-gMk" firstAttribute="top" secondItem="ZMr-Ms-54w" secondAttribute="bottom" constant="40" id="KzT-jh-ORy"/>
-                            <constraint firstItem="TsZ-eF-jch" firstAttribute="bottom" secondItem="ZJV-XR-gMk" secondAttribute="bottom" constant="15" id="L4a-cB-gsJ"/>
+                            <constraint firstItem="TsZ-eF-jch" firstAttribute="bottom" secondItem="ZJV-XR-gMk" secondAttribute="bottom" constant="16" id="L4a-cB-gsJ"/>
                             <constraint firstItem="8uN-FL-rRv" firstAttribute="centerX" secondItem="JT1-dz-skW" secondAttribute="centerX" id="LbV-2K-7q2"/>
                             <constraint firstItem="8uN-FL-rRv" firstAttribute="width" secondItem="JT1-dz-skW" secondAttribute="width" id="MGa-fm-k2W"/>
                             <constraint firstItem="WyC-tH-3SW" firstAttribute="height" secondItem="fFc-f3-ivA" secondAttribute="height" id="McK-iB-70l"/>
@@ -858,6 +860,7 @@
                             <constraint firstItem="TsZ-eF-jch" firstAttribute="trailing" secondItem="e9z-YS-XsF" secondAttribute="trailing" id="O7O-Vz-cCi"/>
                             <constraint firstItem="vKo-WD-yeK" firstAttribute="top" secondItem="fFc-f3-ivA" secondAttribute="bottom" constant="7" id="Piz-Qz-16v"/>
                             <constraint firstItem="w4H-HS-LfG" firstAttribute="centerY" secondItem="8uN-FL-rRv" secondAttribute="centerY" id="QDi-V7-qFo"/>
+                            <constraint firstItem="ZJV-XR-gMk" firstAttribute="top" secondItem="ZMr-Ms-54w" secondAttribute="bottom" constant="40" id="SqW-Fp-O1k"/>
                             <constraint firstItem="3yR-KY-cEI" firstAttribute="leading" secondItem="Pap-mY-Znm" secondAttribute="leading" id="TNs-d9-hdF"/>
                             <constraint firstItem="e9z-YS-XsF" firstAttribute="top" secondItem="xAY-cX-PVq" secondAttribute="bottom" id="UG4-SQ-Oc6"/>
                             <constraint firstItem="TsZ-eF-jch" firstAttribute="bottom" secondItem="vKo-WD-yeK" secondAttribute="bottom" constant="20" id="UIA-az-IbU"/>
@@ -877,6 +880,7 @@
                             <constraint firstItem="TsZ-eF-jch" firstAttribute="trailing" secondItem="3yR-KY-cEI" secondAttribute="trailing" id="lRH-G7-a8o"/>
                             <constraint firstItem="xAY-cX-PVq" firstAttribute="top" secondItem="LVm-1C-Qk8" secondAttribute="bottom" constant="8" id="lpM-Av-Twz"/>
                             <constraint firstItem="TsZ-eF-jch" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="WyC-tH-3SW" secondAttribute="trailing" constant="5" id="myz-yE-yJE"/>
+                            <constraint firstItem="ZJV-XR-gMk" firstAttribute="leading" secondItem="TsZ-eF-jch" secondAttribute="leading" constant="16" id="nCP-8Y-eym"/>
                             <constraint firstItem="TsZ-eF-jch" firstAttribute="trailing" secondItem="ZMr-Ms-54w" secondAttribute="trailing" id="oV4-ed-dXN"/>
                             <constraint firstItem="3yR-KY-cEI" firstAttribute="leading" secondItem="xAY-cX-PVq" secondAttribute="leading" id="oZu-hK-nmG"/>
                             <constraint firstItem="vKo-WD-yeK" firstAttribute="width" secondItem="fFc-f3-ivA" secondAttribute="width" id="oh4-5X-EZO"/>
@@ -895,8 +899,9 @@
                     <navigationItem key="navigationItem" id="uPo-99-NVZ">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="HVO-8p-cIP">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Nwt-3s-Zha">
-                                <rect key="frame" x="16" y="7" width="48" height="30"/>
+                                <rect key="frame" x="16" y="5.5" width="53" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Cancel"/>
                                 <connections>
                                     <action selector="cancel:" destination="D0n-r4-hd3" eventType="touchUpInside" id="w2t-nW-Yda"/>
@@ -905,8 +910,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="A0N-go-1b7">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Mf5-If-ImG">
-                                <rect key="frame" x="313" y="7" width="46" height="30"/>
+                                <rect key="frame" x="308" y="5.5" width="51" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Import"/>
                                 <connections>
                                     <action selector="addCards:" destination="D0n-r4-hd3" eventType="touchUpInside" id="dh1-wR-iG2"/>
@@ -1038,40 +1044,55 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="oZq-9R-9N4">
                                 <rect key="frame" x="0.0" y="240.5" width="375" height="250"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HII-tP-UiQ" customClass="BigButton" customModule="HandsFreeFlashcards" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HII-tP-UiQ">
                                         <rect key="frame" x="87.5" y="0.0" width="200" height="30"/>
-                                        <state key="normal" title="Answer"/>
+                                        <color key="backgroundColor" red="0.1019607843" green="0.72549019609999998" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Answer">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="answer:" destination="pbh-1U-7FO" eventType="touchUpInside" id="k4M-Ji-qo7"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wUn-ve-LKx" customClass="BigButton" customModule="HandsFreeFlashcards" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wUn-ve-LKx">
                                         <rect key="frame" x="87.5" y="55" width="200" height="30"/>
+                                        <color key="backgroundColor" red="0.1019607843" green="0.72549019609999998" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="5dE-kO-dp1"/>
                                         </constraints>
-                                        <state key="normal" title="Answer and Repeat"/>
+                                        <state key="normal" title="Answer and Repeat">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="answerAndRep:" destination="pbh-1U-7FO" eventType="touchUpInside" id="ahi-ZD-qDN"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q0J-dI-XG0" customClass="BigButton" customModule="HandsFreeFlashcards" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q0J-dI-XG0">
                                         <rect key="frame" x="87.5" y="110" width="200" height="30"/>
-                                        <state key="normal" title="Repeat"/>
+                                        <color key="backgroundColor" red="0.1019607843" green="0.72549019609999998" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Repeat">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="rep:" destination="pbh-1U-7FO" eventType="touchUpInside" id="oTL-AE-YXc"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7XL-ZA-CI3" customClass="BigButton" customModule="HandsFreeFlashcards" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7XL-ZA-CI3">
                                         <rect key="frame" x="87.5" y="165" width="200" height="30"/>
-                                        <state key="normal" title="No Voice"/>
+                                        <color key="backgroundColor" red="0.1019607843" green="0.72549019609999998" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="No Voice">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="noVoice:" destination="pbh-1U-7FO" eventType="touchUpInside" id="BiO-b3-dMw"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fjy-lG-Fzd" customClass="BigButton" customModule="HandsFreeFlashcards" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fjy-lG-Fzd">
                                         <rect key="frame" x="87.5" y="220" width="200" height="30"/>
-                                        <state key="normal" title="Manual"/>
+                                        <color key="backgroundColor" red="0.1019607843" green="0.72549019609999998" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Manual">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="manual:" destination="pbh-1U-7FO" eventType="touchUpInside" id="xce-Ke-23T"/>
                                         </connections>
