@@ -241,7 +241,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PZq-eR-rC5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2045.5999999999999" y="-467.3163418290855"/>
+            <point key="canvasLocation" x="2046" y="45"/>
         </scene>
         <!--Lang Picker View Controller-->
         <scene sceneID="eOk-cx-GJT">
@@ -304,274 +304,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VaM-UM-Lxg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2809" y="-761"/>
-        </scene>
-        <!--Create Set View Controller-->
-        <scene sceneID="uSj-oD-KCf">
-            <objects>
-                <viewController id="BQo-KG-wZy" customClass="CreateSetViewController" customModule="HandsFreeFlashcards" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="7oX-aQ-Hyj">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2WA-cW-Wtn" userLabel="Title Text Field">
-                                <rect key="frame" x="30" y="76.5" width="315" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="9PT-E6-SIh"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title of Set:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9KX-mk-HTv">
-                                <rect key="frame" x="141.5" y="45" width="92.5" height="21.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ucd-vD-AG2" customClass="BigButton" customModule="HandsFreeFlashcards" customModuleProvider="target">
-                                <rect key="frame" x="150" y="627" width="75" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="75" id="Agf-TG-ddo"/>
-                                    <constraint firstAttribute="height" constant="30" id="U85-XM-Kul"/>
-                                </constraints>
-                                <state key="normal" title="Create"/>
-                                <connections>
-                                    <action selector="createSet:" destination="BQo-KG-wZy" eventType="touchUpInside" id="v1Q-ON-BSI"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9DX-T2-g4i" customClass="BigButton" customModule="HandsFreeFlashcards" customModuleProvider="target">
-                                <rect key="frame" x="16" y="20" width="75" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="75" id="m7K-8p-Bvm"/>
-                                </constraints>
-                                <state key="normal" title="Cancel"/>
-                                <connections>
-                                    <action selector="cancel:" destination="BQo-KG-wZy" eventType="touchUpInside" id="5gq-8H-V6U"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Side One Language:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M90-fd-AAu">
-                                <rect key="frame" x="15" y="166.5" width="360" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <pickerView contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="fPc-oi-x37" userLabel="Side One Lang Picker View">
-                                <rect key="frame" x="10" y="190.5" width="355" height="167.5"/>
-                            </pickerView>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Vu-Rq-bcE" userLabel="Side Two Lang Picker View">
-                                <rect key="frame" x="10" y="420" width="355" height="167"/>
-                            </pickerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Side Two Language:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jP2-9t-QCG">
-                                <rect key="frame" x="15" y="396" width="360" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="V6n-ya-fty" userLabel="Side One Name Stack">
-                                <rect key="frame" x="15" y="121.5" width="345" height="35"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Side One Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8A6-T8-feu">
-                                        <rect key="frame" x="0.0" y="0.0" width="124" height="35"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Word" borderStyle="roundedRect" textAlignment="center" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="CTX-hE-Wjr">
-                                        <rect key="frame" x="142" y="0.0" width="203" height="35"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="DM4-vW-373"/>
-                                </constraints>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="jYr-oy-xdy" userLabel="Side Two Name Stack">
-                                <rect key="frame" x="15" y="358" width="345" height="35"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Side Two Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eFI-qu-Fgj">
-                                        <rect key="frame" x="0.0" y="0.0" width="123.5" height="35"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Definition" borderStyle="roundedRect" textAlignment="center" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="DO9-3r-B0i">
-                                        <rect key="frame" x="141.5" y="0.0" width="203.5" height="35"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                </subviews>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="gpu-w6-vE8" userLabel="Side Three Stack">
-                                <rect key="frame" x="15" y="587" width="345" height="35"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Side Three: None" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yyr-fH-And">
-                                        <rect key="frame" x="0.0" y="0.0" width="132.5" height="35"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gi8-11-asE" customClass="BigButton" customModule="HandsFreeFlashcards" customModuleProvider="target">
-                                        <rect key="frame" x="150.5" y="0.0" width="194.5" height="35"/>
-                                        <state key="normal" title="Add a third side"/>
-                                        <connections>
-                                            <segue destination="wy1-ZR-EWK" kind="presentation" identifier="addThirdSide" id="tDu-w5-kzI"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="DLK-dA-dfW" firstAttribute="trailing" secondItem="gpu-w6-vE8" secondAttribute="trailing" constant="15" id="1kp-H3-0AI"/>
-                            <constraint firstItem="M90-fd-AAu" firstAttribute="leading" secondItem="V6n-ya-fty" secondAttribute="leading" id="3K3-8t-afB"/>
-                            <constraint firstItem="DLK-dA-dfW" firstAttribute="trailing" secondItem="6Vu-Rq-bcE" secondAttribute="trailing" constant="10" id="5fB-gg-9EO"/>
-                            <constraint firstItem="DLK-dA-dfW" firstAttribute="top" secondItem="9DX-T2-g4i" secondAttribute="top" id="8u0-Uh-IzE"/>
-                            <constraint firstItem="6Vu-Rq-bcE" firstAttribute="top" secondItem="jP2-9t-QCG" secondAttribute="bottom" id="934-vS-5Y7"/>
-                            <constraint firstItem="DLK-dA-dfW" firstAttribute="bottom" secondItem="ucd-vD-AG2" secondAttribute="bottom" constant="10" id="CAS-yK-hXO"/>
-                            <constraint firstItem="M90-fd-AAu" firstAttribute="top" secondItem="V6n-ya-fty" secondAttribute="bottom" constant="10" id="E0A-Ra-oHU"/>
-                            <constraint firstItem="gpu-w6-vE8" firstAttribute="height" secondItem="jYr-oy-xdy" secondAttribute="height" id="EtD-k4-DMH"/>
-                            <constraint firstItem="gpu-w6-vE8" firstAttribute="top" secondItem="6Vu-Rq-bcE" secondAttribute="bottom" id="I9B-c8-R7R"/>
-                            <constraint firstItem="fPc-oi-x37" firstAttribute="height" secondItem="6Vu-Rq-bcE" secondAttribute="height" id="Jvh-ke-apm"/>
-                            <constraint firstItem="9KX-mk-HTv" firstAttribute="centerX" secondItem="DLK-dA-dfW" secondAttribute="centerX" id="LDg-Dr-ujo"/>
-                            <constraint firstItem="jYr-oy-xdy" firstAttribute="top" secondItem="fPc-oi-x37" secondAttribute="bottom" id="MU9-MA-xL9"/>
-                            <constraint firstItem="V6n-ya-fty" firstAttribute="height" secondItem="jYr-oy-xdy" secondAttribute="height" id="PMU-vO-lF1"/>
-                            <constraint firstItem="9KX-mk-HTv" firstAttribute="top" secondItem="9DX-T2-g4i" secondAttribute="bottom" constant="-5" id="PNX-zQ-RYw"/>
-                            <constraint firstItem="fPc-oi-x37" firstAttribute="width" secondItem="6Vu-Rq-bcE" secondAttribute="width" id="Pat-UV-YT4"/>
-                            <constraint firstItem="DLK-dA-dfW" firstAttribute="trailing" secondItem="M90-fd-AAu" secondAttribute="trailing" id="Prw-PO-NuG"/>
-                            <constraint firstItem="gpu-w6-vE8" firstAttribute="leading" secondItem="DLK-dA-dfW" secondAttribute="leading" constant="15" id="Qde-VJ-oQq"/>
-                            <constraint firstItem="ucd-vD-AG2" firstAttribute="top" secondItem="gpu-w6-vE8" secondAttribute="bottom" constant="5" id="R2B-md-0aD"/>
-                            <constraint firstItem="fPc-oi-x37" firstAttribute="top" secondItem="M90-fd-AAu" secondAttribute="bottom" id="RtN-MM-EcE"/>
-                            <constraint firstItem="jYr-oy-xdy" firstAttribute="trailing" secondItem="V6n-ya-fty" secondAttribute="trailing" id="TnR-8P-5US"/>
-                            <constraint firstItem="jP2-9t-QCG" firstAttribute="top" secondItem="jYr-oy-xdy" secondAttribute="bottom" constant="3" id="TqP-5y-Vur"/>
-                            <constraint firstItem="V6n-ya-fty" firstAttribute="top" secondItem="2WA-cW-Wtn" secondAttribute="bottom" constant="10" id="XFi-as-D9q"/>
-                            <constraint firstItem="jP2-9t-QCG" firstAttribute="leading" secondItem="V6n-ya-fty" secondAttribute="leading" id="XqQ-DB-gtS"/>
-                            <constraint firstItem="V6n-ya-fty" firstAttribute="leading" secondItem="DLK-dA-dfW" secondAttribute="leading" constant="15" id="ZJL-U9-GTT"/>
-                            <constraint firstItem="2WA-cW-Wtn" firstAttribute="top" secondItem="9KX-mk-HTv" secondAttribute="bottom" constant="10" id="ZzV-ff-iwz"/>
-                            <constraint firstItem="DLK-dA-dfW" firstAttribute="trailing" secondItem="V6n-ya-fty" secondAttribute="trailing" constant="15" id="eaT-tg-uON"/>
-                            <constraint firstItem="DLK-dA-dfW" firstAttribute="trailing" secondItem="2WA-cW-Wtn" secondAttribute="trailing" constant="30" id="fcS-4l-lPc"/>
-                            <constraint firstItem="DLK-dA-dfW" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="9DX-T2-g4i" secondAttribute="trailing" constant="311" id="hIY-Vg-cvW"/>
-                            <constraint firstItem="2WA-cW-Wtn" firstAttribute="leading" secondItem="DLK-dA-dfW" secondAttribute="leading" constant="30" id="hbY-I6-eZc"/>
-                            <constraint firstItem="6Vu-Rq-bcE" firstAttribute="leading" secondItem="DLK-dA-dfW" secondAttribute="leading" constant="10" id="k34-WK-d6R"/>
-                            <constraint firstItem="6Vu-Rq-bcE" firstAttribute="centerX" secondItem="fPc-oi-x37" secondAttribute="centerX" id="l50-Ec-eTC"/>
-                            <constraint firstItem="DLK-dA-dfW" firstAttribute="trailing" secondItem="jP2-9t-QCG" secondAttribute="trailing" id="mVM-aR-Faw"/>
-                            <constraint firstItem="9DX-T2-g4i" firstAttribute="leading" secondItem="DLK-dA-dfW" secondAttribute="leading" constant="16" id="ntC-Mz-Dl1"/>
-                            <constraint firstItem="ucd-vD-AG2" firstAttribute="centerX" secondItem="DLK-dA-dfW" secondAttribute="centerX" id="sD3-dO-sc1"/>
-                            <constraint firstItem="jYr-oy-xdy" firstAttribute="leading" secondItem="V6n-ya-fty" secondAttribute="leading" id="syD-YP-baf"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="DLK-dA-dfW"/>
-                    </view>
-                    <connections>
-                        <outlet property="sideOneLangPicker" destination="fPc-oi-x37" id="fHT-T7-EXH"/>
-                        <outlet property="sideOneNameField" destination="CTX-hE-Wjr" id="6eP-7i-fbB"/>
-                        <outlet property="sideThreeButton" destination="gi8-11-asE" id="ed1-Ei-JiI"/>
-                        <outlet property="sideThreeInfoLabel" destination="Yyr-fH-And" id="FPE-zY-q4p"/>
-                        <outlet property="sideTwoLangPicker" destination="6Vu-Rq-bcE" id="lC2-XD-32W"/>
-                        <outlet property="sideTwoNameField" destination="DO9-3r-B0i" id="vQy-F9-Acs"/>
-                        <outlet property="titleTextBox" destination="2WA-cW-Wtn" id="rQh-UB-t2U"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Zzz-Gw-FPc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2830" y="-81"/>
-        </scene>
-        <!--Side Three View Controller-->
-        <scene sceneID="0S5-FK-yhc">
-            <objects>
-                <viewController id="wy1-ZR-EWK" customClass="SideThreeViewController" customModule="HandsFreeFlashcards" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8ba-3z-dAf">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Side Three Language:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q1I-Kc-iBB">
-                                <rect key="frame" x="15" y="159" width="360" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cOC-Pz-2Of" customClass="BigButton" customModule="HandsFreeFlashcards" customModuleProvider="target">
-                                <rect key="frame" x="15" y="20" width="75" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="75" id="Bxv-ts-ZYL"/>
-                                </constraints>
-                                <state key="normal" title="Cancel"/>
-                                <connections>
-                                    <action selector="cancel:" destination="wy1-ZR-EWK" eventType="touchUpInside" id="Iga-8d-Y4m"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2iG-O3-mVe" customClass="BigButton" customModule="HandsFreeFlashcards" customModuleProvider="target">
-                                <rect key="frame" x="87.5" y="453.5" width="200" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="b46-cr-Bjx"/>
-                                </constraints>
-                                <state key="normal" title="Add Side Three"/>
-                                <connections>
-                                    <action selector="addSide:" destination="wy1-ZR-EWK" eventType="touchUpInside" id="G33-a0-e1V"/>
-                                </connections>
-                            </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="huU-mC-ao8" userLabel="Side Three Name Stack">
-                                <rect key="frame" x="15" y="95" width="345" height="35"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Side Three Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y18-5k-Pc6">
-                                        <rect key="frame" x="0.0" y="0.0" width="137" height="35"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bVy-QC-QXW">
-                                        <rect key="frame" x="155" y="0.0" width="190" height="35"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="tKg-gt-ydj"/>
-                                </constraints>
-                            </stackView>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CeV-YI-Eff" userLabel="Side Three Lang Picker View">
-                                <rect key="frame" x="27.5" y="187.5" width="320" height="216"/>
-                            </pickerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vJL-zc-vlM" customClass="BigButton" customModule="HandsFreeFlashcards" customModuleProvider="target">
-                                <rect key="frame" x="87.5" y="515.5" width="200" height="30"/>
-                                <state key="normal" title="Remove Side Three"/>
-                                <connections>
-                                    <action selector="removeSide:" destination="wy1-ZR-EWK" eventType="touchUpInside" id="Rwh-Dn-m51"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="huU-mC-ao8" firstAttribute="top" secondItem="cOC-Pz-2Of" secondAttribute="bottom" constant="45" id="0ab-zn-Qu3"/>
-                            <constraint firstItem="vJL-zc-vlM" firstAttribute="top" secondItem="2iG-O3-mVe" secondAttribute="bottom" constant="32" id="6O0-8I-1as"/>
-                            <constraint firstItem="3rA-Re-DXh" firstAttribute="trailing" secondItem="huU-mC-ao8" secondAttribute="trailing" constant="15" id="Aof-E5-o3r"/>
-                            <constraint firstItem="2iG-O3-mVe" firstAttribute="top" secondItem="CeV-YI-Eff" secondAttribute="bottom" constant="50" id="BzX-UY-zTr"/>
-                            <constraint firstItem="CeV-YI-Eff" firstAttribute="centerX" secondItem="3rA-Re-DXh" secondAttribute="centerX" id="CYZ-Uf-Sdr"/>
-                            <constraint firstItem="cOC-Pz-2Of" firstAttribute="leading" secondItem="3rA-Re-DXh" secondAttribute="leading" constant="15" id="Mp6-6V-6nj"/>
-                            <constraint firstItem="3rA-Re-DXh" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="cOC-Pz-2Of" secondAttribute="trailing" constant="312" id="Q1A-bX-FMb"/>
-                            <constraint firstItem="cOC-Pz-2Of" firstAttribute="top" secondItem="3rA-Re-DXh" secondAttribute="top" id="Q8w-LN-MWn"/>
-                            <constraint firstItem="vJL-zc-vlM" firstAttribute="centerX" secondItem="3rA-Re-DXh" secondAttribute="centerX" id="hg2-sL-on1"/>
-                            <constraint firstItem="2iG-O3-mVe" firstAttribute="centerX" secondItem="3rA-Re-DXh" secondAttribute="centerX" id="jf0-we-4cc"/>
-                            <constraint firstItem="vJL-zc-vlM" firstAttribute="width" secondItem="2iG-O3-mVe" secondAttribute="width" id="m1d-Sl-siy"/>
-                            <constraint firstItem="q1I-Kc-iBB" firstAttribute="leading" secondItem="Y18-5k-Pc6" secondAttribute="leading" id="nRn-EC-XGC"/>
-                            <constraint firstItem="huU-mC-ao8" firstAttribute="leading" secondItem="3rA-Re-DXh" secondAttribute="leading" constant="15" id="ncI-XR-F8U"/>
-                            <constraint firstItem="q1I-Kc-iBB" firstAttribute="top" secondItem="huU-mC-ao8" secondAttribute="bottom" constant="29" id="o1C-VX-Kkb"/>
-                            <constraint firstItem="3rA-Re-DXh" firstAttribute="trailing" secondItem="q1I-Kc-iBB" secondAttribute="trailing" id="sbP-8R-yaV"/>
-                            <constraint firstItem="CeV-YI-Eff" firstAttribute="top" secondItem="q1I-Kc-iBB" secondAttribute="bottom" constant="8" id="x3O-nf-y65"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="3rA-Re-DXh"/>
-                    </view>
-                    <connections>
-                        <outlet property="sideThreeLangPicker" destination="CeV-YI-Eff" id="SN9-bB-5YU"/>
-                        <outlet property="sideThreeNameField" destination="bVy-QC-QXW" id="9t0-xV-Pf0"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="f1X-fz-IDO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3600.8000000000002" y="-81.409295352323838"/>
+            <point key="canvasLocation" x="2839" y="45"/>
         </scene>
         <!--Mode Info View Controller-->
         <scene sceneID="44x-yU-8iY">
@@ -667,7 +400,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nxz-79-qNH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4312.8000000000002" y="152.47376311844079"/>
+            <point key="canvasLocation" x="4084" y="183"/>
         </scene>
         <!--Import Quizlet View Controller-->
         <scene sceneID="ZTY-Tt-Hff">
@@ -1031,7 +764,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a88-uD-ILJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2046" y="1586"/>
+            <point key="canvasLocation" x="2046" y="1666"/>
         </scene>
         <!--Study Modes-->
         <scene sceneID="ExP-iS-N2y">
@@ -1707,6 +1440,6 @@
         <image name="right_arrow_icon" width="280" height="280"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="SCz-2l-TbM"/>
+        <segue reference="3jd-mc-pTS"/>
     </inferredMetricsTieBreakers>
 </document>

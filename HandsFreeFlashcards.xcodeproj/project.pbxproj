@@ -38,11 +38,9 @@
 		E99AA69722FB8C400005749C /* LangPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99AA69622FB8C400005749C /* LangPickerViewController.swift */; };
 		E9A2DA482071527300FD9D54 /* CardsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A2DA472071527300FD9D54 /* CardsTableViewController.swift */; };
 		E9A2DA4F20715B0F00FD9D54 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A2DA4E20715B0F00FD9D54 /* RootViewController.swift */; };
-		E9A2DA5120715CB400FD9D54 /* CreateSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A2DA5020715CB400FD9D54 /* CreateSetViewController.swift */; };
 		E9A2DA532071907F00FD9D54 /* ImportQuizletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A2DA522071907F00FD9D54 /* ImportQuizletViewController.swift */; };
 		E9A2DA552071D8CD00FD9D54 /* QuizletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A2DA542071D8CD00FD9D54 /* QuizletViewController.swift */; };
 		E9B1969520748271007B2EC1 /* SetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B1969420748271007B2EC1 /* SetTableViewCell.swift */; };
-		E9B400B22105A4DD0031B9F9 /* SideThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B400B12105A4DD0031B9F9 /* SideThreeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,7 +60,7 @@
 		E9205773210D60930056A185 /* ManualStudyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualStudyViewController.swift; sourceTree = "<group>"; };
 		E93734D921513ABD00F4DF21 /* ModeInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeInfoViewController.swift; sourceTree = "<group>"; };
 		E93776822071E06500B92880 /* BigButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigButton.swift; sourceTree = "<group>"; };
-		E943A3E71FFDA847002F3FB5 /* CardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTableViewCell.swift; sourceTree = "<group>"; };
+		E943A3E71FFDA847002F3FB5 /* CardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CardTableViewCell.swift; path = "../My Classes/CardTableViewCell.swift"; sourceTree = "<group>"; };
 		E943A3E92000A3ED002F3FB5 /* StudyModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyModeViewController.swift; sourceTree = "<group>"; };
 		E943A3EB2006844B002F3FB5 /* Card+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E943A3EF200684D1002F3FB5 /* Set+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Set+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -80,11 +78,9 @@
 		E99AA69622FB8C400005749C /* LangPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LangPickerViewController.swift; sourceTree = "<group>"; };
 		E9A2DA472071527300FD9D54 /* CardsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsTableViewController.swift; sourceTree = "<group>"; };
 		E9A2DA4E20715B0F00FD9D54 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
-		E9A2DA5020715CB400FD9D54 /* CreateSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSetViewController.swift; sourceTree = "<group>"; };
 		E9A2DA522071907F00FD9D54 /* ImportQuizletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportQuizletViewController.swift; sourceTree = "<group>"; };
 		E9A2DA542071D8CD00FD9D54 /* QuizletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizletViewController.swift; sourceTree = "<group>"; };
-		E9B1969420748271007B2EC1 /* SetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTableViewCell.swift; sourceTree = "<group>"; };
-		E9B400B12105A4DD0031B9F9 /* SideThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideThreeViewController.swift; sourceTree = "<group>"; };
+		E9B1969420748271007B2EC1 /* SetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SetTableViewCell.swift; path = "../My Classes/SetTableViewCell.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,7 +134,9 @@
 			isa = PBXGroup;
 			children = (
 				E9069B5A1FBED1A000B58932 /* SetsTableViewController.swift */,
+				E9B1969420748271007B2EC1 /* SetTableViewCell.swift */,
 				E9A2DA472071527300FD9D54 /* CardsTableViewController.swift */,
+				E943A3E71FFDA847002F3FB5 /* CardTableViewCell.swift */,
 			);
 			path = TVCs;
 			sourceTree = "<group>";
@@ -147,8 +145,6 @@
 			isa = PBXGroup;
 			children = (
 				E9A2DA4E20715B0F00FD9D54 /* RootViewController.swift */,
-				E9B1969420748271007B2EC1 /* SetTableViewCell.swift */,
-				E943A3E71FFDA847002F3FB5 /* CardTableViewCell.swift */,
 				E93776822071E06500B92880 /* BigButton.swift */,
 				E99AA68E22EA5FA90005749C /* LanguageCodes.swift */,
 				E99AA69422F45A360005749C /* HelperFunctions.swift */,
@@ -214,8 +210,6 @@
 		E9B400B32105A4F40031B9F9 /* Create VCs */ = {
 			isa = PBXGroup;
 			children = (
-				E9B400B12105A4DD0031B9F9 /* SideThreeViewController.swift */,
-				E9A2DA5020715CB400FD9D54 /* CreateSetViewController.swift */,
 				E99AA69022EA63890005749C /* NewSetViewController.swift */,
 				E99AA69222EA63DF0005749C /* NewSideTableViewCell.swift */,
 				E99AA69622FB8C400005749C /* LangPickerViewController.swift */,
@@ -321,12 +315,10 @@
 				E9B1969520748271007B2EC1 /* SetTableViewCell.swift in Sources */,
 				E91F68C0215F36F30029BCA6 /* Side+CoreDataProperties.swift in Sources */,
 				E99AA69322EA63DF0005749C /* NewSideTableViewCell.swift in Sources */,
-				E9B400B22105A4DD0031B9F9 /* SideThreeViewController.swift in Sources */,
 				E9A2DA482071527300FD9D54 /* CardsTableViewController.swift in Sources */,
 				E9A2DA532071907F00FD9D54 /* ImportQuizletViewController.swift in Sources */,
 				E91F68BE215F36F30029BCA6 /* StudyInfo+CoreDataProperties.swift in Sources */,
 				E91F68BF215F36F30029BCA6 /* Side+CoreDataClass.swift in Sources */,
-				E9A2DA5120715CB400FD9D54 /* CreateSetViewController.swift in Sources */,
 				E99AA69722FB8C400005749C /* LangPickerViewController.swift in Sources */,
 				E943A3E81FFDA848002F3FB5 /* CardTableViewCell.swift in Sources */,
 			);
