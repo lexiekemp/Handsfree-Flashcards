@@ -33,25 +33,11 @@ class CardsTableViewController: CoreDataTableViewController, UITextFieldDelegate
         if let context = managedObjectContext, parentSet != nil {
             let request = NSFetchRequest<NSFetchRequestResult>(entityName:"Card")
             request.predicate = NSPredicate(format:"parentSet.setName = %@", parentSet!.setName!)
-            request.sortDescriptors = [NSSortDescriptor(key: "sideOne", ascending: true, selector: #selector(NSString.localizedStandardCompare(_:)))]
+            request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
             fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
             if let newCount = fetchedResultsController?.fetchedObjects?.count {
                 cardCount = newCount
             }
-            
-            
-            
-//            if parentSet?.sideThreeName != nil {
-//                sideThreeTextField = UITextField()
-//                cardCellView.addSubview(sideThreeTextField!)
-//                sideThreeTextField!.widthAnchor.constraint(equalTo: sideOneTextField.widthAnchor).isActive = true
-//                sideThreeTextField!.topAnchor.constraint(equalTo: cardCellView.topAnchor, constant: 10).isActive = true
-//                sideThreeTextField!.leadingAnchor.constraint(equalTo: sideTwoTextField.trailingAnchor)
-//                sideThreeTextField!.bottomAnchor.constraint(equalTo: cardCellView.bottomAnchor, constant: 10).isActive = true
-//                sideThreeTextField!.trailingAnchor.constraint(equalTo: cardCellView.trailingAnchor).isActive = true
-//                sideThreeTextField!.heightAnchor.constraint(equalTo: sideOneTextField.heightAnchor).isActive = true
-//
-//            }
         }
         else {
             fetchedResultsController = nil
@@ -74,18 +60,16 @@ class CardsTableViewController: CoreDataTableViewController, UITextFieldDelegate
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cardCell", for: indexPath) as! CardTableViewCell
         updateCardCellUI(cell)
+        cell.selectionStyle = .none
         if indexPath.row == 0 {
-            //cell.sideOneTextField?.text = parentSet?.sideOneName
             if parentSet?.sideOneName != nil {
                 cell.sideOneTextField?.attributedText = NSAttributedString(string: parentSet!.sideOneName!, attributes: [.font: UIFont.boldSystemFont(ofSize: 16.0)])
             }
             if parentSet?.sideTwoName != nil {
                 cell.sideTwoTextField?.attributedText = NSAttributedString(string: parentSet!.sideTwoName!, attributes: [.font: UIFont.boldSystemFont(ofSize: 16.0)])
             }
-           // cell.sideTwoTextField?.text = parentSet?.sideTwoName
             if parentSet?.sideThreeName != nil {
                 cell.sideThreeTextField?.attributedText = NSAttributedString(string: parentSet!.sideThreeName!, attributes: [.font: UIFont.boldSystemFont(ofSize: 16.0)])
-                //cell.sideThreeTextField?.text = parentSet?.sideThreeName!
             }
         }
         else if indexPath.row < (cardCount + 1) {
@@ -94,7 +78,7 @@ class CardsTableViewController: CoreDataTableViewController, UITextFieldDelegate
                 var sideOneWord = ""
                 var sideTwoWord = ""
                 var sideThreeWord = ""
-                card.managedObjectContext?.performAndWait { //TODO: REALLY NEED PERFORM AND WAIT HERE?
+                card.managedObjectContext?.performAndWait {
                     if (card.sideOne != nil) {
                         sideOneWord = card.sideOne!
                     }
@@ -143,7 +127,6 @@ class CardsTableViewController: CoreDataTableViewController, UITextFieldDelegate
         }
         else {
             cell.cardCellView.addSubview(cell.sideThreeTextField)
-           // cell.cardCellView.removeConstraint(twoToView)
             let twoToThree = NSLayoutConstraint(item: cell.sideTwoTextField, attribute: .trailing, relatedBy: .equal, toItem: cell.sideThreeTextField, attribute: .leading, multiplier: 1.0, constant: 0.0)
             cell.cardCellView.addConstraint(twoToThree)
         }
@@ -152,7 +135,7 @@ class CardsTableViewController: CoreDataTableViewController, UITextFieldDelegate
     
      // Override to support conditional editing of the table view.
      override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     return true
+        return true
      }
     
     
@@ -261,7 +244,7 @@ class CardsTableViewController: CoreDataTableViewController, UITextFieldDelegate
                                     errorAlert(message: "Cannot create duplicate cards.")
                                     cell.sideOneTextField.becomeFirstResponder()
                                 }
-                                else if Card.addCard(sideOne: sideOneText!, sideTwo: sideTwoText!, sideThree: text, set: parentSet!, inManagedObjectContext: managedObjectContext!) != nil {
+                                else if Card.addCard(date: NSDate(), sideOne: sideOneText!, sideTwo: sideTwoText!, sideThree: text, set: parentSet!, inManagedObjectContext: managedObjectContext!) != nil {
                                     setFirstResponder = true
                                 }
                             }
@@ -270,7 +253,7 @@ class CardsTableViewController: CoreDataTableViewController, UITextFieldDelegate
                                     errorAlert(message: "Cannot create duplicate cards.")
                                     cell.sideOneTextField.becomeFirstResponder()
                                 }
-                                else if Card.addCard(sideOne: sideOneText!, sideTwo: text, sideThree: nil, set: parentSet!, inManagedObjectContext: managedObjectContext!) != nil {
+                                else if Card.addCard(date: NSDate(), sideOne: sideOneText!, sideTwo: text, sideThree: nil, set: parentSet!, inManagedObjectContext: managedObjectContext!) != nil {
                                     setFirstResponder = true
                                 }
                             }

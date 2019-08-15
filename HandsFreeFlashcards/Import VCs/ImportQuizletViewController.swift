@@ -105,10 +105,10 @@ class ImportQuizletViewController: RootViewController, UITextViewDelegate, UITab
         for card in cards {
             var sides = card.components(separatedBy: sideSepChoice)
             if set?.sideThreeName != nil && set?.sideThreeLangID != nil && numSidesSegControl.selectedSegmentIndex == 1 {
-                _ = Card.addCard(sideOne: sides[0], sideTwo: sides[1], sideThree: sides[2], set: set!, inManagedObjectContext: managedObjectContext!)
+                _ = Card.addCard(date: NSDate(), sideOne: sides[0], sideTwo: sides[1], sideThree: sides[2], set: set!, inManagedObjectContext: managedObjectContext!)
             }
             else {
-                _ = Card.addCard(sideOne: sides[0], sideTwo: sides[1], sideThree: nil, set: set!, inManagedObjectContext: managedObjectContext!)
+                _ = Card.addCard(date: NSDate(), sideOne: sides[0], sideTwo: sides[1], sideThree: nil, set: set!, inManagedObjectContext: managedObjectContext!)
             }
         }
         return true

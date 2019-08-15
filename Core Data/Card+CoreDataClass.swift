@@ -12,7 +12,7 @@ import CoreData
 
 @objc(Card)
 public class Card: NSManagedObject {
-    class func addCard(sideOne: String, sideTwo: String, sideThree: String?, set: Set, inManagedObjectContext context: NSManagedObjectContext) -> Card? {
+    class func addCard(date: NSDate, sideOne: String, sideTwo: String, sideThree: String?, set: Set, inManagedObjectContext context: NSManagedObjectContext) -> Card? {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Card")
         if sideThree != nil {
             request.predicate = NSPredicate(format: "sideOne = %@ AND sideTwo = %@ AND sideThree = %@ AND parentSet = %@", sideOne, sideTwo, sideThree!, set)
@@ -24,6 +24,7 @@ public class Card: NSManagedObject {
             return card
         }
         else if let card = NSEntityDescription.insertNewObject(forEntityName:"Card", into: context) as? Card {
+            card.date = date
             card.sideOne = sideOne
             card.sideTwo = sideTwo
             card.sideThree = sideThree

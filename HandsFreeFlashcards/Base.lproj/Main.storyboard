@@ -360,7 +360,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manual: Flip through the cards manually" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wqn-r4-wnf">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manual: Flip through the cards manually. Rate how well you remembered (1 - hard, 4 - easy) on the side with the answer. " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wqn-r4-wnf">
                                                 <rect key="frame" x="0.0" y="358" width="325" height="81.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
@@ -1250,32 +1250,36 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="pnq-Qo-DpY">
-                                <rect key="frame" x="79.5" y="617" width="216" height="30"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="pnq-Qo-DpY">
+                                <rect key="frame" x="72.5" y="617" width="275" height="30"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mqr-O0-zqb">
-                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                    <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mqr-O0-zqb">
+                                        <rect key="frame" x="0.0" y="0.0" width="66" height="30"/>
+                                        <color key="backgroundColor" red="0.67843137249999996" green="0.70980392160000005" blue="0.71372549019999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="1"/>
                                         <connections>
                                             <action selector="onePressed:" destination="2RR-0V-WvR" eventType="touchUpInside" id="rUx-nt-LfI"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQG-mz-GWX">
-                                        <rect key="frame" x="62" y="0.0" width="30" height="30"/>
+                                        <rect key="frame" x="70" y="0.0" width="65.5" height="30"/>
+                                        <color key="backgroundColor" red="0.67843137249999996" green="0.70980392160000005" blue="0.71372549019999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="2"/>
                                         <connections>
                                             <action selector="twoPressed:" destination="2RR-0V-WvR" eventType="touchUpInside" id="7IV-gV-xxo"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i8v-zk-tdN">
-                                        <rect key="frame" x="124" y="0.0" width="30" height="30"/>
+                                        <rect key="frame" x="139.5" y="0.0" width="66" height="30"/>
+                                        <color key="backgroundColor" red="0.67843137249999996" green="0.70980392160000005" blue="0.71372549019999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="3"/>
                                         <connections>
                                             <action selector="threePressed:" destination="2RR-0V-WvR" eventType="touchUpInside" id="5Rv-yh-AdP"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c1L-Ke-CHu">
-                                        <rect key="frame" x="186" y="0.0" width="30" height="30"/>
+                                        <rect key="frame" x="209.5" y="0.0" width="65.5" height="30"/>
+                                        <color key="backgroundColor" red="0.67843137249999996" green="0.70980392160000005" blue="0.71372549019999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="4"/>
                                         <connections>
                                             <action selector="fourPressed:" destination="2RR-0V-WvR" eventType="touchUpInside" id="PHa-Cf-6vY"/>
@@ -1287,12 +1291,13 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="l1Z-lP-Mvh" firstAttribute="top" secondItem="xB1-GJ-BIi" secondAttribute="top" constant="10" id="8Ys-Lc-cm7"/>
-                            <constraint firstItem="pnq-Qo-DpY" firstAttribute="centerX" secondItem="xB1-GJ-BIi" secondAttribute="centerX" id="8xe-9c-9yJ"/>
+                            <constraint firstItem="pnq-Qo-DpY" firstAttribute="trailing" secondItem="HmU-cR-tXW" secondAttribute="trailing" id="JcF-Qw-GXX"/>
                             <constraint firstItem="HmU-cR-tXW" firstAttribute="top" secondItem="l1Z-lP-Mvh" secondAttribute="bottom" constant="40" id="MXT-Cl-oN5"/>
                             <constraint firstItem="xB1-GJ-BIi" firstAttribute="bottom" secondItem="pnq-Qo-DpY" secondAttribute="bottom" constant="20" id="Pv1-It-0lC"/>
                             <constraint firstItem="HmU-cR-tXW" firstAttribute="leading" secondItem="xB1-GJ-BIi" secondAttribute="leading" constant="72.5" id="b9h-QM-3nJ"/>
                             <constraint firstItem="l1Z-lP-Mvh" firstAttribute="centerX" secondItem="xB1-GJ-BIi" secondAttribute="centerX" id="p7M-rg-gQH"/>
                             <constraint firstItem="pnq-Qo-DpY" firstAttribute="top" secondItem="HmU-cR-tXW" secondAttribute="bottom" constant="20" id="q51-Vg-2qK"/>
+                            <constraint firstItem="pnq-Qo-DpY" firstAttribute="leading" secondItem="HmU-cR-tXW" secondAttribute="leading" id="xEy-bQ-l1m"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xB1-GJ-BIi"/>
                     </view>

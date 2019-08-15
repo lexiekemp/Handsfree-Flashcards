@@ -2,8 +2,8 @@
 //  Card+CoreDataProperties.swift
 //  HandsFreeFlashcards
 //
-//  Created by Lexie Kemp on 9/28/18.
-//  Copyright © 2018 Lexie Kemp. All rights reserved.
+//  Created by Lexie Kemp on 8/15/19.
+//  Copyright © 2019 Lexie Kemp. All rights reserved.
 //
 //
 
@@ -20,6 +20,7 @@ extension Card {
     @NSManaged public var sideOne: String?
     @NSManaged public var sideThree: String?
     @NSManaged public var sideTwo: String?
+    @NSManaged public var date: NSDate?
     @NSManaged public var parentSet: Set?
     @NSManaged public var sides: NSSet?
 
