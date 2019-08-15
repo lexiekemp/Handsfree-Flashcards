@@ -14,7 +14,6 @@ import CoreData
 public class Set: NSManagedObject {
     class func addSet(setName: String, sideOneLangID: String, sideTwoLangID: String, sideThreeLangID: String?, sideOneName: String, sideTwoName: String, sideThreeName: String?, inManagedObjectContext context: NSManagedObjectContext) -> Set? {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Set")
-       // let request: = Set.fetchRequest()
         request.predicate = NSPredicate(format: "setName = %@", setName)
         
         if let set = (try? context.fetch(request))?.first as? Set {

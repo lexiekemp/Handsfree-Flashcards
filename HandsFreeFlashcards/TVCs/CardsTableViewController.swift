@@ -163,7 +163,7 @@ class CardsTableViewController: CoreDataTableViewController, UITextFieldDelegate
             let cell = tableView.cellForRow(at: indexPath) as! CardTableViewCell
             if let sideOne = cell.sideOneTextField.text, let sideTwo = cell.sideTwoTextField.text, managedObjectContext != nil, parentSet != nil {
                 cardCount = cardCount - 1
-                if let sideThree = cell.sideThreeTextField.text {
+                if let sideThree = cell.sideThreeTextField?.text {
                     Card.removeCard(sideOne: sideOne, sideTwo: sideTwo, sideThree: sideThree, set: parentSet!, inManagedObjectContext: managedObjectContext!)
                 }
                 else {
