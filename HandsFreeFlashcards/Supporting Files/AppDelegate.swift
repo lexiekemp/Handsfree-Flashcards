@@ -8,12 +8,14 @@
 
 import UIKit
 import CoreData
+import AVFoundation
+import MediaPlayer
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    let audioEngine = AVAudioEngine()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -85,8 +87,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+    
     */
- 
+    
+    func setupRemotePlayControls() {
+        UIApplication.shared.beginReceivingRemoteControlEvents()
+        
+        let commandCenter = MPRemoteCommandCenter.shared()
+        
+        commandCenter.playCommand.isEnabled = true
+        commandCenter.playCommand.addTarget { (_) -> MPRemoteCommandHandlerStatus in
+            try? self.audioEngine.start()
+            return .success
+        }
+        
+        commandCenter.pauseCommand.isEnabled = true
+        commandCenter.pauseCommand.addTarget { (_) -> MPRemoteCommandHandlerStatus in
+            self.audioEngine.pause()
+            return .success
+        }
+    }
+    
     // MARK: - Core Data stack
     
     lazy var persistentContainer: NSPersistentContainer = {

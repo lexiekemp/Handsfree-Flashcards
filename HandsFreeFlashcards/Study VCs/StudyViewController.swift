@@ -58,7 +58,7 @@ class StudyViewController: UIViewController, SFSpeechRecognizerDelegate, AVSpeec
     //voice recognition
     private var speechRecognizer = SFSpeechRecognizer(locale:Locale(identifier:"en-US"))!
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
-    private let audioEngine = AVAudioEngine()
+    private let audioEngine = (UIApplication.shared.delegate as? AppDelegate)!.audioEngine
     private var recognitionTask: SFSpeechRecognitionTask?
     
     override func viewDidLoad() {
@@ -185,7 +185,6 @@ class StudyViewController: UIViewController, SFSpeechRecognizerDelegate, AVSpeec
         if synth.isSpeaking {
             synth.stopSpeaking(at: .immediate)
         }
-        //TODO: CHECK IF VOICE STILL BEING RECORDED AFTER LEAVING SCREEN (EVEN THOUGH NOT RESPONDING TO IT)
     }
     
     private func inactivateAudioSession() {
@@ -220,7 +219,7 @@ class StudyViewController: UIViewController, SFSpeechRecognizerDelegate, AVSpeec
         recognitionRequest?.shouldReportPartialResults = true
         recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest!) {
             result, error in
-            var isFinal = false //TODO: NEED THIS VARIABLE?
+            var isFinal = false
             if (result != nil) {
                 let result = result!.bestTranscription.formattedString //check for correct answer
                 if (self.sideOneShowing && self.studyMode != .rep) {
@@ -244,7 +243,7 @@ class StudyViewController: UIViewController, SFSpeechRecognizerDelegate, AVSpeec
                 self.recognitionTask = nil
                 if (!self.saidSideTwo && self.sideOneShowing) {
                     self.saidSideTwo = true
-                    self.saySideTwo() //TODO: NEED WEAKSELF HERE?
+                    self.saySideTwo()
                 }
                 else if (!self.saidSideOne && !self.sideOneShowing) {
                     self.saidSideOne = true
@@ -308,13 +307,9 @@ class StudyViewController: UIViewController, SFSpeechRecognizerDelegate, AVSpeec
         else {
             currentCardIndex += 1
         }
-        //let randomOffset = Int(arc4random_uniform(UInt32(currNumArray.count)))
-        //currentCardIndex = currNumArray[randomOffset]
-        //TODO: NEED PERFORM AND WAIT HERE?
         let currWord = sideOneSet[setIndex].term
         wordLabel.text = currWord
         sideOneShowing = true
-       // currNumArray.remove(at:randomOffset)
         
         utterance = AVSpeechUtterance(string: currWord)
         utterance.voice = AVSpeechSynthesisVoice(language:sideOneSet[setIndex].langID)
@@ -358,7 +353,12 @@ class StudyViewController: UIViewController, SFSpeechRecognizerDelegate, AVSpeec
             }
             else {
                 self.saidSideTwo = false
-                try! startRecording() //TODO: FIX ALL TRY! TO CATCH PROPERLY
+                do {
+                    try startRecording()
+                }
+                catch {
+                    print("error recording")
+                }
             }
         }
         else {
@@ -370,7 +370,12 @@ class StudyViewController: UIViewController, SFSpeechRecognizerDelegate, AVSpeec
             }
             else {
                 self.saidSideOne = false
-                try! startRecording()
+                do {
+                    try startRecording()
+                }
+                catch {
+                    print("error recording")
+                }
             }
         }
     }

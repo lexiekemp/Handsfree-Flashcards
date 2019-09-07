@@ -93,10 +93,16 @@ class SideChoiceViewController: RootViewController, UITableViewDelegate, UITable
                 thirdArrowButton.isHidden = true
                 chooseLabel.isHidden = true
                 if studySets!.count  > 1 {
+                    var threeSides = true
                     for set in studySets! {
                         if set.sideThreeName == nil {
                             sortByThirdButton.isHidden = true //only allow to sort by third side if all desks selected have three side
+                            threeSides = false
+                            break
                         }
+                    }
+                    if threeSides {
+                        thirdChoiceIndex = 3
                     }
                 }
             }
@@ -116,6 +122,9 @@ class SideChoiceViewController: RootViewController, UITableViewDelegate, UITable
             sortByThirdButton.isHidden = true
             sortByShuffleButton.isHidden = true
             sortByLabel.isHidden = true
+            if studySets!.count  > 1 { //go straight to start
+                self.performSegue(withIdentifier: "voiceStudy", sender: nil)
+            }
         }
     }
     

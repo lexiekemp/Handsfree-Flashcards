@@ -40,6 +40,7 @@
 		E9A2DA4F20715B0F00FD9D54 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A2DA4E20715B0F00FD9D54 /* RootViewController.swift */; };
 		E9A2DA532071907F00FD9D54 /* ImportQuizletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A2DA522071907F00FD9D54 /* ImportQuizletViewController.swift */; };
 		E9A2DA552071D8CD00FD9D54 /* QuizletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A2DA542071D8CD00FD9D54 /* QuizletViewController.swift */; };
+		E9AB5A99231A85BD00D98BC1 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E9AB5A98231A85BD00D98BC1 /* icon.png */; };
 		E9B1969520748271007B2EC1 /* SetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B1969420748271007B2EC1 /* SetTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +81,7 @@
 		E9A2DA4E20715B0F00FD9D54 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		E9A2DA522071907F00FD9D54 /* ImportQuizletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportQuizletViewController.swift; sourceTree = "<group>"; };
 		E9A2DA542071D8CD00FD9D54 /* QuizletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizletViewController.swift; sourceTree = "<group>"; };
+		E9AB5A98231A85BD00D98BC1 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../../../../../Downloads/Untitled/icon.png; sourceTree = "<group>"; };
 		E9B1969420748271007B2EC1 /* SetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SetTableViewCell.swift; path = "../My Classes/SetTableViewCell.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -187,6 +189,7 @@
 		E98B4FD71FB2F24600DC349D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E9AB5A98231A85BD00D98BC1 /* icon.png */,
 				E98B4FC51FB2F22C00DC349D /* AppDelegate.swift */,
 				E98B4FCC1FB2F22C00DC349D /* Assets.xcassets */,
 				E98B4FCE1FB2F22C00DC349D /* LaunchScreen.storyboard */,
@@ -210,8 +213,8 @@
 		E9B400B32105A4F40031B9F9 /* Create VCs */ = {
 			isa = PBXGroup;
 			children = (
-				E99AA69022EA63890005749C /* NewSetViewController.swift */,
 				E99AA69222EA63DF0005749C /* NewSideTableViewCell.swift */,
+				E99AA69022EA63890005749C /* NewSetViewController.swift */,
 				E99AA69622FB8C400005749C /* LangPickerViewController.swift */,
 			);
 			name = "Create VCs";
@@ -280,6 +283,7 @@
 				E98B4FD01FB2F22C00DC349D /* LaunchScreen.storyboard in Resources */,
 				E98B4FCD1FB2F22C00DC349D /* Assets.xcassets in Resources */,
 				E98B4FCB1FB2F22C00DC349D /* Main.storyboard in Resources */,
+				E9AB5A99231A85BD00D98BC1 /* icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,7 +465,7 @@
 				DEVELOPMENT_TEAM = M4PHT7QB8F;
 				INFOPLIST_FILE = "$(SRCROOT)/HandsFreeFlashcards/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = lexiekemp.HandsFreeFlashcards;
+				PRODUCT_BUNDLE_IDENTIFIER = lexiekemp.Polycards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -476,7 +480,7 @@
 				DEVELOPMENT_TEAM = M4PHT7QB8F;
 				INFOPLIST_FILE = "$(SRCROOT)/HandsFreeFlashcards/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = lexiekemp.HandsFreeFlashcards;
+				PRODUCT_BUNDLE_IDENTIFIER = lexiekemp.Polycards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

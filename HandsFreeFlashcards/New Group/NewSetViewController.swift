@@ -122,11 +122,6 @@ class NewSetViewController: RootViewController {
         self.parentSetTVC?.setFirstResponder = true
         self.parentSetTVC?.performSegue(withIdentifier: "showCards", sender: nil)
         
-//        self.dismiss(animated: true) {
-//            self.parentSetTVC?.selectedSets.insert(self.currentSet!, at: 0)
-//            self.parentSetTVC?.setFirstResponder = true
-//            self.parentSetTVC?.performSegue(withIdentifier: "showCards", sender: nil)
-//        }
     }
     @IBAction func cancelClicked(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)

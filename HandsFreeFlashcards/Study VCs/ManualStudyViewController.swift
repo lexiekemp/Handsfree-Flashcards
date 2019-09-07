@@ -16,8 +16,8 @@ class ManualStudyViewController: RootViewController {
     var secondChoiceIndex = 2
     var thirdChoiceIndex:Int?
     var sortChoiceIndex:Int?
-    
-    var cards = [Card]()
+
+    var allCards = [Card]()
     var sideOneSet = [(term: String, langID: String)]()
     var sideTwoSet = [(term: String, langID: String)]()
     var sideThreeSet = [(term: String, langID: String)]()
@@ -65,7 +65,7 @@ class ManualStudyViewController: RootViewController {
         addStudyInfo(rating: 4)
     }
     private func addStudyInfo(rating: Int64) {
-        let currentCard = cards[currentCardIndex]
+        let currentCard = allCards[currentCardIndex]
         guard let side = Side.side(card:currentCard, index:(Int64(currSideIndex)), inManagedObjectContext: managedObjectContext!) else {
             errorAlert(message: "Could not save rating")
             return
@@ -94,19 +94,22 @@ class ManualStudyViewController: RootViewController {
         }
         
         if managedObjectContext != nil {
+            allCards = []
+            var cards = [Card]()
             for studySet in studySets! {
                 if studySet.setName != nil {
                     let request = NSFetchRequest<NSFetchRequestResult>(entityName:"Card")
                     request.predicate = NSPredicate(format: "parentSet.setName = %@", studySet.setName!)
                     if let fetchedCards = (try? managedObjectContext!.fetch(request)) as? [Card] {
                         cards = fetchedCards
+                        allCards += fetchedCards
                     }
                 }
                 if (cards.isEmpty) {
                     wordLabel.text = "Please choose a nonempty study set."
                     return
                 }
-                sortCards()
+                cards = sortCards(cards)
                 for card in cards {
                     switch firstChoiceIndex {
                     case 1:
@@ -138,7 +141,7 @@ class ManualStudyViewController: RootViewController {
                             sideTwoSet.append((term: card.sideThree!, langID: studySet.sideThreeLangID!))
                         }
                     default:
-                        print("invalid firstChoiceIndex")
+                        print("invalid secondChoiceIndex")
                     }
                     if thirdChoiceIndex != nil {
                         useSideThree = true
@@ -156,18 +159,20 @@ class ManualStudyViewController: RootViewController {
                                 sideThreeSet.append((term: card.sideThree!, langID: studySet.sideThreeLangID!))
                             }
                         default:
-                            print("invalid firstChoiceIndex")
+                            print("invalid thirdChoiceIndex")
                         }
                     }
                 }
             }
         }
+        reorganizeCards()
         currentCardIndex = 0
         showCardSide(1)
     }
-    private func sortCards() {
+    private func sortCards(_ cards: [Card]) -> [Card] {
+        var tempCards = cards
         if sortChoiceIndex != nil {
-            cards.sort(by: {
+            tempCards.sort(by: {
                 let studyInfo1 = getLastStudyInfo(card: $0, sideIndex: sortChoiceIndex!)
                 let studyInfo2 = getLastStudyInfo(card: $1, sideIndex: sortChoiceIndex!)
                 if studyInfo1 == nil {
@@ -193,7 +198,64 @@ class ManualStudyViewController: RootViewController {
             })
         }
         else {
-            cards.shuffle()
+            tempCards.shuffle()
+        }
+        return tempCards
+    }
+    func reorganizeCards() {
+        allCards = sortCards(allCards)
+        for index in 0..<allCards.count {
+            switch firstChoiceIndex {
+            case 1:
+                if allCards[index].sideOne != nil {
+                    sideOneSet[index].term = allCards[index].sideOne!
+                }
+            case 2:
+                if allCards[index].sideTwo != nil {
+                    sideOneSet[index].term = allCards[index].sideTwo!
+                }
+            case 3:
+                if allCards[index].sideThree != nil {
+                    sideOneSet[index].term = allCards[index].sideThree!
+                }
+            default:
+                print("invalid firstChoiceIndex")
+            }
+            switch secondChoiceIndex {
+            case 1:
+                if allCards[index].sideOne != nil {
+                    sideTwoSet[index].term = allCards[index].sideOne!
+                }
+            case 2:
+                if allCards[index].sideTwo != nil {
+                    sideTwoSet[index].term = allCards[index].sideTwo!
+                }
+            case 3:
+                if allCards[index].sideThree != nil {
+                    sideTwoSet[index].term = allCards[index].sideThree!
+                }
+            default:
+                print("invalid secondChoiceIndex")
+            }
+            if thirdChoiceIndex != nil {
+                useSideThree = true
+                switch thirdChoiceIndex {
+                case 1?:
+                    if allCards[index].sideOne != nil {
+                        sideThreeSet[index].term = allCards[index].sideOne!
+                    }
+                case 2?:
+                    if allCards[index].sideTwo != nil {
+                        sideThreeSet[index].term = allCards[index].sideTwo!
+                    }
+                case 3?:
+                    if allCards[index].sideThree != nil {
+                        sideThreeSet[index].term = allCards[index].sideThree!
+                    }
+                default:
+                    print("invalid thirdChoiceIndex")
+                }
+            }
         }
     }
     private func setGestureRecognizers() {
@@ -232,7 +294,7 @@ class ManualStudyViewController: RootViewController {
         default:
             return;
         }
-        if let lastStudyInfo = getLastStudyInfo(card: cards[currentCardIndex], sideIndex: currSideIndex), lastStudyInfo.date != nil {
+        if let lastStudyInfo = getLastStudyInfo(card: allCards[currentCardIndex], sideIndex: currSideIndex), lastStudyInfo.date != nil {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MM/dd/yyyy"
             
@@ -261,7 +323,20 @@ class ManualStudyViewController: RootViewController {
         }
     }
     private func goToNextCard() {
-        if currentCardIndex >= (sideOneSet.count - 1) { return }
+        if currentCardIndex >= (sideOneSet.count - 1) {
+            let alert = UIAlertController(title: "Success!", message: "You have studied all the cards in this set", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Start Over", style: .default, handler: { [weak self] _ in
+                guard let strongSelf = self else { return }
+                strongSelf.currentCardIndex = -1
+                strongSelf.reorganizeCards()
+                strongSelf.goToNextCard()
+            }))
+                alert.addAction(UIAlertAction(title: "Finish", style: .default, handler: { [weak self] _ in
+                    self?.navigationController?.popViewController(animated: true)
+            }))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
         currentCardIndex += 1
         UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
             self.cardViewConstraint.constant = -self.cardView.frame.width

@@ -70,7 +70,7 @@ extension NewSideTableViewCell: UITextFieldDelegate {
         return true
     }
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if index != (parentVC?.sideCount ?? 0) - 2 { return true }
+        if index != (parentVC?.cellSideInfo.count ?? 0) - 1 { return true }
         let _ = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { [weak self] _ in
             self?.parentVC?.view.frame.origin.y -= (self?.parentVC?.keyboardHeight ?? 150)
         }
