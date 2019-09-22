@@ -51,6 +51,7 @@ class ManualStudyViewController: RootViewController {
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var studyInfoLabel: UILabel!
     @IBOutlet weak var cardViewConstraint: NSLayoutConstraint!
+    @IBOutlet weak var cardViewWidthConstraint: NSLayoutConstraint!
     
     @IBAction func onePressed(_ sender: UIButton) {
         addStudyInfo(rating: 1)
@@ -81,6 +82,8 @@ class ManualStudyViewController: RootViewController {
         super.viewDidLoad()
          self.managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
         wordLabel.text = ""
+        cardViewWidthConstraint.constant = self.view.frame.width - 50
+        self.view.layoutIfNeeded()
         cardViewConstraint.constant = self.view.frame.width/2 - self.cardView.frame.width/2
         self.view.layoutIfNeeded()
         getCards()
