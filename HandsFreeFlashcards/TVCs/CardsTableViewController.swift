@@ -15,7 +15,7 @@ class CardsTableViewController: CoreDataTableViewController, UITextFieldDelegate
     var parentSet: Set?
     var cardCount = 0
     var setFirstResponder = false
-    
+    var activeTextField: UITextField?
    
 
     override func viewDidLoad() {
@@ -28,7 +28,12 @@ class CardsTableViewController: CoreDataTableViewController, UITextFieldDelegate
         super.viewDidAppear(animated)
         updateUI()
     }
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let textField = activeTextField {
+            textFieldUpdate(textField)
+        }
+    }
     private func updateUI() {
         if let context = managedObjectContext, parentSet != nil {
             let request = NSFetchRequest<NSFetchRequestResult>(entityName:"Card")
@@ -182,7 +187,9 @@ class CardsTableViewController: CoreDataTableViewController, UITextFieldDelegate
         }
         return true
     }
-    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.activeTextField = textField
+    }
     func textFieldUpdate(_ textField: UITextField) {
         if let text = textField.text {
             let currTag = textField.tag
