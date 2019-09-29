@@ -30,7 +30,7 @@ class NewSideTableViewCell: UITableViewCell {
         parentVC = parent
         index = side - 1
         sideLabel.text = "Side " + side.numToWord()
-        sideNameLabel.text = "Name for Side " + side.numToWord()
+        sideNameLabel.text = "Name for side " + side.numToWord()
         if let name = info.name {
             sideNameTextField.text = name
         }
