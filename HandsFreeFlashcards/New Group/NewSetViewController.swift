@@ -33,6 +33,7 @@ class NewSetViewController: RootViewController {
         self.managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
         setTitleTextField.delegate = self
         setTitleTextField.addBottomBorder()
+        setTitleTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         sidesTable.dataSource = self
         sidesTable.delegate = self
         
@@ -231,6 +232,16 @@ extension NewSetViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         _ = isValidInput()
         return true
+    }
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        if let text = textField.text {
+            setTitleLabel.text = text
+        }
+    }
+    func textFieldUpdate(_ textField: UITextField) {
+        if let text = textField.text {
+            setTitleLabel.text = text
+        }
     }
     @objc func handleTap(_ tap: UITapGestureRecognizer) {
         setTitleTextField.resignFirstResponder()
