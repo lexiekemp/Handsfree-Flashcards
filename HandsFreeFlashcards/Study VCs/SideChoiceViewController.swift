@@ -33,13 +33,22 @@ class SideChoiceViewController: RootViewController, UITableViewDelegate, UITable
     @IBOutlet weak var firstArrowButton: UIButton!
     @IBOutlet weak var secondArrowButton: UIButton!
     @IBOutlet weak var thirdArrowButton: UIButton!
-    @IBOutlet weak var repeatIncorrectSwitch: UISwitch!
-    @IBOutlet weak var repeatIncorrectLabel: UILabel!
+//    @IBOutlet weak var repeatIncorrectSwitch: UISwitch!
+//    @IBOutlet weak var repeatIncorrectLabel: UILabel!
     @IBOutlet weak var sortByLabel: UILabel!
     @IBOutlet weak var sortByFirstButton: UIButton!
     @IBOutlet weak var sortBySecondButton: UIButton!
     @IBOutlet weak var sortByThirdButton: UIButton!
     @IBOutlet weak var sortByShuffleButton: UIButton!
+    
+    //constraints
+    @IBOutlet weak var SortOneTrailing: NSLayoutConstraint!
+    @IBOutlet weak var SortOneLeading: NSLayoutConstraint!
+    @IBOutlet weak var SortTwoTrailing: NSLayoutConstraint!
+    @IBOutlet weak var SortTwoLeading: NSLayoutConstraint!
+    @IBOutlet weak var SortThreeTrailing: NSLayoutConstraint!
+    @IBOutlet weak var SortThreeLeading: NSLayoutConstraint!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,6 +101,17 @@ class SideChoiceViewController: RootViewController, UITableViewDelegate, UITable
                 thirdLabel.isHidden = true
                 thirdArrowButton.isHidden = true
                 chooseLabel.isHidden = true
+                
+                SortOneLeading.isActive = false
+                SortOneTrailing.isActive = false
+                SortTwoLeading.isActive = false
+                SortTwoTrailing.isActive = false
+                SortThreeLeading.isActive = false
+                SortThreeTrailing.isActive = false
+                sortByFirstButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+                sortBySecondButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+                sortByThirdButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+                
                 if studySets!.count  > 1 {
                     var threeSides = true
                     for set in studySets! {
@@ -112,10 +132,10 @@ class SideChoiceViewController: RootViewController, UITableViewDelegate, UITable
             return;
         }
 
-        if !(studyMode == .answer || studyMode == .answerAndRep) {
-            repeatIncorrectSwitch.isHidden = true
-            repeatIncorrectLabel.isHidden = true
-        }
+//        if !(studyMode == .answer || studyMode == .answerAndRep) {
+//            repeatIncorrectSwitch.isHidden = true
+//            repeatIncorrectLabel.isHidden = true
+//        }
         if studyMode != .manual {
             sortByFirstButton.isHidden = true
             sortBySecondButton.isHidden = true
@@ -162,9 +182,9 @@ class SideChoiceViewController: RootViewController, UITableViewDelegate, UITable
     @IBAction func selectThird(_ sender: UIButton) {
         thirdTableView.isHidden = !thirdTableView.isHidden
     }
-    @IBAction func toggleRepeat(_ sender: UISwitch) {
-        repeatIncorrect = !repeatIncorrect
-    }
+//    @IBAction func toggleRepeat(_ sender: UISwitch) {
+//        repeatIncorrect = !repeatIncorrect
+//    }
     @IBAction func gotToStudy(_ sender: UIButton) {
         if studyMode == .manual {
             self.performSegue(withIdentifier: "manualStudy", sender: nil)
