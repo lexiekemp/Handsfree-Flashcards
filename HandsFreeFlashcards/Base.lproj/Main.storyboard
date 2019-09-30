@@ -42,9 +42,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name this set..." textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HMA-xW-ckZ">
-                                        <rect key="frame" x="107.5" y="50" width="105" height="32"/>
+                                        <rect key="frame" x="72.5" y="50" width="175" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="As8-Ex-STH"/>
+                                            <constraint firstAttribute="width" constant="175" id="H1j-WN-DzK"/>
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -53,13 +54,13 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="HMA-xW-ckZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="D8g-Ld-KRB" secondAttribute="leading" constant="16" id="72D-Lk-QJ0"/>
+                                    <constraint firstItem="HMA-xW-ckZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="D8g-Ld-KRB" secondAttribute="leading" constant="14" id="72D-Lk-QJ0"/>
                                     <constraint firstItem="KuF-q4-evb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Wex-a0-1o4" secondAttribute="trailing" constant="8" symbolic="YES" id="7pK-oh-lgt"/>
                                     <constraint firstAttribute="height" constant="100" id="Eer-Dw-mSP"/>
                                     <constraint firstItem="Wex-a0-1o4" firstAttribute="top" secondItem="D8g-Ld-KRB" secondAttribute="top" constant="18" id="NXH-QF-cNC"/>
                                     <constraint firstItem="Wex-a0-1o4" firstAttribute="leading" secondItem="D8g-Ld-KRB" secondAttribute="leading" constant="16" id="Nab-Mj-eKv"/>
                                     <constraint firstAttribute="bottom" secondItem="HMA-xW-ckZ" secondAttribute="bottom" constant="18" id="Tvc-ag-ze2"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="HMA-xW-ckZ" secondAttribute="trailing" constant="16" id="cAf-aH-9Oj"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="HMA-xW-ckZ" secondAttribute="trailing" constant="14" id="cAf-aH-9Oj"/>
                                     <constraint firstItem="HMA-xW-ckZ" firstAttribute="centerX" secondItem="D8g-Ld-KRB" secondAttribute="centerX" id="lbc-Up-xwM"/>
                                     <constraint firstItem="KuF-q4-evb" firstAttribute="centerY" secondItem="Wex-a0-1o4" secondAttribute="centerY" id="lbn-em-dnP"/>
                                     <constraint firstItem="KuF-q4-evb" firstAttribute="centerX" secondItem="D8g-Ld-KRB" secondAttribute="centerX" id="mSK-Y7-GQl"/>
@@ -91,7 +92,7 @@
                                                     <color key="textColor" red="0.45098039215686275" green="0.45098039215686275" blue="0.45098039215686275" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Assign a Language" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FVU-mh-Auk">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Assign a language" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FVU-mh-Auk">
                                                     <rect key="frame" x="16" y="100" width="140" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.45098039220000002" green="0.45098039220000002" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
