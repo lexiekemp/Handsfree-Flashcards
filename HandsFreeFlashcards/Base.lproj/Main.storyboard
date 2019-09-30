@@ -788,11 +788,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="oZq-9R-9N4">
-                                <rect key="frame" x="0.0" y="191" width="320" height="250"/>
+                                <rect key="frame" x="0.0" y="180.5" width="320" height="271"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HII-tP-UiQ">
-                                        <rect key="frame" x="60" y="0.0" width="200" height="30"/>
+                                        <rect key="frame" x="60" y="0.0" width="200" height="34"/>
                                         <color key="backgroundColor" red="0.1019607843" green="0.72549019609999998" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="400" id="5Qp-RM-Rbw"/>
+                                            <constraint firstAttribute="width" secondItem="HII-tP-UiQ" secondAttribute="height" multiplier="35:6" id="nFM-7M-JGk"/>
+                                        </constraints>
                                         <state key="normal" title="Answer">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -801,11 +805,8 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wUn-ve-LKx">
-                                        <rect key="frame" x="60" y="55" width="200" height="30"/>
+                                        <rect key="frame" x="60" y="59" width="200" height="34.5"/>
                                         <color key="backgroundColor" red="0.1019607843" green="0.72549019609999998" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="200" id="5dE-kO-dp1"/>
-                                        </constraints>
                                         <state key="normal" title="Answer and Repeat">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -814,7 +815,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q0J-dI-XG0">
-                                        <rect key="frame" x="60" y="110" width="200" height="30"/>
+                                        <rect key="frame" x="60" y="118.5" width="200" height="34"/>
                                         <color key="backgroundColor" red="0.1019607843" green="0.72549019609999998" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Repeat">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -824,7 +825,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7XL-ZA-CI3">
-                                        <rect key="frame" x="60" y="165" width="200" height="30"/>
+                                        <rect key="frame" x="60" y="177.5" width="200" height="34.5"/>
                                         <color key="backgroundColor" red="0.1019607843" green="0.72549019609999998" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="No Voice">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -834,7 +835,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fjy-lG-Fzd">
-                                        <rect key="frame" x="60" y="220" width="200" height="30"/>
+                                        <rect key="frame" x="60" y="237" width="200" height="34"/>
                                         <color key="backgroundColor" red="0.1019607843" green="0.72549019609999998" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Manual">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -845,6 +846,7 @@
                                     </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="HII-tP-UiQ" firstAttribute="leading" secondItem="oZq-9R-9N4" secondAttribute="leading" priority="900" constant="60" id="2mx-Pt-Osi"/>
                                     <constraint firstItem="7XL-ZA-CI3" firstAttribute="width" secondItem="wUn-ve-LKx" secondAttribute="width" id="8s6-Yc-V8r"/>
                                     <constraint firstItem="fjy-lG-Fzd" firstAttribute="width" secondItem="wUn-ve-LKx" secondAttribute="width" id="E6J-NA-9R2"/>
                                     <constraint firstItem="Q0J-dI-XG0" firstAttribute="width" secondItem="wUn-ve-LKx" secondAttribute="width" id="IyH-Dw-UxY"/>
@@ -890,20 +892,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Repeat incorrect cards" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fzu-5S-ysb">
-                                <rect key="frame" x="15" y="686.5" width="160" height="41"/>
+                                <rect key="frame" x="15" y="413.5" width="0.0" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="HPt-bJ-seP">
-                                <rect key="frame" x="180" y="691.5" width="51" height="31"/>
+                                <rect key="frame" x="20" y="408" width="2" height="31"/>
                                 <connections>
                                     <action selector="toggleRepeat:" destination="pbh-1U-7FO" eventType="valueChanged" id="0MC-uH-52j"/>
                                     <action selector="toggleRepeat:" destination="C4q-Xl-Zl1" eventType="valueChanged" id="nqz-il-fZx"/>
                                 </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wIZ-O6-g6p" userLabel="First Label">
-                                <rect key="frame" x="15" y="135" width="63" height="20.5"/>
+                                <rect key="frame" x="15" y="134.5" width="63" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20.5" id="maJ-8J-IeT"/>
                                 </constraints>
@@ -912,7 +914,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Second:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gek-Uj-I4W" userLabel="Second Label">
-                                <rect key="frame" x="15" y="255.5" width="63" height="20.5"/>
+                                <rect key="frame" x="15" y="255" width="63" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20.5" id="gx9-w0-Vp9"/>
                                 </constraints>
@@ -921,7 +923,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Third:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bL1-nw-dY3">
-                                <rect key="frame" x="15" y="376" width="63" height="20.5"/>
+                                <rect key="frame" x="15" y="375.5" width="63" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20.5" id="VnT-Q1-Q1u"/>
                                 </constraints>
@@ -930,13 +932,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose order of sides to show:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D7Y-xa-EoS">
-                                <rect key="frame" x="10" y="94.5" width="300" height="20.5"/>
+                                <rect key="frame" x="10" y="94" width="300" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iwj-TK-oWg" userLabel="SelectFirstButton">
-                                <rect key="frame" x="93" y="135" width="100" height="20.5"/>
+                                <rect key="frame" x="93" y="134.5" width="100" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="Zoq-fv-6Ca"/>
                                 </constraints>
@@ -946,7 +948,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C07-6Y-Rsl" userLabel="SelectSecondButton">
-                                <rect key="frame" x="93" y="255.5" width="100" height="20.5"/>
+                                <rect key="frame" x="93" y="255" width="100" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="gFB-2q-g4R"/>
                                 </constraints>
@@ -956,7 +958,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vyW-YR-fu0" userLabel="SelectThirdButton">
-                                <rect key="frame" x="93" y="376" width="100" height="20.5"/>
+                                <rect key="frame" x="93" y="375.5" width="100" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="Jmg-yX-ulH"/>
                                 </constraints>
@@ -966,20 +968,20 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort by: shuffle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ulU-mj-Ygd">
-                                <rect key="frame" x="15" y="633" width="118" height="21"/>
+                                <rect key="frame" x="15" y="360" width="118" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pWI-6d-Hcl">
-                                <rect key="frame" x="158" y="628.5" width="94" height="30"/>
+                                <rect key="frame" x="158" y="355.5" width="94" height="30"/>
                                 <state key="normal" title="Shuffle Cards"/>
                                 <connections>
                                     <action selector="sortByShuffle:" destination="C4q-Xl-Zl1" eventType="touchUpInside" id="EDu-b6-gOj"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Pqr-kD-9JP" userLabel="FirstTableView">
-                                <rect key="frame" x="93" y="155.5" width="100" height="275"/>
+                                <rect key="frame" x="93" y="155" width="100" height="2.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="275" id="Fuc-Kw-HS2"/>
@@ -1013,7 +1015,7 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4QQ-l4-jio" userLabel="Second Arrow Button">
-                                <rect key="frame" x="193" y="255.5" width="20.5" height="20.5"/>
+                                <rect key="frame" x="193" y="255" width="20.5" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="4QQ-l4-jio" secondAttribute="height" multiplier="1:1" id="xWv-c4-UkL"/>
                                 </constraints>
@@ -1023,7 +1025,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tzV-fD-YSF" userLabel="ThirdTableView">
-                                <rect key="frame" x="93" y="396.5" width="100" height="275"/>
+                                <rect key="frame" x="93" y="396" width="100" height="2.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="275" id="hVF-R8-7qe"/>
@@ -1040,7 +1042,7 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9MP-Ym-9uw" userLabel="First Arrow Button">
-                                <rect key="frame" x="193" y="135" width="20.5" height="20.5"/>
+                                <rect key="frame" x="193" y="134.5" width="20.5" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="9MP-Ym-9uw" secondAttribute="height" multiplier="1:1" id="dHu-QW-ntf"/>
                                 </constraints>
@@ -1050,7 +1052,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z4Y-Dc-bdZ">
-                                <rect key="frame" x="260" y="687" width="40" height="40"/>
+                                <rect key="frame" x="51" y="299" width="249" height="249"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="z4Y-Dc-bdZ" secondAttribute="height" multiplier="1:1" id="LEq-dW-AGD"/>
                                     <constraint firstAttribute="width" constant="40" id="vCW-oR-OGw"/>
@@ -1061,7 +1063,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XUa-uc-Fwy" userLabel="Third Arrow Button">
-                                <rect key="frame" x="193" y="376" width="20.5" height="20.5"/>
+                                <rect key="frame" x="193" y="375.5" width="20.5" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="XUa-uc-Fwy" secondAttribute="height" multiplier="1:1" id="c52-pt-QjL"/>
                                 </constraints>
@@ -1071,21 +1073,21 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="dd8-Qp-xhS">
-                                <rect key="frame" x="228.5" y="135" width="81.5" height="30"/>
+                                <rect key="frame" x="228.5" y="134.5" width="81.5" height="30"/>
                                 <state key="normal" title="Sort by first side rating"/>
                                 <connections>
                                     <action selector="sortByFirst:" destination="C4q-Xl-Zl1" eventType="touchUpInside" id="ket-Zb-6Uf"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="cVO-8d-2bx">
-                                <rect key="frame" x="228.5" y="255.5" width="81.5" height="30"/>
+                                <rect key="frame" x="228.5" y="255" width="81.5" height="30"/>
                                 <state key="normal" title="Sort by second side rating"/>
                                 <connections>
                                     <action selector="sortBySecond:" destination="C4q-Xl-Zl1" eventType="touchUpInside" id="tUO-AJ-wUw"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="NFI-n1-mYe">
-                                <rect key="frame" x="228.5" y="376" width="81.5" height="30"/>
+                                <rect key="frame" x="228.5" y="375.5" width="81.5" height="30"/>
                                 <state key="normal" title="Sort by third side rating"/>
                                 <connections>
                                     <action selector="sortByThird:" destination="C4q-Xl-Zl1" eventType="touchUpInside" id="uKg-dc-xeU"/>
@@ -1424,7 +1426,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bID-Gy-waL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2047" y="842"/>
+            <point key="canvasLocation" x="2045.625" y="841.90140845070425"/>
         </scene>
         <!--Sets-->
         <scene sceneID="Tdf-3N-lSq">
@@ -1471,6 +1473,6 @@
         <image name="right_arrow_icon" width="280" height="280"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3jd-mc-pTS"/>
+        <segue reference="SCz-2l-TbM"/>
     </inferredMetricsTieBreakers>
 </document>
