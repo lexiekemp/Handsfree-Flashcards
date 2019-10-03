@@ -1228,9 +1228,8 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date - Rating" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wi4-me-Sdc">
-                                        <rect key="frame" x="60" y="26" width="200" height="25"/>
+                                        <rect key="frame" x="158.5" y="26" width="101.5" height="25"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="200" id="SAo-bd-LTa"/>
                                             <constraint firstAttribute="height" constant="25" id="Sm6-xR-eWL"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>

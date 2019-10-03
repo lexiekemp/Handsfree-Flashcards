@@ -84,8 +84,7 @@ class StudyViewController: UIViewController, SFSpeechRecognizerDelegate, AVSpeec
                     }
                 }
                 if (self.cards.isEmpty) {
-                    self.wordLabel.text = "Please choose a nonempty study set."
-                    return
+                    continue
                 }
                 self.gotCards = true
             
@@ -126,6 +125,9 @@ class StudyViewController: UIViewController, SFSpeechRecognizerDelegate, AVSpeec
                 for num in self.numArray.count..<(self.numArray.count + self.cards.count) {
                     self.numArray.append(num)
                 }
+            }
+            if self.gotCards == false {
+                self.wordLabel.text = "Please choose a nonempty study set."
             }
         }
     }

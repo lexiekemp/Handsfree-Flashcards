@@ -109,8 +109,7 @@ class ManualStudyViewController: RootViewController {
                     }
                 }
                 if (cards.isEmpty) {
-                    wordLabel.text = "Please choose a nonempty study set."
-                    return
+                    continue
                 }
                 cards = sortCards(cards)
                 for card in cards {
@@ -166,6 +165,9 @@ class ManualStudyViewController: RootViewController {
                         }
                     }
                 }
+            }
+            if allCards.isEmpty {
+                wordLabel.text = "Please choose a nonempty study set."
             }
         }
         reorganizeCards()
