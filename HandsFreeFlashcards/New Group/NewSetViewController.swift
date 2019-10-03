@@ -199,12 +199,14 @@ extension NewSetViewController: UITableViewDataSource, UITableViewDelegate {
             //tapped +add a side button
             let defaultSideInfo = CellSideInfo(name: nil, language: nil)
             cellSideInfo.append(defaultSideInfo)
+            _ = isValidInput()
             tableView.reloadData()
         }
         setTitleTextField.resignFirstResponder()
     }
     func removeSide() {
         _ = cellSideInfo.popLast()
+        _ = isValidInput()
         sidesTable.reloadData()
     }
     func addName(index: Int, name: String) {
@@ -236,6 +238,7 @@ extension NewSetViewController: UITextFieldDelegate {
     @objc func textFieldDidChange(_ textField: UITextField) {
         if let text = textField.text {
             setTitleLabel.text = text
+            _ = isValidInput()
         }
     }
     func textFieldUpdate(_ textField: UITextField) {

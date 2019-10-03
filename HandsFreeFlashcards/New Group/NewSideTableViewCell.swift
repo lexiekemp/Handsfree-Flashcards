@@ -24,6 +24,7 @@ class NewSideTableViewCell: UITableViewCell {
         super.awakeFromNib()
         sideNameTextField.delegate = self
         sideNameTextField.addBottomBorder()
+        sideNameTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         sideLangButton.addBottomBorder()
     }
     func inflateCell(parent: NewSetViewController, side: Int, info: CellSideInfo) {
@@ -68,6 +69,11 @@ extension NewSideTableViewCell: UITextFieldDelegate {
         guard let i = index else { return true }
         parentVC?.addName(index: i, name: textField.text ?? "")
         return true
+    }
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        if let i = index {
+            parentVC?.addName(index: i, name: textField.text ?? "")
+        }
     }
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if index != (parentVC?.cellSideInfo.count ?? 0) - 1 { return true }
