@@ -42,10 +42,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name this set..." textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HMA-xW-ckZ">
-                                        <rect key="frame" x="72.5" y="50" width="175" height="32"/>
+                                        <rect key="frame" x="60" y="50" width="200" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="As8-Ex-STH"/>
-                                            <constraint firstAttribute="width" constant="175" id="H1j-WN-DzK"/>
+                                            <constraint firstAttribute="width" constant="200" id="H1j-WN-DzK"/>
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
